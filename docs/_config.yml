@@ -30,8 +30,7 @@ twitter_username: none
 github_username:  RobMcA
 
 # Build settings
-remote_theme: volny/creative-theme-jekyll
-#theme: minima
+theme: minima
 plugins:
   - jekyll-feed
 
