@@ -18,10 +18,10 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Toronto Mega Empires Club
+title: Toronto Mega Empires
 email: info@torontomegaempires.com
 description: >- # this means to ignore newlines until "baseurl:"
-  The Toronto Mega Empires Club is a Toronto group dedicated to promoting
+  Toronto Mega Empires is a Toronto group dedicated to promoting
   and playing Mega Empires. You can find out more about this great board game
   at https://www.mega-empires.com
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -40,6 +40,10 @@ defaults:
       path: "assets/img"
     values:
       image: true
+
+author:
+  name: Rob of the North
+  email: rob@torontomegaempires.com
 
 minima:
   skin: dark
