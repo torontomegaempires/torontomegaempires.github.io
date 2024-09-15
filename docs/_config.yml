@@ -35,6 +35,7 @@ plugins:
   - jekyll-feed
 
 minima:
+  skin: dark
   social_links:
     - { platform: facebook,  user_url: "https://www.facebook.com/groups/2344614905731511" }
 
