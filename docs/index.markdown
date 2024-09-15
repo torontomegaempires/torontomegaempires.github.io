@@ -4,3 +4,4 @@
 
 layout: home
 ---
+![Mega Empires Closeup](/assets/img/board-closeup.png "Mega Empires Closeup")

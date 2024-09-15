@@ -34,6 +34,12 @@ theme: minima
 plugins:
   - jekyll-feed
 
+defaults:
+  - scope:
+      path: "assets/img"
+    values:
+      image: true
+      
 minima:
   skin: dark
   social_links:
