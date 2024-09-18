@@ -8,7 +8,6 @@ title: Players
 	<tr>
 		<th>Name</th>
 		<th>Display</th>
-		<th>Email</th>
 		<th>Discord</th>
 	</tr>
 	{% for k in site.data.players %}
