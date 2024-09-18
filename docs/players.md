@@ -4,17 +4,6 @@ title: Players
 ---
 ## All Players
 
-{{ site.data.players }}
-<ul>
-{% for member in site.data.members %}
-  <li>
-    <a href="https://github.com/{{ member.github }}">
-      {{ member.name }}
-    </a>
-  </li>
-{% endfor %}
-</ul>
-
 <table>
 	<tr>
 		<th>Name</th>
@@ -26,7 +15,6 @@ title: Players
 	<tr>
 		<td>{{k.name}}</td>
 		<td>{{k.display}}</td>
-		<td>{{k.email}}</td>
 		<td>{{k.discord}}</td>
 	</tr>
 	{% endfor %}

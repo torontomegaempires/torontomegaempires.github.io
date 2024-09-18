@@ -53,9 +53,6 @@ minima:
     - { platform: facebook,  user_url: "https://www.facebook.com/groups/2344614905731511" }
 
 sqlite:
-  - data: customers
-    file: "_db/northwind.db"
-    query: SELECT * from Customers
   - data: players
     file: _db/megaempires.db
     query: SELECT * from player
@@ -68,8 +65,8 @@ sqlite:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
-#   - _db
+exclude:
+  - _db
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
