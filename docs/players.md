@@ -1,6 +1,7 @@
 ---
 layout: base
 title: Players
+published: false
 ---
 ## All Players
 

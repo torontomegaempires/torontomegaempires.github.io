@@ -2,23 +2,23 @@
 layout: base
 title: Games
 ---
-## All Games
+## Games
 
+{% for game in site.data.games %}
+
+### {{game.name}} - {{game.date}}
 <table>
 	<tr>
-		<th>Game</th>
-		<th>Date</th>
-		<th>Nation</th>
         <th>Player</th>
+		<th>Nation</th>
         <th>Score</th>
 	</tr>
-	{% for k in site.data.games %}
+	{% for k in game.player %}
 	<tr>
-		<td>{{k.game}}</td>
-		<td>{{k.date}}</td>
-		<td>{{k.nation}}</td>
         <td>{{k.player}}</td>
+		<td>{{k.nation}}</td>
         <td>{{k.score}}</td>
 	</tr>
 	{% endfor %}
 </table>
+{% endfor %}
