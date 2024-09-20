@@ -1,0 +1,12 @@
+[[redirects]]
+  from = "https://app.torontomegaempires.com"
+  to = "https://crawdad.neocities.org/MCA2/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://app.torontomegaempires.com"
+  to = "https://crawdad.neocities.org/MCA2/"
+  status = 301
+  force = true
+  
