@@ -6,24 +6,41 @@
   force = true
 
 #
-# These redirects proxy /app/* to the MCA2 application
-#
+# Redirect to MCA2 application
 [[redirects]]
   from = "https://app.torontomegaempires.com"
-  to = "https://torontomegaempires.com/app/"
+  to = "https://crawdad.neocities.org/MCA2/"
   status = 301
   force = true
 
 [[redirects]]
   from = "http://app.torontomegaempires.com"
-  to = "https://torontomegaempires.com/app/"
+  to = "https://crawdad.neocities.org/MCA2/"
   status = 301
   force = true
 
-[[redirects]]
-  from = "/app/*"
-  to = "https://crawdad.neocities.org/MCA2/:splat"
-  status = 200
-  force = true
-  [redirects.headers]
-    X-From = "Netlify"
+#
+# These redirects proxy /app/* to the MCA2 application
+#
+#
+# commented out for now to avoid consuming
+# bandwidth via proxy
+#
+#[[redirects]]
+#  from = "https://app.torontomegaempires.com"
+#  to = "https://torontomegaempires.com/app/"
+#  status = 301
+#  force = true
+#[[redirects]]
+#  from = "http://app.torontomegaempires.com"
+#  to = "https://torontomegaempires.com/app/"
+#  status = 301
+#  force = true
+#
+#[[redirects]]
+#  from = "/app/*"
+#  to = "https://crawdad.neocities.org/MCA2/:splat"
+#  status = 200
+#  force = true
+#  [redirects.headers]
+#    X-From = "Netlify"
