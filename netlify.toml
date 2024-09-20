@@ -1,11 +1,29 @@
+# Redirect from the Netlify URL to the main URL
+[[redirects]]
+  from = "https://torontomegaempires.netlify.app"
+  to = "https://torontomegaempires.com"
+  status = 301
+  force = true
+
+#
+# These redirects proxy /app/* to the MCA2 application
+#
 [[redirects]]
   from = "https://app.torontomegaempires.com"
-  to = "https://crawdad.neocities.org/MCA2/"
-  status = 200
+  to = "https://torontomegaempires.com/app/"
+  status = 301
   force = true
 
 [[redirects]]
   from = "http://app.torontomegaempires.com"
-  to = "https://crawdad.neocities.org/MCA2/"
+  to = "https://torontomegaempires.com/app/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/app/*"
+  to = "https://crawdad.neocities.org/MCA2/:splat"
   status = 200
   force = true
+  [redirects.headers]
+    X-From = "Netlify"
