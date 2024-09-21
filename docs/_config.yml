@@ -61,11 +61,16 @@ sqlite:
     query: "select * from game"
   - data: games.player
     file: *db
-    query: "select nation.name as nation, player.display as player, game_player_nation.score from game_player_nation
-join player, game, nation on 
-	game_player_nation.player_id=player.id and 
-	game_player_nation.game_id=:id AND
-	game_player_nation.nation_id=nation.id
+    query: "select 
+	player.display as player, 
+	nation.name as nation,
+	game_player_nation.score 
+from player
+  join game_player_nation on 
+	player.id=game_player_nation.player_id
+  join nation on
+    nation.id=game_player_nation.nation_id
+ where game_player_nation.game_id=:id
 order by score desc"
 
 # Exclude from processing.
