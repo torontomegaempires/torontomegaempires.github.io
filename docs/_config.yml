@@ -64,7 +64,9 @@ sqlite:
     query: "select 
 	player.display as player, 
 	nation.name as nation,
-	game_player_nation.score 
+	game_player_nation.cities,
+	game_player_nation.ast_pos,
+	game_player_nation.score
 from player
   join game_player_nation on 
 	player.id=game_player_nation.player_id
