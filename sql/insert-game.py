@@ -60,12 +60,19 @@ try:
                       "cities":cities, 
                       "ast_pos":ast_pos}
             cursor.execute(sql, params)
+            if (cursor.rowcount != 1):
+                sqliteConnection.rollback()
+                raise Exception("No row inserted!")
 
     sqliteConnection.commit()
     cursor.close()
 
 except sqlite3.Error as error:
     print("Error while inserting values")
+    print(error)
+
+except Exception as error:
+    print("Error raised")
     print(error)
 
 finally:
