@@ -42,13 +42,24 @@ try:
 
     with open(sys.argv[1], newline='') as csvfile:
         gamereader = csv.reader(csvfile, delimiter=',', quotechar='"')
-        # format is 'game,name,nation,score'
+        # format is 'game,name,nation,score,cities,ast_position'
+
         for row in gamereader:
-            params = {"game":row[0], "name": row[1], "nation":row[2], "score":row[3], 
-                      None if len(row)<5 else "cities":row[4], 
-                      None if len(row)<6 else "ast_pos":row[5]}
-            cursor.execute(sql, params)
             print(', '.join(row))
+            # Optionally read cities and position
+            cities = None
+            ast_pos = None
+            if ( len(row)>4 ):
+                cities = row[4]
+            if ( len(row)>5 ):
+                ast_pos = row[5]
+            params = {"game":row[0], 
+                      "name": row[1], 
+                      "nation":row[2], 
+                      "score":row[3], 
+                      "cities":cities, 
+                      "ast_pos":ast_pos}
+            cursor.execute(sql, params)
 
     sqliteConnection.commit()
     cursor.close()
