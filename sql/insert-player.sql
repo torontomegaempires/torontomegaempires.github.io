@@ -1,4 +1,4 @@
 insert into player (name, display, discord)
 values
-("Niser","Niser","legendarycanary"),
-("Daniel","Daniel","Daniel")
+("William Leung","William L.","william"),
+("Mark","monstrooper (Mark)","monstrooper")
