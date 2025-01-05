@@ -14,10 +14,16 @@
   force = true
 
 [[redirects]]
-  from = "http://app.torontomegaempires.com"
-  to = "https://crawdad.neocities.org/MCA2/"
-  status = 301
-  force = true
+  from = "https://torontomegaempires.com/mmcw25"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLSdZ2pWSU-y4W3WPHlJP8aEMfHI-0mQeR98fPyUyPJBs7ywdbg/viewform?usp=header"
+  status = 302
+  force = false
+  
+#[[redirects]]
+#  from = "http://app.torontomegaempires.com"
+#  to = "https://crawdad.neocities.org/MCA2/"
+#  status = 301
+#  force = true
 
 #
 # These redirects proxy /app/* to the MCA2 application
