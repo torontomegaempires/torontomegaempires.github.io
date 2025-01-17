@@ -13,6 +13,14 @@
   status = 301
   force = true
 
+# Redirect to Discord Link
+[[redirects]]
+  from = "https://discord.torontomegaempires.com"
+  to = "https://discord.gg/vU48JDyQeW"
+  status = 302
+  force = true
+
+# Redirect to Mini MegaCon Winter 25 form
 [[redirects]]
   from = "https://torontomegaempires.com/mmcw25"
   to = "https://docs.google.com/forms/d/e/1FAIpQLSdZ2pWSU-y4W3WPHlJP8aEMfHI-0mQeR98fPyUyPJBs7ywdbg/viewform?usp=header"
