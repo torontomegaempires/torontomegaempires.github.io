@@ -20,12 +20,19 @@
   status = 302
   force = true
 
-# Redirect to Mini MegaCon Winter 25 form
+# Redirect to facebook
 [[redirects]]
-  from = "https://torontomegaempires.com/mmcw25"
-  to = "https://docs.google.com/forms/d/e/1FAIpQLSdZ2pWSU-y4W3WPHlJP8aEMfHI-0mQeR98fPyUyPJBs7ywdbg/viewform?usp=header"
+  from = "https://fb.torontomegaempires.com"
+  to = "https://www.facebook.com/groups/2344614905731511"
   status = 302
-  force = false
+  force = true
+
+# Redirect to Mini MegaCon Winter 25 form
+#[[redirects]]
+#  from = "https://torontomegaempires.com/mmcw25"
+#  to = "https://docs.google.com/forms/d/e/1FAIpQLSdZ2pWSU-y4W3WPHlJP8aEMfHI-0mQeR98fPyUyPJBs7ywdbg/viewform?usp=header"
+#  status = 302
+#  force = false
   
 #[[redirects]]
 #  from = "http://app.torontomegaempires.com"
