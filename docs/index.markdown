@@ -5,7 +5,7 @@ layout: home
 ---
 
 ![Mega Empires Closeup](/assets/img/board-closeup.png "Mega Empires Closeup")
-
+<!--
 Sign up for the Mega Empires newsletter
 
 <form name="contact" action="/form-success" netlify>
@@ -19,3 +19,4 @@ Sign up for the Mega Empires newsletter
     <button type="submit">Send</button>
   </p>
 </form>
+-->
