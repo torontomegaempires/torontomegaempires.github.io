@@ -42,9 +42,10 @@ defaults:
     values:
       image: true
 
-author:
-  name: Rob of the North
-  email: rob@torontomegaempires.com
+site:
+  author:
+    name: Rob of the North
+    email: rob@torontomegaempires.com
 
 minima:
   skin: dark
