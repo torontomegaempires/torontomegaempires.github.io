@@ -29,9 +29,14 @@ url: "https://www.torontomegaempires.com" # the base hostname & protocol for you
 #github_username:  torontomegaempires
 
 # Build settings
-remote_theme: jekyll/minima@c6e74bb
-# theme: minima
+# remote_theme: jekyll/minima
+theme: minima
 plugins:
+  - jekyll-archives
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-paginate
   - jekyll-feed
   - jekyll_sqlite # see https://github.com/captn3m0/jekyll-sqlite
   - jekyll-datapage-generator
@@ -47,7 +52,17 @@ site:
     name: Rob of the North
     email: rob@torontomegaempires.com
 
+# List of pages in the header and their order
+# header_pages:
+#   - about.md
+#   - portfolio.md
+
+show_excerpts: false # set to true to show excerpts on the homepage
+
+# Minima date format
+# refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 minima:
+  date_format: "%b %-d, %Y"
   skin: dark
   social_links:
     - { platform: facebook,  user_url: "https://www.facebook.com/groups/2344614905731511" }
