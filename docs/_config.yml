@@ -29,7 +29,7 @@ url: "https://www.torontomegaempires.com" # the base hostname & protocol for you
 #github_username:  torontomegaempires
 
 # Build settings
-remote_theme: jekyll/minima@c6e74bb
+remote_theme: jekyll/minima
 # theme: minima
 plugins:
   - jekyll-feed
