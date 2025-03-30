@@ -33,3 +33,17 @@ A game of [Mega Empires: The West](https://boardgamegeek.com/boardgame/267304/me
 ### Hosting your own game
 
 We're always looking for more venues and locations to host a game of Mega Empires. If you know of one feel free to contact [rob@torontomegaempires.com](mailto:rob@torontomegaempires.com) who'll help you organize the game and find players. We're especially interested in venues in the GTA to better accommodate our out of town players.
+
+### Next Game Days
+
+Home games alternate West/East/East/West then the following year is East/West/West/East so that the game played in a given month alternates each year. This will change once the Far East is released.
+
+- Rob's Home - East - **May 24, 2025**
+- The Guild House - **June 21, 2025**
+- Rob's Home - West - **September 20, 2025**
+- Rob's Home - East - **November 28, 2025**
+- The Guild House - **January 10 , 2026**
+- Niagara Boardgame Weekend - West - **January 22, 2026**
+- Rob's Home - West - **February 28, 2026**
+
+***
