@@ -1,5 +1,5 @@
 ---
-layout: base
+layout: games
 title: Games
 ---
 ## Games

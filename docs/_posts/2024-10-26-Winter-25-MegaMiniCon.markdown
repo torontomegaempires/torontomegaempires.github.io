@@ -10,5 +10,3 @@ We're happy to announce the **Winter 2025 Mega Mini Con** taking place January 1
 [Mega Empires](https://mega-empires.com) can be learned as you play with no lengthy up front rules teach. 
 
 Contact [rob@torontomegaempires.com](mailto:rob@torontomegaempires.com) for more details on how to sign up for the game.
-
-[Post Mega MiniCon Winter 25 Game Results](https://docs.google.com/forms/d/e/1FAIpQLSdZ2pWSU-y4W3WPHlJP8aEMfHI-0mQeR98fPyUyPJBs7ywdbg/viewform?usp=header)
