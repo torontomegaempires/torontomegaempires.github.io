@@ -27,41 +27,9 @@
   status = 302
   force = true
 
-# Redirect to Mini MegaCon Winter 25 form
-#[[redirects]]
-#  from = "https://torontomegaempires.com/mmcw25"
-#  to = "https://docs.google.com/forms/d/e/1FAIpQLSdZ2pWSU-y4W3WPHlJP8aEMfHI-0mQeR98fPyUyPJBs7ywdbg/viewform?usp=header"
-#  status = 302
-#  force = false
-  
-#[[redirects]]
-#  from = "http://app.torontomegaempires.com"
-#  to = "https://crawdad.neocities.org/MCA2/"
-#  status = 301
-#  force = true
-
-#
-# These redirects proxy /app/* to the MCA2 application
-#
-#
-# commented out for now to avoid consuming
-# bandwidth via proxy
-#
-#[[redirects]]
-#  from = "https://app.torontomegaempires.com"
-#  to = "https://torontomegaempires.com/app/"
-#  status = 301
-#  force = true
-#[[redirects]]
-#  from = "http://app.torontomegaempires.com"
-#  to = "https://torontomegaempires.com/app/"
-#  status = 301
-#  force = true
-#
-#[[redirects]]
-#  from = "/app/*"
-#  to = "https://crawdad.neocities.org/MCA2/:splat"
-#  status = 200
-#  force = true
-#  [redirects.headers]
-#    X-From = "Netlify"
+# Redirect to Gaggle sign-up
+[[redirects]]
+  from = "https://gaggle.torontomegaempires.com"
+  to = "https://gaggle.email/join/torontomegaempires@gaggle.email"
+  status = 302
+  force = true

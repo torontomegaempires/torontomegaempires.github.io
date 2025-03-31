@@ -17,7 +17,25 @@ Mega Empires was first released as Mega Civilization and was the culmination of 
 
 # How to get into a game
 
-Our games are announced on the Toronto Mega Empires Discord server: [discord.torotomegaempires.com](https://discord.torontomegaempires.com).
+Join our mailing list to be notified of games 
+<div>
+    <form method="post" action="https://gaggle.email/join/torontomegaempires@gaggle.email">
+        <div>
+        Name: <input name="name" type="text" placeholder="Name">
+        </div>
+        <div>
+        Email: <input name="email" type="email" placeholder="Email Address">
+        </div>
+        <div>
+            <button>Join Mega Empires</button>
+        </div>
+    </form>
+</div>
+<br />
+
+If you have problems with the form, use this link: [gaggle.torontomegaempires.com](https://gaggle.torontomegaempires.com).
+
+We also have the Toronto Mega Empires Discord server: [discord.torotomegaempires.com](https://discord.torontomegaempires.com).
 
 ## Home Game
 We play a 9 player game 4 times a year in the Beaches neighbourhood of Toronto at the end of February, May, September, and November, alternating between [Mega Empires: The West](https://boardgamegeek.com/boardgame/267304/mega-empires-the-west) and [Mega Empires: The East](https://boardgamegeek.com/boardgame/338980/mega-empires-the-east). It's an all-day event from 10am to 10pm with a fee requested to cover lunch and dinner food. 
