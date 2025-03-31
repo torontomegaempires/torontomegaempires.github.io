@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Game 13 - March 1, 2005 - The East"
+title:  "Game 13 - March 1, 2025 - The East"
 date:   2025-03-04 00:00:00 -0500
 categories: 
     - "Home"
