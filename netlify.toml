@@ -33,3 +33,11 @@
   to = "https://gaggle.email/join/torontomegaempires@gaggle.email"
   status = 302
   force = true
+
+# Redirect to latest game sign-up
+[[redirects]]
+  from = "https://signup.torontomegaempires.com"
+  to = ""https://discord.com/channels/1199457108257669231/1219112401287516161/1360416456067649766""
+  status = 302
+  force = true
+
