@@ -41,7 +41,7 @@ file_upload="data.txt"
 # echo "some log in a txt file to attach to the mail" > log.txt
 
 mail_from="Rob McArthur <$rtmp_from>"
-mail_to="Rob McArthur <$rtmp_to>"
+mail_to="Toronto Mega Empires <$rtmp_to>"
 mail_subject="Mega Empires: The West - Game 14 - May 24, 2025"
 mail_reply_to="Rob McArthur <$rtmp_from>"
 mail_cc=""
