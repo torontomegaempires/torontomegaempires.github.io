@@ -41,3 +41,9 @@
   status = 302
   force = true
 
+# Redirect to latest megacon sign-up
+[[redirects]]
+  from = "https://megacon-signup.torontomegaempires.com"
+  to = "https://discord.com/channels/1199457108257669231/1219112401287516161/1366051378371362896"
+  status = 302
+  force = true
