@@ -1,0 +1,31 @@
+---
+layout: post
+title:  "Game 14 - May 24, 2025 - The West"
+date:   2025-05-24 00:00:00 -0500
+categories: 
+    - "Home"
+    - "West"
+published: true
+---
+Another hard-fought game in the West! We played the Expert AST to round 18 with one more round to go as the winner stalled once. With 8 players the calamities were fast and furious with everyone getting knocked down in some fashion every round. With that being said, almost everyone managed to stay within a few points of each other except for Egypt which got hit hard and then lagged in getting sufficient trade goods to get them into the early bronze age until late in the game.
+
+The end was a close race between Hellas, Rome and Assyria, with Rome and Assyria not advancing only due to having insufficient cities in the final round.
+
+| Rank | Nation       | Player   | Score | Notes |
+|------|--------------|----------|-------|-------|
+|   1  | **Hellas**   | Allister |  143  ||
+|   2  | **Rome**     | Rob M.   |  135  ||
+|   3  | **Carthage** | Rob E.   |  133  |*(Special Building)*|
+|   4  | **Assyria**  | John P.  |  133  |*(No Special Building)*|
+|   5  | **Iberia**   | Sandy    |  130  ||
+|   6  | **Minoa**    | Don      |  122  ||
+|   7  | **Hatti**    | Aaron    |  119  ||
+|   8  | **Egypt**    | John C.  |   79  ||
+
+![Tyranny gives Corsica and Sardinia to Minoa](/assets/images/games/2025-05-24/photo1.jpeg)
+
+![Carthage reaches out to touch Assyria](/assets/images/games/2025-05-24/photo2.jpeg)
+
+## Final positions 
+
+![Final AST](/assets/images/games/2025-05-24/ast-positions.jpeg)
