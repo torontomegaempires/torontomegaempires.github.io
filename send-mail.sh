@@ -12,7 +12,8 @@
 
 # taken from https://stackoverflow.com/questions/44728855/curl-send-html-email-with-embedded-image-and-attachment
 
-message_file=${1}
+subject=${1}
+message_file=${2}
 
 # Read Password
 echo "password:\c"
@@ -42,7 +43,8 @@ file_upload="data.txt"
 
 mail_from="Rob McArthur <$rtmp_from>"
 mail_to="Toronto Mega Empires <$rtmp_to>"
-mail_subject="Mega Empires: The West - Game 14 - May 24, 2025"
+# "Mega Empires: The West - Saturday, September 20, 2025"
+mail_subject="${subject}"
 mail_reply_to="Rob McArthur <$rtmp_from>"
 mail_cc=""
 
