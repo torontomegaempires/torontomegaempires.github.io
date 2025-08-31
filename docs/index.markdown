@@ -34,7 +34,7 @@ Learn more about this legendary game at [mega-empires.com](https://mega-empires.
   </div>
 {% endif %}
 
-# Ready to Join the Empire?
+# Ready to Make Your Empire Stand the Test of Time?
 
 **New players welcome!** Don't worry about experience - Mega Empires is designed to be learned as you play. Our friendly community will help you navigate your first civilization from humble beginnings to potential world dominance.
 
@@ -52,7 +52,7 @@ Learn more about this legendary game at [mega-empires.com](https://mega-empires.
   <input name="email" type="email" placeholder="Your Email Address" style="width: 100%; padding: 8px; margin-top: 5px;">
 </div>
 <div>
-  <button type="submit" style="background: var(--brand-color, #f2cb05); padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Join the Empire</button>
+  <button type="submit" style="background: var(--brand-color, #f2cb05); padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Join Toronto Mega Empires</button>
 </div>
 </form>
 
@@ -128,7 +128,7 @@ Read the full development story at [mega-empires.com/history](https://mega-empir
   </div>
 {% endif %}
 
-# Host Your Own Empire
+# Host Your Own Mega Empires
 
 **Have a great venue?** We're always seeking new locations throughout the Greater Toronto Area. Whether you have a community center, game store, or spacious home, we'd love to help you organize an epic Mega Empires event.
 
