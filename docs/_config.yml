@@ -296,9 +296,10 @@ sqlite:
   - data: games
     file: *db
     query: "select * from game order by date(date) desc"
-  - data: games.player
+  - data: game_players
     file: *db
     query: "select 
+	game_player_nation.game_id,
 	player.display as player, 
 	nation.name as nation,
 	game_player_nation.cities,
@@ -309,8 +310,7 @@ from player
 	player.id=game_player_nation.player_id
   join nation on
     nation.id=game_player_nation.nation_id
- where game_player_nation.game_id=:id
-order by score desc"
+order by game_player_nation.game_id, score desc"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
