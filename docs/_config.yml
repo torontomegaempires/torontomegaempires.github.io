@@ -157,6 +157,10 @@ brand_color: greenblue
 #     subheading: "Your awesome subheading"
 #     banner: "Your image url"
 
+# setting image to null disables the banner
+banner:
+  image: null
+
 # Banner default settings
 # These banner settings are for global banner default, but you can also
 # config it by the front matter for one specific post

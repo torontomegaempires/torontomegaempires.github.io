@@ -1,17 +1,10 @@
-// Hide yat theme banner completely
-.home-banner,
-.page-banner,
-.banner {
-  display: none !important;
-}
-
 // Hero Section Styling - Enhanced Visual Impact
 .hero-section {
   text-align: center;
   padding: 80px 20px;
   background: 
     linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(52, 73, 94, 0.75) 50%, rgba(44, 62, 80, 0.85) 100%),
-    url('/assets/images/banners/mega-empires-banner.png') center/cover no-repeat;
+    url('/assets/images/banners/board-closeup.png') center/cover no-repeat;
   border-radius: 20px;
   margin: 30px 0;
   position: relative;

@@ -5,7 +5,7 @@ title: Home
 
 <div class="hero-section">
 <h1>Build an Empire. Make History. Have Fun.</h1>
-<div class="hero-subtitle">Toronto's premier strategy gaming community for epic civilization-building adventures
+<div class="hero-subtitle">Toronto's Mega Empires gaming community for epic civilization-building adventures
 </div>
 
 <div class="hero-stats">
@@ -120,16 +120,6 @@ Don't worry about experience - Mega Empires is designed to be learned as you pla
 <span>Follow Facebook</span>
 </a>
 </div>
-</div>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">🏛️</span>
-</div>
-
-# Three Ways to Play
-
-<div class="game-types-grid">
 <div class="game-type-card">
 <span class="card-icon">🏠</span>
 <h3>Cozy Home Games</h3>
