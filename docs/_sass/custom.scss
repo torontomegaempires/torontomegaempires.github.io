@@ -1889,6 +1889,48 @@ h3 {
   }
 }
 
+// Fix for night mode toggle z-index issue
+// Ensure the night mode toggle appears above the navigation
+.site-header {
+  .night-toggle {
+    z-index: 1000 !important;
+    position: relative;
+  }
+}
+
+// Alternative approach - target the theme's night mode toggle directly
+.yat-site-header {
+  .night-toggle,
+  .theme-toggle,
+  .dark-toggle,
+  [class*="night"],
+  [class*="dark"],
+  [class*="theme"] {
+    z-index: 1000 !important;
+    position: relative;
+  }
+}
+
+// Generic fix for any toggle button in header
+header {
+  .toggle,
+  .btn-toggle,
+  [role="button"],
+  button {
+    z-index: 1000 !important;
+    position: relative;
+  }
+}
+
+// Specific fix for YAT theme night mode toggle
+.site-header .site-nav {
+  .night-toggle,
+  .theme-toggle {
+    z-index: 1000 !important;
+    position: relative;
+  }
+}
+
 // Dark mode support (if your theme supports it)
 @media (prefers-color-scheme: dark) {
   .game-card {
