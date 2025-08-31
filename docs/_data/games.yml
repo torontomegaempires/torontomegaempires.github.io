@@ -1,0 +1,43 @@
+# Game schedule data
+games:
+    
+  - date: "2025-09-20"
+    title: "Rob's Home - West"
+    type: "home"
+    variant: "west"
+    location: "Beaches, Toronto"
+    max_players: 9
+    status: "upcoming"
+    
+  - date: "2025-11-28"
+    title: "Rob's Home - East"
+    type: "home"
+    variant: "weeastst"
+    location: "Beaches, Toronto"
+    max_players: 9
+    status: "upcoming"
+    
+  - date: "2026-01-10"
+    title: "The Guild House"
+    type: "megacon"
+    variant: "full"
+    location: "The Guild House"
+    max_players: 18
+    status: "upcoming"
+    cost: "$10 per player"
+    
+  - date: "2026-01-15"
+    title: "Niagara Boardgame Weekend - West"
+    type: "convention"
+    variant: "west"
+    location: "Niagara"
+    max_players: 9
+    status: "upcoming"
+    
+  - date: "2026-02-28"
+    title: "Rob's Home - East"
+    type: "home"
+    variant: "east"
+    location: "Beaches, Toronto"
+    max_players: 9
+    status: "upcoming"

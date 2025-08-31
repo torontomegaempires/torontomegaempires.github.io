@@ -228,6 +228,31 @@ brand_color: greatgold
 #   theme: "github-light"
 #   follow_site_theme: true
 
+# Social links for the theme
+social_links:
+  discord: "https://discord.torontomegaempires.com"
+  email: "mailto:info@torontomegaempires.com"
+
+# Custom collections for different content types
+collections:
+  game_reports:
+    output: true
+    permalink: /:collection/:name/
+
+# Better defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Rob of the North"
+  - scope:
+      path: ""
+      type: "game_reports"
+    values:
+      layout: "game_report"
+      
 # Build settings
 # highlighter: none
 markdown: kramdown
@@ -251,6 +276,17 @@ author:
   email: rob@torontomegaempires.com
 
 sqlite:
+  - data: recent_results
+    file: &db "_db/megaempires.db"
+    query: "SELECT 
+    game.*, 
+    player.display as winner
+  FROM game 
+  LEFT JOIN game_player_nation ON game.id = game_player_nation.game_id 
+  LEFT JOIN player ON player.id = game_player_nation.player_id
+  WHERE game_player_nation.ast_pos = 1
+  ORDER BY date(game.date) DESC 
+  LIMIT 5"
   - data: players
     file: &db "_db/megaempires.db"
     query: SELECT * from player
