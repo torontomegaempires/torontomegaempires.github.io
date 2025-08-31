@@ -2,26 +2,26 @@
 games:
     
   - date: "2025-09-20"
-    title: "Rob's Home - Mega Empires: The West"
+    title: "Mega Empires: The West"
     type: "home"
-    variant: "west"
+    variant: "the west"
     location: "Beaches, Toronto"
     max_players: 9
     status: "upcoming"
     
   - date: "2025-11-28"
-    title: "Rob's Home - Mega Empires: The East"
+    title: "Mega Empires: The East"
     type: "home"
-    variant: "weeastst"
+    variant: "the east"
     location: "Beaches, Toronto"
     max_players: 9
     status: "upcoming"
     
   - date: "2026-01-10"
-    title: "The Guild House"
+    title: "The Guild House - Mega Empires"
     type: "megacon"
-    variant: "full"
-    location: "The Guild House"
+    variant: "full game"
+    location: "The Guild House, Toronto"
     max_players: 18
     status: "upcoming"
     cost: "$10 per player"
@@ -29,15 +29,15 @@ games:
   - date: "2026-01-15"
     title: "Niagara Boardgame Weekend - Mega Empires: The West"
     type: "convention"
-    variant: "west"
-    location: "Niagara"
+    variant: "the west"
+    location: "Niagara Falls, ON"
     max_players: 9
     status: "upcoming"
     
   - date: "2026-02-28"
-    title: "Rob's Home - Mega Empires: The East"
+    title: "Mega Empires: The East"
     type: "home"
-    variant: "east"
+    variant: "the east"
     location: "Beaches, Toronto"
     max_players: 9
     status: "upcoming"

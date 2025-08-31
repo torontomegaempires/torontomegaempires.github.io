@@ -24,6 +24,22 @@ title: Home
 </div>
 </div>
 
+<div class="social-media-section">
+<h2 class="social-title">🏛️ Join Our Empire Building Community</h2>
+<p class="social-subtitle">Connect with fellow strategists, get game updates, and secure your spot at the table</p>
+
+<div class="social-buttons">
+<a href="https://discord.torontomegaempires.com" class="social-button discord" target="_blank">
+<span class="social-icon">💬</span>
+<span class="social-text">Join Discord Server</span>
+</a>
+<a href="https://fb.torontomegaempires.com" class="social-button facebook" target="_blank">
+<span class="social-icon">👥</span>
+<span class="social-text">Follow on Facebook</span>
+</a>
+</div>
+</div>
+
 <div class="info-callout">
 <div class="callout-title">New to Mega Empires?
 </div>
@@ -44,6 +60,7 @@ Learn more about this legendary game at <a href="https://mega-empires.com" targe
 <h2 style="margin-top: 0;">🎲 Next Game</h2>
 <h3>{{ next_game.title }}</h3>
 <p><strong>Date:</strong> {{ next_game.date | date: "%B %d, %Y" }}</p>
+<p><strong>Location:</strong> {{ next_game.location | "" }}</p>
 <p><strong>Players:</strong> Up to {{ next_game.max_players }}</p>
 {% if next_game.cost %}<p><strong>Cost:</strong> {{ next_game.cost }}</p>{% endif %}
 </div>
@@ -90,9 +107,19 @@ Don't worry about experience - Mega Empires is designed to be learned as you pla
 </form>
 
 <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
-<p style="margin: 5px 0; font-size: 0.9em;"><strong>Having trouble with the form?</strong></p>
+<p style="margin: 5px 0 15px 0; font-size: 0.9em;"><strong>Having trouble with the form?</strong></p>
 <p style="margin: 5px 0; font-size: 0.9em;">📧 Direct signup: <a href="https://gaggle.torontomegaempires.com">gaggle.torontomegaempires.com</a></p>
-<p style="margin: 5px 0; font-size: 0.9em;">💬 Join our Discord: <a href="https://discord.torontomegaempires.com">discord.torontomegaempires.com</a></p>
+
+<div class="social-links-compact">
+<a href="https://discord.torontomegaempires.com" class="social-link-compact discord-compact" target="_blank">
+<span class="social-icon">💬</span>
+<span>Join Discord</span>
+</a>
+<a href="https://fb.torontomegaempires.com" class="social-link-compact facebook-compact" target="_blank">
+<span class="social-icon">👥</span>
+<span>Follow Facebook</span>
+</a>
+</div>
 </div>
 </div>
 
@@ -178,13 +205,13 @@ Mega Empires evolved from the classic Civilization by Francis Tresham, expanded 
 <div class="game-type-card">
 <span class="card-icon">🏛️</span>
 <h3>Civilization Building</h3>
-<p>Develop technologies and advance your society from the bronze age to the heights of ancient civilization.</p>
+<p>Develop technologies and advance your society from Prehistory to the heights of the Iron Age.</p>
 </div>
 
 <div class="game-type-card">
 <span class="card-icon">⚔️</span>
-<h3>Strategic Warfare</h3>
-<p>When diplomacy fails, armies march. Command your forces in tactical battles across the ancient world.</p>
+<h3>Clash of Civilizations</h3>
+<p>When diplomacy fails, armies march. Send your people to war by land or sea.</p>
 </div>
 
 <div class="game-type-card">
@@ -213,7 +240,7 @@ Read the full development story at <a href="https://mega-empires.com/history" ta
 <div class="game-card">
 <h4 style="margin-top: 0;">{{ game.title }}</h4>
 <p><strong>{{ game.date | date: "%B %d, %Y" }}</strong></p>
-<p>{{ game.max_players }} players • {{ game.variant | capitalize }}</p>
+<p>{{ game.max_players }} players • {{ game.location }}</p>
 {% if game.cost %}<p><em>{{ game.cost }}</em></p>{% endif %}
 </div>
 {% endfor %}
