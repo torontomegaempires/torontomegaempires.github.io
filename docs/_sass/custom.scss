@@ -1,3 +1,10 @@
+// Hide yat theme banner completely
+.home-banner,
+.page-banner,
+.banner {
+  display: none !important;
+}
+
 // Hero Section Styling - Enhanced Visual Impact
 .hero-section {
   text-align: center;
