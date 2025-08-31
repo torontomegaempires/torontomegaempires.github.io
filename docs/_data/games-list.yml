@@ -2,7 +2,7 @@
 games:
     
   - date: "2025-09-20"
-    title: "Rob's Home - West"
+    title: "Rob's Home - Mega Empires: The West"
     type: "home"
     variant: "west"
     location: "Beaches, Toronto"
@@ -10,7 +10,7 @@ games:
     status: "upcoming"
     
   - date: "2025-11-28"
-    title: "Rob's Home - East"
+    title: "Rob's Home - Mega Empires: The East"
     type: "home"
     variant: "weeastst"
     location: "Beaches, Toronto"
@@ -27,7 +27,7 @@ games:
     cost: "$10 per player"
     
   - date: "2026-01-15"
-    title: "Niagara Boardgame Weekend - West"
+    title: "Niagara Boardgame Weekend - Mega Empires: The West"
     type: "convention"
     variant: "west"
     location: "Niagara"
@@ -35,7 +35,7 @@ games:
     status: "upcoming"
     
   - date: "2026-02-28"
-    title: "Rob's Home - East"
+    title: "Rob's Home - Mega Empires: The East"
     type: "home"
     variant: "east"
     location: "Beaches, Toronto"

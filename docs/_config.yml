@@ -110,7 +110,7 @@ theme_color: spacegrey
 # greatgold: #f2cb05
 # greenblue: #389092
 #
-brand_color: greatgold
+brand_color: greenblue
 #
 # Custom color as below:
 # brand_color: "#1a8e42"
@@ -258,7 +258,10 @@ defaults:
 markdown: kramdown
 kramdown:
   input: GFM
-
+  parse_block_html: true
+  parse_span_html: true
+  html_to_native: true
+  
 # Build settings
 theme: jekyll-theme-yat
 
