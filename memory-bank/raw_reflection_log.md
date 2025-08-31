@@ -1,37 +1,29 @@
 ---
 Date: 2025-08-31
-TaskRef: "Enhanced Homepage Banner Visual Impact"
+TaskRef: "Update next game card on home page to link to signup URL"
 
 Learnings:
-- Successfully transformed a basic hero section into a cinematic, impactful banner using existing assets
-- Learned effective layering techniques: background image + gradient overlays + animated patterns + glass-morphism elements
-- Discovered that backdrop-filter: blur() creates excellent glass-morphism effects for modern UI design
-- Found that multiple subtle animations (background pulse, border shimmer, title glow, stat pulse) create engaging motion without being distracting
-- Confirmed that high contrast (white text on dark overlay) dramatically improves readability and visual impact
-- Learned that existing banner images can be repurposed effectively as background elements with proper overlay treatment
-
-Technical Insights:
-- CSS background layering: linear-gradient overlays + url() images work well for creating dramatic effects
-- Animation performance: Using transform and opacity properties ensures smooth 60fps animations
-- Text effects: Combining text-shadow with multiple layers creates professional glow effects
-- Responsive design: background-size: cover and background-position: center maintain visual impact across devices
-- Glass-morphism: backdrop-filter: blur(10px) + rgba backgrounds create modern translucent card effects
+- Jekyll Liquid templating can have issues with complex nested HTML structures, especially when wrapping large blocks of content with <a> tags
+- CSS `pointer-events: none` on child elements completely blocks click functionality - this was a critical issue that prevented links from working
+- JavaScript onclick events with `window.open()` are more reliable than complex HTML link structures for clickable card components
+- HTML structure validation is crucial - malformed nested divs can interfere with link functionality
+- Jekyll data files (_data/games-list.yml) work correctly and the templating processes the data as expected
 
 Difficulties:
-- Initial concern about image path resolution, but Jekyll's asset pipeline handled it correctly
-- Balancing animation subtlety - needed to ensure effects enhance rather than distract from content
-- Mobile optimization required careful adjustment of font sizes and spacing to maintain impact
+- Initial approach using <a> tags wrapping the entire next-game-highlight content caused HTML structure issues
+- CSS rule `* { pointer-events: none; }` in .next-game-link class was blocking all click events
+- Malformed HTML with unclosed divs was interfering with the link functionality
+- Visible `</a>` tags in the browser indicated Jekyll templating processing issues
 
 Successes:
-- Dramatic visual transformation achieved using only CSS enhancements and existing assets
-- Perfect alignment with ancient civilization gaming theme through color choices and effects
-- Maintained full responsiveness while adding sophisticated visual elements
-- User engagement significantly improved through interactive hover effects and animations
-- Professional appearance now matches the epic scale of Mega Empires gaming experience
+- Successfully identified and removed the problematic `pointer-events: none` CSS rule
+- Fixed malformed HTML structure by properly closing nested divs
+- Implemented a more reliable JavaScript-based click solution using onclick and window.open()
+- Verified the Jekyll data integration is working correctly (showing "Mega Empires: The West" on "September 20, 2025")
+- Confirmed the click functionality works (hover effects activate on click)
 
 Improvements_Identified_For_Consolidation:
-- Glass-morphism card pattern (backdrop-filter + rgba + hover effects) - highly reusable
-- Multi-layer background technique for dramatic visual impact
-- Animation layering strategy for subtle, engaging motion
-- High-contrast text treatment for maximum readability and impact
+- For clickable card components, JavaScript onclick events are more reliable than complex nested HTML link structures
+- Always validate HTML structure when working with Jekyll templating
+- CSS pointer-events should be used carefully as they can completely block interactivity
 ---

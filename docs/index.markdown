@@ -56,7 +56,7 @@ Learn more about this legendary game at <a href="https://mega-empires.com" targe
 {% assign upcoming_games = site.data.games-list.games | where_exp: "game", "game.date >= today" | sort: "date" %}
 {% if upcoming_games.size > 0 %}
 {% assign next_game = upcoming_games.first %}
-<div class="next-game-highlight">
+<div class="next-game-highlight" onclick="window.open('https://signup.torontomegaempires.com', '_blank')" style="cursor: pointer;">
 <h2 style="margin-top: 0;">🎲 Next Game</h2>
 <h3>{{ next_game.title }}</h3>
 <p><strong>Date:</strong> {{ next_game.date | date: "%B %d, %Y" }}</p>
@@ -66,7 +66,7 @@ Learn more about this legendary game at <a href="https://mega-empires.com" targe
 </div>
 {% endif %}
 {% else %}
-<div class="next-game-highlight">
+<div class="next-game-highlight" onclick="window.open('https://signup.torontomegaempires.com', '_blank')" style="cursor: pointer;">
 <h2 style="margin-top: 0;">🎲 Next Game</h2>
 <h3>Rob's Home - West</h3>
 <p><strong>Date:</strong> May 24, 2025</p>
@@ -120,6 +120,10 @@ Don't worry about experience - Mega Empires is designed to be learned as you pla
 <span>Follow Facebook</span>
 </a>
 </div>
+</div>
+</div>
+
+<div class="game-types-grid">
 <div class="game-type-card">
 <span class="card-icon">🏠</span>
 <h3>Cozy Home Games</h3>
