@@ -28,94 +28,31 @@ title: Games
 </div>
 </div>
 
-{% comment %} Photo Gallery Section {% endcomment %}
-{% assign photo_folder = game.date %}
-{% assign photo_path = "/assets/images/games/" | append: photo_folder | append: "/" %}
+{% comment %} Dynamic Photo Gallery Section {% endcomment %}
+{% assign game_date = game.date %}
+{% assign game_photos = site.data.game_photos[game_date] %}
 
-{% comment %} Check for photos based on known game dates {% endcomment %}
-{% if game.date == "2024-05-25" %}
+{% if game_photos and game_photos.size > 0 %}
 <div class="photo-gallery-section">
 <div class="photo-gallery-grid">
-<img src="{{ photo_path }}0e7a95a5-7105-45e7-ab6e-e52234bdf2ed.jpg" alt="Game 10 - Epic moments" class="gallery-photo featured-photo" loading="lazy">
-<img src="{{ photo_path }}37d7869e-c004-4510-988d-f360042911b0.jpg" alt="Game 10 - Strategic planning" class="gallery-photo" loading="lazy">
-<img src="{{ photo_path }}569cab4f-9f49-4fc8-8840-5b72fe9443c7.jpg" alt="Game 10 - Civilization building" class="gallery-photo" loading="lazy">
-<img src="{{ photo_path }}645914be-e476-4448-b00d-a81127e66210.jpg" alt="Game 10 - Player interactions" class="gallery-photo" loading="lazy">
-<img src="{{ photo_path }}c65a3bb1-371a-4857-91e5-d32caf149599.jpg" alt="Game 10 - Board overview" class="gallery-photo" loading="lazy">
-<img src="{{ photo_path }}e0c37107-7d2f-4741-a49e-944dee0c2e31.jpg" alt="Game 10 - Final positions" class="gallery-photo" loading="lazy">
+{% for photo in game_photos %}
+{% assign photo_alt = game.name | append: " - Epic gaming moments" %}
+{% if forloop.first %}
+<img src="{{ photo.path }}" alt="{{ photo_alt }}" class="gallery-photo featured-photo" loading="lazy">
+{% elsif photo.filename contains "ast" or photo.filename contains "position" %}
+<img src="{{ photo.path }}" alt="{{ photo_alt }}" class="gallery-photo winner-photo" loading="lazy">
+{% else %}
+<img src="{{ photo.path }}" alt="{{ photo_alt }}" class="gallery-photo" loading="lazy">
+{% endif %}
+{% endfor %}
 </div>
 <div class="photo-gallery-caption">
-{% assign current_game = site.data.games | where: "date", "2024-05-25" | first %}
-{% if current_game.game_summary %}
-<p>{{ current_game.game_summary }}</p>
-{% endif %}
-</div>
-</div>
-{% elsif game.date == "2024-09-21" %}
-<div class="photo-gallery-section">
-<div class="photo-gallery-grid">
-<img src="{{ photo_path }}IMG_1603.jpg" alt="Game 11 - Strategic gameplay" class="gallery-photo featured-photo" loading="lazy">
-<img src="{{ photo_path }}IMG_1604.jpg" alt="Game 11 - Player focus" class="gallery-photo" loading="lazy">
-<img src="{{ photo_path }}IMG_1605.jpg" alt="Game 11 - Civilization progress" class="gallery-photo" loading="lazy">
-</div>
-<div class="photo-gallery-caption">
-{% assign current_game = site.data.games | where: "date", "2024-09-21" | first %}
-{% if current_game.game_summary %}
-<p>{{ current_game.game_summary }}</p>
-{% endif %}
-</div>
-</div>
-{% elsif game.date == "2025-01-18" %}
-<div class="photo-gallery-section">
-<div class="photo-gallery-grid">
-<img src="{{ photo_path }}IMG_1884_Large.jpeg" alt="MegaCon Winter 25 - Convention atmosphere" class="gallery-photo featured-photo" loading="lazy">
-<img src="{{ photo_path }}IMG_1885_Large.jpeg" alt="MegaCon Winter 25 - Epic scale gaming" class="gallery-photo" loading="lazy">
-</div>
-<div class="photo-gallery-caption">
-{% assign current_game = site.data.games | where: "date", "2025-01-18" | first %}
-{% if current_game.game_summary %}
-<p>{{ current_game.game_summary }}</p>
-{% endif %}
-</div>
-</div>
+{% if game.game_summary %}
+<p>{{ game.game_summary }}</p>
 {% elsif game.date == "2025-01-23" %}
-<div class="photo-gallery-section">
-<div class="photo-gallery-grid">
-<img src="/assets/images/games/2025-01-23/IMG_1886.jpeg" alt="Niagara Boardgame Weekend - Convention gaming" class="gallery-photo featured-photo" loading="lazy">
-<img src="/assets/images/games/2025-01-23/IMG_1887.jpeg" alt="Niagara Boardgame Weekend - Strategic discussions" class="gallery-photo" loading="lazy">
-<img src="/assets/images/games/2025-01-23/IMG_1888.jpeg" alt="Niagara Boardgame Weekend - Player engagement" class="gallery-photo" loading="lazy">
-<img src="/assets/images/games/2025-01-23/IMG_1889.jpeg" alt="Niagara Boardgame Weekend - Epic moments" class="gallery-photo" loading="lazy">
-<img src="/assets/images/games/2025-01-23/IMG_1890.jpeg" alt="Niagara Boardgame Weekend - Community spirit" class="gallery-photo" loading="lazy">
-<img src="/assets/images/games/2025-01-23/IMG_1891.jpeg" alt="Niagara Boardgame Weekend - Final celebration" class="gallery-photo" loading="lazy">
-</div>
-<div class="photo-gallery-caption">
 <p>🌟 <strong>Niagara Boardgame Weekend</strong> - Toronto Mega Empires expands beyond the city, bringing our epic gaming experience to Ontario's broader gaming community.</p>
-</div>
-</div>
-{% elsif game.date == "2025-03-01" %}
-<div class="photo-gallery-section">
-<div class="photo-gallery-grid">
-<img src="/assets/images/games/2025-03-04/photo1.jpeg" alt="Game 13 - The East - Strategic positioning" class="gallery-photo featured-photo" loading="lazy">
-<img src="/assets/images/games/2025-03-04/photo2.jpeg" alt="Game 13 - The East - Civilization development" class="gallery-photo" loading="lazy">
-<img src="/assets/images/games/2025-03-04/photo3.jpeg" alt="Game 13 - The East - Epic conclusion" class="gallery-photo" loading="lazy">
-</div>
-<div class="photo-gallery-caption">
-{% assign current_game = site.data.games | where: "date", "2025-03-01" | first %}
-{% if current_game.game_summary %}
-<p>{{ current_game.game_summary }}</p>
-{% endif %}
-</div>
-</div>
-{% elsif game.date == "2025-05-24" %}
-<div class="photo-gallery-section">
-<div class="photo-gallery-grid">
-<img src="{{ photo_path }}photo1.jpeg" alt="Game 14 - The West - Opening moves" class="gallery-photo featured-photo" loading="lazy">
-<img src="{{ photo_path }}photo2.jpeg" alt="Game 14 - The West - Mid-game strategy" class="gallery-photo" loading="lazy">
-<img src="{{ photo_path }}ast-positions.jpeg" alt="Game 14 - The West - Final AST positions" class="gallery-photo winner-photo" loading="lazy">
-</div>
-<div class="photo-gallery-caption">
-{% assign current_game = site.data.games | where: "date", "2025-05-24" | first %}
-{% if current_game.game_summary %}
-<p>{{ current_game.game_summary }}</p>
+{% else %}
+<p>📸 Captured moments from this epic {{ game_photos.size }}-photo gaming session, showcasing the strategic intensity and community spirit of Mega Empires.</p>
 {% endif %}
 </div>
 </div>
