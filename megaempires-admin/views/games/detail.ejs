@@ -294,11 +294,11 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm">
-                                                        <a href="/records/<%= record.id %>/edit" class="btn btn-outline-secondary" title="Edit Record">
+                                                        <a href="/records/<%= record.game_id %>/<%= record.player_id %>/<%= record.nation_id %>/edit" class="btn btn-outline-secondary" title="Edit Record">
                                                             <i class="bi bi-pencil"></i>
                                                         </a>
                                                         <button type="button" class="btn btn-outline-danger" title="Delete Record" 
-                                                                onclick="confirmDeleteRecord(<%= record.id %>, '<%= record.player_display || record.player_name %>')">
+                                                                onclick="confirmDeleteRecord(<%= record.game_id %>, <%= record.player_id %>, <%= record.nation_id %>, '<%= record.player_display || record.player_name %>')">
                                                             <i class="bi bi-trash"></i>
                                                         </button>
                                                     </div>
@@ -393,7 +393,7 @@
         }
 
         // Delete record confirmation
-        function confirmDeleteRecord(recordId, playerName) {
+        function confirmDeleteRecord(gameId, playerId, nationId, playerName) {
             Swal.fire({
                 title: 'Delete Record?',
                 text: 'Are you sure you want to delete the record for "' + playerName + '"? This action cannot be undone.',
@@ -408,7 +408,7 @@
                     // Create and submit form
                     var form = document.createElement('form');
                     form.method = 'POST';
-                    form.action = '/records/' + recordId + '/delete';
+                    form.action = '/records/' + gameId + '/' + playerId + '/' + nationId + '/delete';
                     document.body.appendChild(form);
                     form.submit();
                 }

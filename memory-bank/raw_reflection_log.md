@@ -32,3 +32,32 @@ Improvements_Identified_For_Consolidation:
 - DataTables integration patterns for sortable, searchable admin tables
 - SweetAlert2 integration for professional confirmation dialogs
 ---
+
+---
+Date: 2025-09-01
+TaskRef: "Fix 404 error on records edit URL from games detail page"
+
+Learnings:
+- Identified critical routing mismatch between games detail view and records routing configuration
+- Records model uses composite primary key (game_id, player_id, nation_id) but template was using non-existent record.id
+- Fixed malformed URLs with double slashes by correcting EJS template to use proper composite key structure
+- Updated JavaScript confirmation function to match new parameter structure for delete operations
+- Confirmed fix works correctly through browser testing - edit links now navigate properly to edit forms
+
+Difficulties:
+- Initial confusion about URL structure due to composite key vs single ID expectations
+- Required understanding of both routing configuration and database model structure
+- JavaScript function parameters needed updating to match new URL structure
+
+Successes:
+- Successfully identified root cause: template using record.id instead of composite key components
+- Fixed both edit links and delete confirmation functions in single coordinated update
+- Verified fix through comprehensive browser testing - no more 404 errors
+- Edit forms now load correctly with proper data population
+
+Improvements_Identified_For_Consolidation:
+- Composite key routing patterns in Express.js applications
+- EJS template URL generation for complex primary keys
+- Coordinated updates between template links and JavaScript functions
+- Browser testing methodology for verifying routing fixes
+---
