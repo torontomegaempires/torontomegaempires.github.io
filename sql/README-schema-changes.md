@@ -35,3 +35,33 @@ The following columns were added to the `game_player_nation` table:
 - Total records after: 129 (confirmed no data loss)
 - All existing columns and data remain unchanged
 - New columns properly initialized with NULL or default values
+
+## game Table Modifications
+
+**Date:** September 1, 2025
+
+### Added Columns
+
+The following column was added to the `game` table:
+
+| Column Name | Data Type | Default | Nullable | Description |
+|-------------|-----------|---------|----------|-------------|
+| `game_summary` | TEXT | NULL | Yes | CLOB field for storing detailed game summaries and notes |
+
+### Implementation Details
+
+- Column is nullable to preserve existing data integrity
+- Uses SQLite's TEXT type which can store large amounts of text (CLOB equivalent)
+- A backup of the database was created before modifications: `megaempires.db.backup-20250901`
+
+### Files Modified
+
+- `sql/alter-game-table-add-summary.sql` - Contains the ALTER TABLE statement
+- `sql/insert-game.sql` - Updated to include game_summary column
+- Database backup created: `docs/_db/megaempires.db.backup-20250901`
+
+### Data Integrity
+
+- All existing game records remain unchanged
+- New column properly initialized with NULL values
+- Database structure verified and functional

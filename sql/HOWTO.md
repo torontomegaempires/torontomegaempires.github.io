@@ -4,7 +4,18 @@ Use DB Browser for SQLite and open /docs/_db/megaempires.db
 
 ## Adding a new game
 
-Use `insert-game.sql` to add the game record.
+Use `insert-game.sql` to add the game record. The game record includes:
+- `name`: Game name (e.g., "Game 15")
+- `date`: Game date in YYYY-MM-DD format
+- `final_ast_pos`: Final AST position
+- `game_summary`: Optional detailed summary of the game (can be NULL)
+
+Example:
+```sql
+insert into game (name, date, final_ast_pos, game_summary)
+values
+("Game 15","2025-09-01", 16, "Epic game with close finish. Rome dominated early but Egypt came back strong in the late game.")
+```
 
 ## Adding a new game record
 
