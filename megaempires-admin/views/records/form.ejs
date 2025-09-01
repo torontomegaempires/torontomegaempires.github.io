@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - Mega Empires Admin</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-trophy"></i> Mega Empires Admin
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="bi bi-house"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-controller"></i> Games
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/games">View All Games</a></li>
+                            <li><a class="dropdown-item" href="/games/new">Add New Game</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-people"></i> Players
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/players">View All Players</a></li>
+                            <li><a class="dropdown-item" href="/players/new">Add New Player</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-flag"></i> Nations
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/nations">View All Nations</a></li>
+                            <li><a class="dropdown-item" href="/nations/new">Add New Nation</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-table"></i> Records
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/records">View All Records</a></li>
+                            <li><a class="dropdown-item active" href="/records/new">Add New Record</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col">
+                <h1 class="h2"><%= title %></h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="/records">Records</a></li>
+                        <li class="breadcrumb-item active"><%= record.game_id ? 'Edit' : 'Add' %></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Error Messages -->
+        <% if (errors && errors.length > 0) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle"></i>
+                <strong>Please fix the following errors:</strong>
+                <ul class="mb-0 mt-2">
+                    <% errors.forEach(function(error) { %>
+                        <li><%= error.msg %></li>
+                    <% }); %>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <% } %>
+
+        <div class="row">
+            <!-- Form Column -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-table"></i> Game Record Details
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="<%= record.game_id ? '/records/' + record.game_id + '/' + record.player_id + '/' + record.nation_id : '/records' %>">
+                            <!-- Basic Information -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h6 class="text-primary border-bottom pb-2 mb-3">
+                                        <i class="bi bi-info-circle"></i> Basic Information
+                                    </h6>
+                                </div>
+                                
+                                <div class="col-md-4 mb-3">
+                                    <label for="game_id" class="form-label">Game <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="game_id" name="game_id" required <%= record.game_id ? 'disabled' : '' %>>
+                                        <option value="">Select a game...</option>
+                                        <% games.forEach(function(game) { %>
+                                            <option value="<%= game.id %>" <%= record.game_id == game.id ? 'selected' : '' %>>
+                                                <%= game.name || 'Game ' + game.id %> (<%= game.date %>)
+                                            </option>
+                                        <% }); %>
+                                    </select>
+                                    <% if (record.game_id) { %>
+                                        <input type="hidden" name="game_id" value="<%= record.game_id %>">
+                                    <% } %>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="player_id" class="form-label">Player <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="player_id" name="player_id" required <%= record.player_id ? 'disabled' : '' %>>
+                                        <option value="">Select a player...</option>
+                                        <% players.forEach(function(player) { %>
+                                            <option value="<%= player.id %>" <%= record.player_id == player.id ? 'selected' : '' %>>
+                                                <%= player.display_name || player.full_name %>
+                                                <% if (player.discord_username) { %>(@<%= player.discord_username %>)<% } %>
+                                            </option>
+                                        <% }); %>
+                                    </select>
+                                    <% if (record.player_id) { %>
+                                        <input type="hidden" name="player_id" value="<%= record.player_id %>">
+                                    <% } %>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="nation_id" class="form-label">Nation <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="nation_id" name="nation_id" required <%= record.nation_id ? 'disabled' : '' %>>
+                                        <option value="">Select a nation...</option>
+                                        <% nations.forEach(function(nation) { %>
+                                            <option value="<%= nation.id %>" <%= record.nation_id == nation.id ? 'selected' : '' %>>
+                                                <%= nation.name %>
+                                            </option>
+                                        <% }); %>
+                                    </select>
+                                    <% if (record.nation_id) { %>
+                                        <input type="hidden" name="nation_id" value="<%= record.nation_id %>">
+                                    <% } %>
+                                </div>
+                            </div>
+
+                            <!-- Game Results -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h6 class="text-primary border-bottom pb-2 mb-3">
+                                        <i class="bi bi-trophy"></i> Game Results
+                                    </h6>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="score" class="form-label">Final Score <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="score" name="score" 
+                                           value="<%= record.score || '' %>" min="0" required>
+                                    <div class="form-text">Total victory points earned</div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="ast_pos" class="form-label">AST Position</label>
+                                    <input type="number" class="form-control" id="ast_pos" name="ast_pos" 
+                                           value="<%= record.ast_pos || '' %>" min="0">
+                                    <div class="form-text">Position on AST track (optional)</div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="cities" class="form-label">Cities</label>
+                                    <input type="number" class="form-control" id="cities" name="cities" 
+                                           value="<%= record.cities || '' %>" min="0">
+                                    <div class="form-text">Number of cities built</div>
+                                </div>
+                            </div>
+
+                            <!-- Civilization Advances -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h6 class="text-primary border-bottom pb-2 mb-3">
+                                        <i class="bi bi-lightbulb"></i> Civilization Advances
+                                    </h6>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="num_civ_adv_1VP" class="form-label">1VP Advances</label>
+                                    <input type="number" class="form-control" id="num_civ_adv_1VP" name="num_civ_adv_1VP" 
+                                           value="<%= record.num_civ_adv_1VP || '' %>" min="0">
+                                    <div class="form-text">Number of 1-point advances</div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="num_civ_adv_3VP" class="form-label">3VP Advances</label>
+                                    <input type="number" class="form-control" id="num_civ_adv_3VP" name="num_civ_adv_3VP" 
+                                           value="<%= record.num_civ_adv_3VP || '' %>" min="0">
+                                    <div class="form-text">Number of 3-point advances</div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="num_civ_adv_6VP" class="form-label">6VP Advances</label>
+                                    <input type="number" class="form-control" id="num_civ_adv_6VP" name="num_civ_adv_6VP" 
+                                           value="<%= record.num_civ_adv_6VP || '' %>" min="0">
+                                    <div class="form-text">Number of 6-point advances</div>
+                                </div>
+                            </div>
+
+                            <!-- Special Achievements -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h6 class="text-primary border-bottom pb-2 mb-3">
+                                        <i class="bi bi-star"></i> Special Achievements
+                                    </h6>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="special_building" name="special_building" 
+                                               value="1" <%= record.special_building ? 'checked' : '' %>>
+                                        <label class="form-check-label" for="special_building">
+                                            Special Building
+                                        </label>
+                                        <div class="form-text">Built a special building (Wonder, etc.)</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="special_building_own" name="special_building_own" 
+                                               value="1" <%= record.special_building_own ? 'checked' : '' %>>
+                                        <label class="form-check-label" for="special_building_own">
+                                            Own Special Building
+                                        </label>
+                                        <div class="form-text">Built special building in own territory</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="bonus_vp" name="bonus_vp" 
+                                               value="1" <%= record.bonus_vp ? 'checked' : '' %>>
+                                        <label class="form-check-label" for="bonus_vp">
+                                            Bonus Victory Points
+                                        </label>
+                                        <div class="form-text">Earned bonus VP from special conditions</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Form Actions -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <hr>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="/records" class="btn btn-secondary">
+                                            <i class="bi bi-arrow-left"></i> Cancel
+                                        </a>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-check-circle"></i> 
+                                            <%= record.game_id ? 'Update Record' : 'Create Record' %>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Panel -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title mb-0">
+                            <i class="bi bi-question-circle"></i> Help & Guidelines
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="text-primary">Required Fields</h6>
+                        <ul class="small mb-3">
+                            <li><strong>Game:</strong> Select the game session</li>
+                            <li><strong>Player:</strong> Choose the player</li>
+                            <li><strong>Nation:</strong> Select the civilization played</li>
+                            <li><strong>Score:</strong> Final victory points total</li>
+                        </ul>
+
+                        <h6 class="text-primary">Scoring Components</h6>
+                        <ul class="small mb-3">
+                            <li><strong>Cities:</strong> Number of cities built on the board</li>
+                            <li><strong>AST Position:</strong> Final position on AST track</li>
+                            <li><strong>Advances:</strong> Civilization advances by point value</li>
+                        </ul>
+
+                        <h6 class="text-primary">Special Achievements</h6>
+                        <ul class="small mb-3">
+                            <li><strong>Special Building:</strong> Built any wonder or monument</li>
+                            <li><strong>Own Territory:</strong> Built special building in home area</li>
+                            <li><strong>Bonus VP:</strong> Extra points from special conditions</li>
+                        </ul>
+
+                        <div class="alert alert-info small">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>Note:</strong> Once created, the Game, Player, and Nation cannot be changed. 
+                            Create a new record if you need to correct these values.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Score Calculator -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h6 class="card-title mb-0">
+                            <i class="bi bi-calculator"></i> Score Calculator
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="small">
+                            <div class="row mb-2">
+                                <div class="col-8">Cities:</div>
+                                <div class="col-4 text-end" id="calc-cities">0</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-8">1VP Advances:</div>
+                                <div class="col-4 text-end" id="calc-1vp">0</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-8">3VP Advances:</div>
+                                <div class="col-4 text-end" id="calc-3vp">0</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-8">6VP Advances:</div>
+                                <div class="col-4 text-end" id="calc-6vp">0</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-8">Special Building:</div>
+                                <div class="col-4 text-end" id="calc-special">0</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-8">Bonus VP:</div>
+                                <div class="col-4 text-end" id="calc-bonus">0</div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-8"><strong>Estimated Total:</strong></div>
+                                <div class="col-4 text-end"><strong id="calc-total">0</strong></div>
+                            </div>
+                        </div>
+                        <div class="form-text mt-2">
+                            This is an estimate. Enter the actual final score above.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">
+                        <i class="bi bi-trophy"></i> Mega Empires Database Admin Interface
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">
+                        Built with Node.js & Express
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom JS -->
+    <script src="/js/app.js"></script>
+
+    <script>
+        // Score calculator
+        function updateCalculator() {
+            const cities = parseInt($('#cities').val()) || 0;
+            const adv1vp = parseInt($('#num_civ_adv_1VP').val()) || 0;
+            const adv3vp = parseInt($('#num_civ_adv_3VP').val()) || 0;
+            const adv6vp = parseInt($('#num_civ_adv_6VP').val()) || 0;
+            const specialBuilding = $('#special_building').is(':checked') ? 5 : 0; // Estimate 5 VP
+            const bonusVp = $('#bonus_vp').is(':checked') ? 3 : 0; // Estimate 3 VP
+
+            $('#calc-cities').text(cities);
+            $('#calc-1vp').text(adv1vp);
+            $('#calc-3vp').text(adv3vp * 3);
+            $('#calc-6vp').text(adv6vp * 6);
+            $('#calc-special').text(specialBuilding);
+            $('#calc-bonus').text(bonusVp);
+
+            const total = cities + adv1vp + (adv3vp * 3) + (adv6vp * 6) + specialBuilding + bonusVp;
+            $('#calc-total').text(total);
+        }
+
+        $(document).ready(function() {
+            // Update calculator on input change
+            $('#cities, #num_civ_adv_1VP, #num_civ_adv_3VP, #num_civ_adv_6VP, #special_building, #bonus_vp').on('input change', updateCalculator);
+            
+            // Initial calculation
+            updateCalculator();
+
+            // Form validation
+            $('form').on('submit', function(e) {
+                const gameId = $('#game_id').val();
+                const playerId = $('#player_id').val();
+                const nationId = $('#nation_id').val();
+                const score = $('#score').val();
+
+                if (!gameId || !playerId || !nationId || !score) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Missing Required Fields',
+                        text: 'Please fill in all required fields (Game, Player, Nation, and Score).',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                    return false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
