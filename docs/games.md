@@ -44,7 +44,10 @@ title: Games
 <img src="{{ photo_path }}e0c37107-7d2f-4741-a49e-944dee0c2e31.jpg" alt="Game 10 - Final positions" class="gallery-photo" loading="lazy">
 </div>
 <div class="photo-gallery-caption">
-<p>🏠 <strong>Home Game</strong> - An intimate 9-player session showcasing the strategic depth and social atmosphere of our Toronto gaming community.</p>
+{% assign current_game = site.data.games | where: "date", "2024-05-25" | first %}
+{% if current_game.game_summary %}
+<p>{{ current_game.game_summary }}</p>
+{% endif %}
 </div>
 </div>
 {% elsif game.date == "2024-09-21" %}
@@ -55,7 +58,10 @@ title: Games
 <img src="{{ photo_path }}IMG_1605.jpg" alt="Game 11 - Civilization progress" class="gallery-photo" loading="lazy">
 </div>
 <div class="photo-gallery-caption">
-<p>🏠 <strong>Home Game</strong> - Intense strategic moments as civilizations clash and alliances form across the ancient world.</p>
+{% assign current_game = site.data.games | where: "date", "2024-09-21" | first %}
+{% if current_game.game_summary %}
+<p>{{ current_game.game_summary }}</p>
+{% endif %}
 </div>
 </div>
 {% elsif game.date == "2025-01-18" %}
@@ -65,7 +71,10 @@ title: Games
 <img src="{{ photo_path }}IMG_1885_Large.jpeg" alt="MegaCon Winter 25 - Epic scale gaming" class="gallery-photo" loading="lazy">
 </div>
 <div class="photo-gallery-caption">
-<p>🎪 <strong>MegaCon Winter 25</strong> - Our community takes center stage at Toronto's premier gaming convention, showcasing Mega Empires to a broader audience.</p>
+{% assign current_game = site.data.games | where: "date", "2025-01-18" | first %}
+{% if current_game.game_summary %}
+<p>{{ current_game.game_summary }}</p>
+{% endif %}
 </div>
 </div>
 {% elsif game.date == "2025-01-23" %}
@@ -90,7 +99,10 @@ title: Games
 <img src="/assets/images/games/2025-03-04/photo3.jpeg" alt="Game 13 - The East - Epic conclusion" class="gallery-photo" loading="lazy">
 </div>
 <div class="photo-gallery-caption">
-<p>🏠 <strong>The East Variant</strong> - Exploring the eastern civilizations with their unique challenges and opportunities for expansion and trade.</p>
+{% assign current_game = site.data.games | where: "date", "2025-03-01" | first %}
+{% if current_game.game_summary %}
+<p>{{ current_game.game_summary }}</p>
+{% endif %}
 </div>
 </div>
 {% elsif game.date == "2025-05-24" %}
@@ -101,7 +113,10 @@ title: Games
 <img src="{{ photo_path }}ast-positions.jpeg" alt="Game 14 - The West - Final AST positions" class="gallery-photo winner-photo" loading="lazy">
 </div>
 <div class="photo-gallery-caption">
-<p>🏠 <strong>The West Variant</strong> - Our most recent epic session featuring the western civilizations. The final AST position photo shows the culmination of 12 hours of strategic gameplay.</p>
+{% assign current_game = site.data.games | where: "date", "2025-05-24" | first %}
+{% if current_game.game_summary %}
+<p>{{ current_game.game_summary }}</p>
+{% endif %}
 </div>
 </div>
 {% endif %}
