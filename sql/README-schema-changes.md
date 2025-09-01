@@ -16,14 +16,12 @@ The following columns were added to the `game_player_nation` table:
 | `special_building` | INTEGER | 0 | Yes | Boolean flag for special building (0=false, 1=true) |
 | `special_building_own` | INTEGER | 0 | Yes | Boolean flag for owning special building (0=false, 1=true) |
 | `bonus_vp` | INTEGER | 0 | Yes | Boolean flag for bonus victory points (0=false, 1=true) |
-| `game_summary` | TEXT | NULL | Yes | Large text field for game summary/notes |
 
 ### Implementation Details
 
 - All new columns are nullable to preserve existing data integrity
 - Boolean columns use SQLite's INTEGER type with 0/1 values
 - Default values are set for boolean columns (0 = false)
-- The `game_summary` column uses TEXT type (SQLite equivalent of CLOB)
 - A backup of the original database was created before modifications
 
 ### Files Modified

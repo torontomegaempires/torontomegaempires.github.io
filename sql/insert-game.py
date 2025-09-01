@@ -13,7 +13,7 @@
 # 'game,name,nation,score,cities,ast-position'
 #
 # Extended format (with new columns):
-# 'game,name,nation,score,cities,ast-position,num_civ_adv_1VP,num_civ_adv_3VP,num_civ_adv_6VP,special_building,special_building_own,bonus_vp,game_summary'
+# 'game,name,nation,score,cities,ast-position,num_civ_adv_1VP,num_civ_adv_3VP,num_civ_adv_6VP,special_building,special_building_own,bonus_vp'
 #
 # Example (basic format):
 #
@@ -33,7 +33,7 @@
 #
 # Example (extended format):
 #
-# "Game 15","Player","Nation",150,7,15,2,1,0,1,0,1,"Great game with lots of action"
+# "Game 15","Player","Nation",150,7,15,2,1,0,1,0,1
 
 import sqlite3, csv, sys
 
@@ -43,10 +43,10 @@ try:
     cursor = sqliteConnection.cursor()
     sql = """INSERT INTO game_player_nation ( game_id, player_id, nation_id, score, cities, ast_pos, 
                                              num_civ_adv_1VP, num_civ_adv_3VP, num_civ_adv_6VP, 
-                                             special_building, special_building_own, bonus_vp, game_summary )
+                                             special_building, special_building_own, bonus_vp )
             SELECT game.id, player.id, nation.id, :score, :cities, :ast_pos, 
                    :num_civ_adv_1VP, :num_civ_adv_3VP, :num_civ_adv_6VP,
-                   :special_building, :special_building_own, :bonus_vp, :game_summary
+                   :special_building, :special_building_own, :bonus_vp
             FROM game, player, nation
             WHERE game.name = :game AND
             player.name = :name AND
@@ -55,7 +55,7 @@ try:
     with open(sys.argv[1], newline='') as csvfile:
         gamereader = csv.reader(csvfile, delimiter=',', quotechar='"')
         # format is 'game,name,nation,score,cities,ast_position' (basic)
-        # or 'game,name,nation,score,cities,ast_position,num_civ_adv_1VP,num_civ_adv_3VP,num_civ_adv_6VP,special_building,special_building_own,bonus_vp,game_summary' (extended)
+        # or 'game,name,nation,score,cities,ast_position,num_civ_adv_1VP,num_civ_adv_3VP,num_civ_adv_6VP,special_building,special_building_own,bonus_vp' (extended)
 
         for row in gamereader:
             print(', '.join(row))
@@ -69,7 +69,6 @@ try:
             special_building = None
             special_building_own = None
             bonus_vp = None
-            game_summary = None
             
             # Parse optional columns based on row length (backward compatible)
             if len(row) > 4:
@@ -88,8 +87,6 @@ try:
                 special_building_own = row[10] if row[10] else None
             if len(row) > 11:
                 bonus_vp = row[11] if row[11] else None
-            if len(row) > 12:
-                game_summary = row[12] if row[12] else None
                 
             params = {"game": row[0], 
                       "name": row[1], 
@@ -102,8 +99,7 @@ try:
                       "num_civ_adv_6VP": num_civ_adv_6VP,
                       "special_building": special_building,
                       "special_building_own": special_building_own,
-                      "bonus_vp": bonus_vp,
-                      "game_summary": game_summary}
+                      "bonus_vp": bonus_vp}
             cursor.execute(sql, params)
             if (cursor.rowcount != 1):
                 sqliteConnection.rollback()

@@ -24,7 +24,7 @@ Use `insert-game.sql` to add the game record.
 
 **Extended format (with new columns):**
 ```
-"Game Name","Player Name","Nation",score,cities,ast_position,num_civ_adv_1VP,num_civ_adv_3VP,num_civ_adv_6VP,special_building,special_building_own,bonus_vp,"game_summary"
+"Game Name","Player Name","Nation",score,cities,ast_position,num_civ_adv_1VP,num_civ_adv_3VP,num_civ_adv_6VP,special_building,special_building_own,bonus_vp
 ```
 
 **New Column Descriptions:**
@@ -34,7 +34,6 @@ Use `insert-game.sql` to add the game record.
 - `special_building`: Has special building (0=false, 1=true)
 - `special_building_own`: The special building is their own (0=false, 1=true)
 - `bonus_vp`: Has bonus victory points (0=false, 1=true)
-- `game_summary`: Text summary/notes about the game (quoted string)
 
 **Note:** All columns after `score` are optional. Empty values will be stored as NULL in the database.
 
