@@ -41,11 +41,15 @@ title: Games
 <img src="{{ photo.path }}" alt="{{ photo_alt }}" class="gallery-photo featured-photo" loading="lazy">
 {% elsif photo.filename contains "ast" or photo.filename contains "position" %}
 <img src="{{ photo.path }}" alt="{{ photo_alt }}" class="gallery-photo winner-photo" loading="lazy">
+{% elsif photo.filename contains "suppress-" %}
+{% comment %} Do not show suppressed photos {% endcomment %}
 {% else %}
 <img src="{{ photo.path }}" alt="{{ photo_alt }}" class="gallery-photo" loading="lazy">
 {% endif %}
 {% endfor %}
 </div>
+</div>
+{% endif %}
 <div class="photo-gallery-caption">
 {% if game.game_summary %}
 <p>{{ game.game_summary }}</p>
@@ -55,18 +59,15 @@ title: Games
 <p>📸 Captured moments from this epic {{ game_photos.size }}-photo gaming session, showcasing the strategic intensity and community spirit of Mega Empires.</p>
 {% endif %}
 </div>
-</div>
-{% endif %}
-
 {% comment %} Winner Spotlight {% endcomment %}
 {% if site.data.game_players %}
-{% assign winner = site.data.game_players | where: "game_id", game.id | where: "ast_pos", 1 | first %}
+{% assign winner = site.data.game_players | where: "game_id", game.id | sort: "score" | reverse | first %}
 {% if winner %}
 <div class="winner-spotlight">
 <div class="winner-crown">👑
 </div>
 <h4>Victory Achieved!</h4>
-<p><strong>{{ winner.player }}</strong> led <strong>{{ winner.nation }}</strong> to glory with <strong>{{ winner.score }} points</strong>{% if winner.cities %} and <strong>{{ winner.cities }} cities</strong>{% endif %}!</p>
+<p><strong>{{ winner.player }}</strong> led <strong>{{ winner.nation }}</strong> to glory with <strong>{{ winner.score }} points</strong>{% if winner.cities != "" %} and <strong>{{ winner.cities }} cities</strong>{% endif %}!</p>
 </div>
 {% endif %}
 {% endif %}
