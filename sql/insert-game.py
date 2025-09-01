@@ -9,9 +9,13 @@
 # 
 # Format for the cvs file
 #
+# Basic format (backward compatible):
 # 'game,name,nation,score,cities,ast-position'
 #
-# Example:
+# Extended format (with new columns):
+# 'game,name,nation,score,cities,ast-position,num_civ_adv_1VP,num_civ_adv_3VP,num_civ_adv_6VP,special_building,special_building_own,bonus_vp,game_summary'
+#
+# Example (basic format):
 #
 # game1-records.csv
 #
@@ -26,6 +30,10 @@
 # "Game 11","Rob E.","Hatti",101,7,13
 # "Game 11","John C.","Carthage",93,5,14
 # "Game 11","Wai-kwong","Minoa",93,6,14
+#
+# Example (extended format):
+#
+# "Game 15","Player","Nation",150,7,15,2,1,0,1,0,1,"Great game with lots of action"
 
 import sqlite3, csv, sys
 
@@ -33,8 +41,12 @@ try:
     sqliteConnection = sqlite3.connect("../docs/_db/megaempires.db")
 
     cursor = sqliteConnection.cursor()
-    sql = """INSERT INTO game_player_nation ( game_id, player_id, nation_id, score, cities, ast_pos )
-            SELECT game.id, player.id, nation.id, :score, :cities, :ast_pos
+    sql = """INSERT INTO game_player_nation ( game_id, player_id, nation_id, score, cities, ast_pos, 
+                                             num_civ_adv_1VP, num_civ_adv_3VP, num_civ_adv_6VP, 
+                                             special_building, special_building_own, bonus_vp, game_summary )
+            SELECT game.id, player.id, nation.id, :score, :cities, :ast_pos, 
+                   :num_civ_adv_1VP, :num_civ_adv_3VP, :num_civ_adv_6VP,
+                   :special_building, :special_building_own, :bonus_vp, :game_summary
             FROM game, player, nation
             WHERE game.name = :game AND
             player.name = :name AND
@@ -42,23 +54,56 @@ try:
 
     with open(sys.argv[1], newline='') as csvfile:
         gamereader = csv.reader(csvfile, delimiter=',', quotechar='"')
-        # format is 'game,name,nation,score,cities,ast_position'
+        # format is 'game,name,nation,score,cities,ast_position' (basic)
+        # or 'game,name,nation,score,cities,ast_position,num_civ_adv_1VP,num_civ_adv_3VP,num_civ_adv_6VP,special_building,special_building_own,bonus_vp,game_summary' (extended)
 
         for row in gamereader:
             print(', '.join(row))
-            # Optionally read cities and position
+            
+            # Initialize all optional columns with None/default values
             cities = None
             ast_pos = None
-            if ( len(row)>4 ):
-                cities = row[4]
-            if ( len(row)>5 ):
-                ast_pos = row[5]
-            params = {"game":row[0], 
+            num_civ_adv_1VP = None
+            num_civ_adv_3VP = None
+            num_civ_adv_6VP = None
+            special_building = None
+            special_building_own = None
+            bonus_vp = None
+            game_summary = None
+            
+            # Parse optional columns based on row length (backward compatible)
+            if len(row) > 4:
+                cities = row[4] if row[4] else None
+            if len(row) > 5:
+                ast_pos = row[5] if row[5] else None
+            if len(row) > 6:
+                num_civ_adv_1VP = row[6] if row[6] else None
+            if len(row) > 7:
+                num_civ_adv_3VP = row[7] if row[7] else None
+            if len(row) > 8:
+                num_civ_adv_6VP = row[8] if row[8] else None
+            if len(row) > 9:
+                special_building = row[9] if row[9] else None
+            if len(row) > 10:
+                special_building_own = row[10] if row[10] else None
+            if len(row) > 11:
+                bonus_vp = row[11] if row[11] else None
+            if len(row) > 12:
+                game_summary = row[12] if row[12] else None
+                
+            params = {"game": row[0], 
                       "name": row[1], 
-                      "nation":row[2], 
-                      "score":row[3], 
-                      "cities":cities, 
-                      "ast_pos":ast_pos}
+                      "nation": row[2], 
+                      "score": row[3], 
+                      "cities": cities, 
+                      "ast_pos": ast_pos,
+                      "num_civ_adv_1VP": num_civ_adv_1VP,
+                      "num_civ_adv_3VP": num_civ_adv_3VP,
+                      "num_civ_adv_6VP": num_civ_adv_6VP,
+                      "special_building": special_building,
+                      "special_building_own": special_building_own,
+                      "bonus_vp": bonus_vp,
+                      "game_summary": game_summary}
             cursor.execute(sql, params)
             if (cursor.rowcount != 1):
                 sqliteConnection.rollback()
