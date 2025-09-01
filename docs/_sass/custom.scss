@@ -2029,181 +2029,181 @@ header {
 // Individual nation classes
 .nation-minoa {
   @extend .nation-base;
-  background: linear-gradient(135deg, #90EE90 0%, #98FB98 100%);
-  color: #2c3e50;
+  background: linear-gradient(135deg, #7CB342 0%, #8BC34A 100%);
+  color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #98FB98 0%, #90EE90 100%);
+    background: linear-gradient(135deg, #8BC34A 0%, #7CB342 100%);
   }
 }
 
 .nation-saba {
   @extend .nation-base;
-  background: linear-gradient(135deg, #FF6347 0%, #FF7F50 100%);
+  background: linear-gradient(135deg, #E57373 0%, #EF5350 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #FF7F50 0%, #FF6347 100%);
+    background: linear-gradient(135deg, #EF5350 0%, #E57373 100%);
   }
 }
 
 .nation-assyria {
   @extend .nation-base;
-  background: linear-gradient(135deg, #00CED1 0%, #48D1CC 100%);
-  color: #2c3e50;
+  background: linear-gradient(135deg, #42A5F5 0%, #64B5F6 100%);
+  color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #48D1CC 0%, #00CED1 100%);
+    background: linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%);
   }
 }
 
 .nation-maurya {
   @extend .nation-base;
-  background: linear-gradient(135deg, #DC143C 0%, #E6194B 100%);
+  background: linear-gradient(135deg, #F44336 0%, #E53935 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #E6194B 0%, #DC143C 100%);
+    background: linear-gradient(135deg, #E53935 0%, #F44336 100%);
   }
 }
 
 .nation-celt {
   @extend .nation-base;
-  background: linear-gradient(135deg, #90EE90 0%, #98FB98 100%);
-  color: #2c3e50;
+  background: linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
+  color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #98FB98 0%, #90EE90 100%);
+    background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
   }
 }
 
 .nation-babylon {
   @extend .nation-base;
-  background: linear-gradient(135deg, #2F2F2F 0%, #404040 100%);
+  background: linear-gradient(135deg, #757575 0%, #9E9E9E 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #404040 0%, #2F2F2F 100%);
+    background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
   }
 }
 
 .nation-carthage {
   @extend .nation-base;
-  background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #FF9800 0%, #FFB74D 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+    background: linear-gradient(135deg, #FFB74D 0%, #FF9800 100%);
   }
 }
 
 .nation-dravidia {
   @extend .nation-base;
-  background: linear-gradient(135deg, #4169E1 0%, #6495ED 100%);
+  background: linear-gradient(135deg, #1A237E 0%, #303F9F 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #6495ED 0%, #4169E1 100%);
+    background: linear-gradient(135deg, #303F9F 0%, #1A237E 100%);
   }
 }
 
 .nation-hatti {
   @extend .nation-base;
-  background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
-  color: #2c3e50;
+  background: linear-gradient(135deg, #E91E63 0%, #F06292 100%);
+  color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
+    background: linear-gradient(135deg, #F06292 0%, #E91E63 100%);
   }
 }
 
 .nation-kushan {
   @extend .nation-base;
-  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+  background: linear-gradient(135deg, #8D6E63 0%, #A1887F 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+    background: linear-gradient(135deg, #A1887F 0%, #8D6E63 100%);
   }
 }
 
 .nation-rome {
   @extend .nation-base;
-  background: linear-gradient(135deg, #8B0000 0%, #B22222 100%);
+  background: linear-gradient(135deg, #E91E63 0%, #F06292 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #B22222 0%, #8B0000 100%);
+    background: linear-gradient(135deg, #F06292 0%, #E91E63 100%);
   }
 }
 
 .nation-persia {
   @extend .nation-base;
-  background: linear-gradient(135deg, #8B4CB8 0%, #9370DB 100%);
+  background: linear-gradient(135deg, #673AB7 0%, #7986CB 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #9370DB 0%, #8B4CB8 100%);
+    background: linear-gradient(135deg, #7986CB 0%, #673AB7 100%);
   }
 }
 
 .nation-iberia {
   @extend .nation-base;
-  background: linear-gradient(135deg, #D3D3D3 0%, #E0E0E0 100%);
-  color: #2c3e50;
+  background: linear-gradient(135deg, #757575 0%, #9E9E9E 100%);
+  color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #E0E0E0 0%, #D3D3D3 100%);
+    background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
   }
 }
 
 .nation-nubia {
   @extend .nation-base;
-  background: linear-gradient(135deg, #20B2AA 0%, #48D1CC 100%);
+  background: linear-gradient(135deg, #26A69A 0%, #4DB6AC 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #48D1CC 0%, #20B2AA 100%);
+    background: linear-gradient(135deg, #4DB6AC 0%, #26A69A 100%);
   }
 }
 
 .nation-hellas {
   @extend .nation-base;
-  background: linear-gradient(135deg, #FFD700 0%, #FFED4E 100%);
+  background: linear-gradient(135deg, #FFEB3B 0%, #FFF176 100%);
   color: #2c3e50;
   
   &:hover {
-    background: linear-gradient(135deg, #FFED4E 0%, #FFD700 100%);
+    background: linear-gradient(135deg, #FFF176 0%, #FFEB3B 100%);
   }
 }
 
 .nation-indus {
   @extend .nation-base;
-  background: linear-gradient(135deg, #006400 0%, #228B22 100%);
+  background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
   color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #228B22 0%, #006400 100%);
+    background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
   }
 }
 
 .nation-egypt {
   @extend .nation-base;
-  background: linear-gradient(135deg, #D2B48C 0%, #DEB887 100%);
+  background: linear-gradient(135deg, #D7CCC8 0%, #EFEBE9 100%);
   color: #2c3e50;
   
   &:hover {
-    background: linear-gradient(135deg, #DEB887 0%, #D2B48C 100%);
+    background: linear-gradient(135deg, #EFEBE9 0%, #D7CCC8 100%);
   }
 }
 
 .nation-parthia {
   @extend .nation-base;
-  background: linear-gradient(135deg, #8FBC8F 0%, #9ACD32 100%);
-  color: #2c3e50;
+  background: linear-gradient(135deg, #689F38 0%, #8BC34A 100%);
+  color: #ffffff;
   
   &:hover {
-    background: linear-gradient(135deg, #9ACD32 0%, #8FBC8F 100%);
+    background: linear-gradient(135deg, #8BC34A 0%, #689F38 100%);
   }
 }
 

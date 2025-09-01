@@ -1,0 +1,94 @@
+{
+  "nations": [
+    {
+      "text": "Minoa",
+      "color_name": "Light Green",
+      "hex_value": "#7CB342"
+    },
+    {
+      "text": "Saba",
+      "color_name": "Coral Red",
+      "hex_value": "#E57373"
+    },
+    {
+      "text": "Assyria",
+      "color_name": "Sky Blue",
+      "hex_value": "#42A5F5"
+    },
+    {
+      "text": "Maurya",
+      "color_name": "Red",
+      "hex_value": "#F44336"
+    },
+    {
+      "text": "Celt",
+      "color_name": "Dark Green",
+      "hex_value": "#388E3C"
+    },
+    {
+      "text": "Babylon",
+      "color_name": "Gray",
+      "hex_value": "#757575"
+    },
+    {
+      "text": "Carthage",
+      "color_name": "Orange",
+      "hex_value": "#FF9800"
+    },
+    {
+      "text": "Dravidia",
+      "color_name": "Navy Blue",
+      "hex_value": "#1A237E"
+    },
+    {
+      "text": "Hatti",
+      "color_name": "Pink",
+      "hex_value": "#E91E63"
+    },
+    {
+      "text": "Kushan",
+      "color_name": "Brown",
+      "hex_value": "#8D6E63"
+    },
+    {
+      "text": "Rome",
+      "color_name": "Magenta",
+      "hex_value": "#E91E63"
+    },
+    {
+      "text": "Persia",
+      "color_name": "Dark Purple",
+      "hex_value": "#673AB7"
+    },
+    {
+      "text": "Iberia",
+      "color_name": "Gray",
+      "hex_value": "#757575"
+    },
+    {
+      "text": "Nubia",
+      "color_name": "Teal",
+      "hex_value": "#26A69A"
+    },
+    {
+      "text": "Hellas",
+      "color_name": "Yellow",
+      "hex_value": "#FFEB3B"
+    },
+    {
+      "text": "Indus",
+      "color_name": "Forest Green",
+      "hex_value": "#2E7D32"
+    },
+    {
+      "text": "Egypt",
+      "color_name": "Beige/Tan",
+      "hex_value": "#D7CCC8"
+    },
+    {
+      "text": "Parthia",
+      "color_name": "Olive Green",
+      "hex_value": "#689F38"
+    }
+  ]
+}
