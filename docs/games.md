@@ -67,7 +67,7 @@ title: Games
 <div class="winner-crown">👑
 </div>
 <h4>Victory Achieved!</h4>
-<p><strong>{{ winner.player }}</strong> led <strong>{{ winner.nation }}</strong> to glory with <strong>{{ winner.score }} points</strong>{% if winner.cities != "" %} and <strong>{{ winner.cities }} cities</strong>{% endif %}!</p>
+<p><strong>{{ winner.player }}</strong> led <strong>{{ winner.nation }}</strong> to glory with <strong>{{ winner.score }} points</strong>{% if winner.cities %} and <strong>{{ winner.cities }} cities</strong>{% endif %}!</p>
 </div>
 {% endif %}
 {% endif %}

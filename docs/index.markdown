@@ -60,7 +60,7 @@ Learn more about this legendary game at <a href="https://mega-empires.com" targe
 <h2 style="margin-top: 0;">🎲 Next Game</h2>
 <h3>{{ next_game.title }}</h3>
 <p><strong>Date:</strong> {{ next_game.date | date: "%B %d, %Y" }}</p>
-<p><strong>Location:</strong> {{ next_game.location | "" }}</p>
+<p><strong>Location:</strong> {{ next_game.location | default: "TBD" }}</p>
 <p><strong>Players:</strong> Up to {{ next_game.max_players }}</p>
 {% if next_game.cost %}<p><strong>Cost:</strong> {{ next_game.cost }}</p>{% endif %}
 </div>
