@@ -37,19 +37,35 @@ title: Games
 <div class="photo-gallery-grid">
 {% for photo in game_photos %}
 {% assign photo_alt = game.name | append: " - Epic gaming moments" %}
-{% if forloop.first %}
-<img src="{{ photo.path }}" alt="{{ photo_alt }}" class="gallery-photo featured-photo" loading="lazy">
-{% elsif photo.filename contains "ast" or photo.filename contains "position" %}
-<img src="{{ photo.path }}" alt="{{ photo_alt }}" class="gallery-photo winner-photo" loading="lazy">
-{% elsif photo.filename contains "suppress-" %}
-{% comment %} Do not show suppressed photos {% endcomment %}
-{% else %}
-<img src="{{ photo.path }}" alt="{{ photo_alt }}" class="gallery-photo" loading="lazy">
-{% endif %}
+{% unless photo.filename contains "suppress-" %}
+<img src="{{ photo.path }}" alt="{{ photo_alt }}" 
+     class="gallery-photo {% if forloop.first %}featured-photo{% elsif photo.filename contains "ast" or photo.filename contains "position" %}winner-photo{% endif %}"
+     data-glightbox="description: {{ game.name }}"
+     data-gallery="game-{{ game_date }}"
+     loading="lazy">
+{% endunless %}
 {% endfor %}
 </div>
 </div>
 {% endif %}
+
+{% comment %} Lightbox Initialization Script {% endcomment %}
+{% if game_photos and game_photos.size > 0 and forloop.first %}
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const lightbox = GLightbox({
+    touchNavigation: true,
+    keyboardNavigation: true,
+    closeOnOutsideClick: true,
+    loop: true,
+    zoomable: true,
+    draggable: true
+  });
+});
+</script>
+{% endif %}
+
 <div class="photo-gallery-caption">
 {% if game.game_summary %}
 <p>{{ game.game_summary }}</p>
