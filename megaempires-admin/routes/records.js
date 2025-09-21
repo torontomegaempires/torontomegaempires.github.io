@@ -95,7 +95,8 @@ router.post('/', recordValidation, async (req, res) => {
             ...req.body,
             special_building: req.body.special_building ? 1 : 0,
             special_building_own: req.body.special_building_own ? 1 : 0,
-            bonus_vp: req.body.bonus_vp ? 1 : 0
+            bonus_vp: req.body.bonus_vp ? 1 : 0,
+            special_building_control: req.body.special_building_control ? 1 : 0
         };
 
         await GameRecord.create(recordData);

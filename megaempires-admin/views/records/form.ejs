@@ -143,10 +143,10 @@
                                     <select class="form-select" id="player_id" name="player_id" required <%= record.player_id ? 'disabled' : '' %>>
                                         <option value="">Select a player...</option>
                                         <% players.forEach(function(player) { %>
-                                            <option value="<%= player.id %>" <%= record.player_id == player.id ? 'selected' : '' %>>
-                                                <%= player.display_name || player.full_name %>
-                                                <% if (player.discord_username) { %>(@<%= player.discord_username %>)<% } %>
-                                            </option>
+                                        <option value="<%= player.id %>" <%= record.player_id == player.id ? 'selected' : '' %>>
+                                            <%= player.display || player.name %>
+                                            <% if (player.discord) { %>(@<%= player.discord %>)<% } %>
+                                        </option>
                                         <% }); %>
                                     </select>
                                     <% if (record.player_id) { %>
@@ -260,17 +260,27 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="bonus_vp" name="bonus_vp" 
-                                               value="1" <%= record.bonus_vp ? 'checked' : '' %>>
-                                        <label class="form-check-label" for="bonus_vp">
-                                            Bonus Victory Points
-                                        </label>
-                                        <div class="form-text">Earned bonus VP from special conditions</div>
-                                    </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="special_building_control" name="special_building_control" 
+                                           value="1" <%= record.special_building_control ? 'checked' : '' %>>
+                                    <label class="form-check-label" for="special_building_control">
+                                        Controls Special Building
+                                    </label>
+                                    <div class="form-text">The player controls their special building</div>
                                 </div>
                             </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="bonus_vp" name="bonus_vp" 
+                                           value="1" <%= record.bonus_vp ? 'checked' : '' %>>
+                                    <label class="form-check-label" for="bonus_vp">
+                                        Bonus Victory Points
+                                    </label>
+                                    <div class="form-text">Earned bonus VP from special conditions</div>
+                                </div>
+                            </div>
+                        </div>
 
                             <!-- Form Actions -->
                             <div class="row">

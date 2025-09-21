@@ -187,6 +187,11 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm">
+                                                        <% if (record.special_building_control) { %>
+                                                            <span class="badge bg-info me-1" title="Controls Special Building">
+                                                                <i class="bi bi-building"></i>
+                                                            </span>
+                                                        <% } %>
                                                         <a href="/records/<%= record.game_id %>/<%= record.player_id %>/<%= record.nation_id %>" class="btn btn-outline-primary" title="View Details">
                                                             <i class="bi bi-eye"></i>
                                                         </a>
