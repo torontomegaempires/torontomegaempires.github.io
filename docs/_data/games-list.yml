@@ -9,7 +9,7 @@ games:
     max_players: 9
     status: "upcoming"
     
-  - date: "2025-11-28"
+  - date: "2025-11-29"
     title: "Mega Empires: The East"
     type: "home"
     variant: "the east"
