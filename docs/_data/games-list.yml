@@ -41,3 +41,11 @@ games:
     location: "Beaches, Toronto"
     max_players: 9
     status: "upcoming"
+
+  - date: "2026-03-20"
+    title: "BreakoutCon 2026 - Mega Empires"
+    type: "convention"
+    variant: "full game"
+    location: "Sheraton Hotel, Toronto"
+    max_players: 18
+    status: "upcoming"
