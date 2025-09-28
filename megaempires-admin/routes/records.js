@@ -20,6 +20,7 @@ const recordValidation = [
     body('num_civ_adv_6VP').optional({ checkFalsy: true }).isInt({ min: 0 }).withMessage('6VP advances must be a non-negative integer'),
     body('special_building').optional().isIn(['0', '1']).withMessage('Special building must be 0 or 1'),
     body('special_building_own').optional().isIn(['0', '1']).withMessage('Special building own must be 0 or 1'),
+    body('special_building_control').optional({ checkFalsy: true }).isInt({ min: 0 }).withMessage('Special building control must be a non-negative integer'),
     body('bonus_vp').optional().isIn(['0', '1']).withMessage('Bonus VP must be 0 or 1')
 ];
 
@@ -90,13 +91,13 @@ router.post('/', recordValidation, async (req, res) => {
             });
         }
 
-        // Convert checkbox values to integers
+        // Convert checkbox values to integers, keep special_building_control as integer
         const recordData = {
             ...req.body,
             special_building: req.body.special_building ? 1 : 0,
             special_building_own: req.body.special_building_own ? 1 : 0,
             bonus_vp: req.body.bonus_vp ? 1 : 0,
-            special_building_control: req.body.special_building_control ? 1 : 0
+            special_building_control: parseInt(req.body.special_building_control) || 0
         };
 
         await GameRecord.create(recordData);
@@ -206,12 +207,13 @@ router.post('/:gameId/:playerId/:nationId', recordValidation, async (req, res) =
             });
         }
 
-        // Convert checkbox values to integers
+        // Convert checkbox values to integers, keep special_building_control as integer
         const recordData = {
             ...req.body,
             special_building: req.body.special_building ? 1 : 0,
             special_building_own: req.body.special_building_own ? 1 : 0,
-            bonus_vp: req.body.bonus_vp ? 1 : 0
+            bonus_vp: req.body.bonus_vp ? 1 : 0,
+            special_building_control: parseInt(req.body.special_building_control) || 0
         };
 
         await GameRecord.update(req.params.gameId, req.params.playerId, req.params.nationId, recordData);

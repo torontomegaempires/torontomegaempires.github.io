@@ -243,9 +243,9 @@
                                         <input class="form-check-input" type="checkbox" id="special_building" name="special_building" 
                                                value="1" <%= record.special_building ? 'checked' : '' %>>
                                         <label class="form-check-label" for="special_building">
-                                            Special Building
+                                            Special Building in Region
                                         </label>
-                                        <div class="form-text">Built a special building (Wonder, etc.)</div>
+                                        <div class="form-text">A special building is in your region (owned).</div>
                                     </div>
                                 </div>
 
@@ -254,21 +254,17 @@
                                         <input class="form-check-input" type="checkbox" id="special_building_own" name="special_building_own" 
                                                value="1" <%= record.special_building_own ? 'checked' : '' %>>
                                         <label class="form-check-label" for="special_building_own">
-                                            Own Special Building
+                                            Control Historical Special Building
                                         </label>
-                                        <div class="form-text">Built special building in own territory</div>
+                                        <div class="form-text">You control the special building associated with your civilization.</div>
                                     </div>
                                 </div>
 
                             <div class="col-md-4 mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="special_building_control" name="special_building_control" 
-                                           value="1" <%= record.special_building_control ? 'checked' : '' %>>
-                                    <label class="form-check-label" for="special_building_control">
-                                        Controls Special Building
-                                    </label>
-                                    <div class="form-text">The player controls their special building</div>
-                                </div>
+                                <label for="special_building_control" class="form-label">Special Buildings Controlled</label>
+                                <input type="number" class="form-control" id="special_building_control" name="special_building_control" 
+                                       value="<%= record.special_building_control || '' %>" min="0">
+                                <div class="form-text">Number of special buildings you control</div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="form-check">
@@ -328,8 +324,9 @@
 
                         <h6 class="text-primary">Special Achievements</h6>
                         <ul class="small mb-3">
-                            <li><strong>Special Building:</strong> Built any wonder or monument</li>
-                            <li><strong>Own Territory:</strong> Built special building in home area</li>
+                            <li><strong>Special Building in Region:</strong>Special building is in home area</li>
+                            <li><strong>Control Historical Building:</strong>Historical build is controlled</li>
+                            <li><strong>Special Buildings Controlled:</strong>Count of special buildings controlled</li>
                             <li><strong>Bonus VP:</strong> Extra points from special conditions</li>
                         </ul>
 
@@ -350,6 +347,10 @@
                     </div>
                     <div class="card-body">
                         <div class="small">
+                            <div class="row mb-2">
+                                <div class="col-8">AST:</div>
+                                <div class="col-4 text-end" id="calc-ast_pos">0</div>
+                            </div>
                             <div class="row mb-2">
                                 <div class="col-8">Cities:</div>
                                 <div class="col-4 text-end" id="calc-cities">0</div>
@@ -420,27 +421,35 @@
     <script>
         // Score calculator
         function updateCalculator() {
+            const astPos = parseInt($('#ast_pos').val()) || 0; 
             const cities = parseInt($('#cities').val()) || 0;
             const adv1vp = parseInt($('#num_civ_adv_1VP').val()) || 0;
             const adv3vp = parseInt($('#num_civ_adv_3VP').val()) || 0;
             const adv6vp = parseInt($('#num_civ_adv_6VP').val()) || 0;
-            const specialBuilding = $('#special_building').is(':checked') ? 5 : 0; // Estimate 5 VP
-            const bonusVp = $('#bonus_vp').is(':checked') ? 3 : 0; // Estimate 3 VP
+            
+            // Special Building VP calculation: (special_building ? 2 : 0) + (special_building_own ? 2 : 0) + special_building_control
+            const specialBuildingVP = ($('#special_building').is(':checked') ? 2 : 0) + 
+                                     ($('#special_building_own').is(':checked') ? 2 : 0) + 
+                                     (parseInt($('#special_building_control').val()) || 0);
+            
+            const bonusVp = $('#bonus_vp').is(':checked') ? 5 : 0; // 5 VP estimate
 
+            const astVP = astPos > 0 ? (astPos - 1) * 5 : 0;
+            $('#calc-ast_pos').text(astVP);
             $('#calc-cities').text(cities);
             $('#calc-1vp').text(adv1vp);
             $('#calc-3vp').text(adv3vp * 3);
             $('#calc-6vp').text(adv6vp * 6);
-            $('#calc-special').text(specialBuilding);
+            $('#calc-special').text(specialBuildingVP);
             $('#calc-bonus').text(bonusVp);
 
-            const total = cities + adv1vp + (adv3vp * 3) + (adv6vp * 6) + specialBuilding + bonusVp;
+            const total = astVP + cities + adv1vp + (adv3vp * 3) + (adv6vp * 6) + specialBuildingVP + bonusVp;
             $('#calc-total').text(total);
         }
 
         $(document).ready(function() {
             // Update calculator on input change
-            $('#cities, #num_civ_adv_1VP, #num_civ_adv_3VP, #num_civ_adv_6VP, #special_building, #bonus_vp').on('input change', updateCalculator);
+            $('#ast_pos, #cities, #num_civ_adv_1VP, #num_civ_adv_3VP, #num_civ_adv_6VP, #special_building, #special_building_own, #special_building_control, #bonus_vp').on('input change', updateCalculator);
             
             // Initial calculation
             updateCalculator();

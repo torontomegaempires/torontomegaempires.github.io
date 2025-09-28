@@ -185,25 +185,35 @@
                                                         <span class="text-muted">-</span>
                                                     <% } %>
                                                 </td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <% if (record.special_building_control) { %>
-                                                            <span class="badge bg-info me-1" title="Controls Special Building">
-                                                                <i class="bi bi-building"></i>
-                                                            </span>
-                                                        <% } %>
-                                                        <a href="/records/<%= record.game_id %>/<%= record.player_id %>/<%= record.nation_id %>" class="btn btn-outline-primary" title="View Details">
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
-                                                        <a href="/records/<%= record.game_id %>/<%= record.player_id %>/<%= record.nation_id %>/edit" class="btn btn-outline-secondary" title="Edit">
-                                                            <i class="bi bi-pencil"></i>
-                                                        </a>
-                                                        <button type="button" class="btn btn-outline-danger" title="Delete" 
-                                                                onclick="confirmDelete(<%= record.game_id %>, <%= record.player_id %>, <%= record.nation_id %>)">
-                                                            <i class="bi bi-trash"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <% if (record.special_building) { %>
+                                            <span class="badge bg-warning me-1" title="Has Special Building">
+                                                <i class="bi bi-star"></i>
+                                            </span>
+                                        <% } %>
+                                        <% if (record.special_building_own) { %>
+                                            <span class="badge bg-success me-1" title="Own Special Building">
+                                                <i class="bi bi-house"></i>
+                                            </span>
+                                        <% } %>
+                                        <% if (record.special_building_control && record.special_building_control > 0) { %>
+                                            <span class="badge bg-info me-1" title="Controls <% if (record.special_building_control == 1) { %>1 Special Building<% } else { %><%= record.special_building_control %> Special Buildings<% } %>">
+                                                <i class="bi bi-building"></i> <%= record.special_building_control %>
+                                            </span>
+                                        <% } %>
+                                        <a href="/records/<%= record.game_id %>/<%= record.player_id %>/<%= record.nation_id %>" class="btn btn-outline-primary" title="View Details">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a href="/records/<%= record.game_id %>/<%= record.player_id %>/<%= record.nation_id %>/edit" class="btn btn-outline-secondary" title="Edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-outline-danger" title="Delete" 
+                                                onclick="confirmDelete(<%= record.game_id %>, <%= record.player_id %>, <%= record.nation_id %>)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
                                             </tr>
                                         <% }); %>
                                     </tbody>
