@@ -37,7 +37,7 @@
 # Redirect to latest game sign-up
 [[redirects]]
   from = "https://signup.torontomegaempires.com"
-  to = "https://discord.com/channels/1199457108257669231/1219112401287516161/1411428380305526886"
+  to = "https://discord.com/channels/1199457108257669231/1219112401287516161/1431825357253644368"
   status = 302
   force = true
 
