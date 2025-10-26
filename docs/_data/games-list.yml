@@ -49,3 +49,27 @@ games:
     location: "Sheraton Hotel, Toronto"
     max_players: 18
     status: "upcoming"
+
+  - date: "2026-05-23"
+    title: "Mega Empires: The East"
+    type: "home"
+    variant: "the east"
+    location: "Beaches, Toronto"
+    max_players: 9
+    status: "upcoming"
+
+  - date: "2026-09-19"
+    title: "Mega Empires: The East"
+    type: "home"
+    variant: "the east"
+    location: "Beaches, Toronto"
+    max_players: 9
+    status: "upcoming"
+
+  - date: "2026-11-28"
+    title: "Mega Empires: The West"
+    type: "home"
+    variant: "the west"
+    location: "Beaches, Toronto"
+    max_players: 9
+    status: "upcoming"
