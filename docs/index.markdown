@@ -29,13 +29,13 @@ title: Home
 <p class="social-subtitle">Connect with fellow strategists, get game updates, and secure your spot at the table</p>
 
 <div class="social-buttons">
+<a href="https://google.torontomegaempires.com" class="social-button discord" target="_blank">
+<span class="social-icon">💬</span>
+<span class="social-text">Join Mailing List</span>
+</a>
 <a href="https://discord.torontomegaempires.com" class="social-button discord" target="_blank">
 <span class="social-icon">💬</span>
 <span class="social-text">Join Discord Server</span>
-</a>
-<a href="https://fb.torontomegaempires.com" class="social-button facebook" target="_blank">
-<span class="social-icon">👥</span>
-<span class="social-text">Follow on Facebook</span>
 </a>
 </div>
 </div>
