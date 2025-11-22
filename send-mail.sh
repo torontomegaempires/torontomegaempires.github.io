@@ -18,10 +18,11 @@ message_file=${2}
 # Read Password
 echo "password:\c"
 read -s mail_pwd
+echo "creating email with subject: $subject"
 
 rtmp_url="smtps://mailout.easymail.ca:465"
 rtmp_from="rob@robmcarthur.com"
-rtmp_to="torontomegaempires@gaggle.email"
+rtmp_to="torontomegaempires@googlegroups.com"
 rtmp_credentials="rob@robmcarthur.com:${mail_pwd}"
 
 file_upload="data.txt"

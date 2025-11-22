@@ -27,10 +27,10 @@
   status = 302
   force = true
 
-# Redirect to Gaggle sign-up
+# Redirect to Google Group
 [[redirects]]
-  from = "https://gaggle.torontomegaempires.com"
-  to = "https://gaggle.email/join/torontomegaempires@gaggle.email"
+  from = "https://google.torontomegaempires.com"
+  to = "https://groups.google.com/g/torontomegaempires"
   status = 302
   force = true
 
