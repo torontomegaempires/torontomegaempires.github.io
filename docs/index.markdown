@@ -92,25 +92,12 @@ Don't worry about experience - Mega Empires is designed to be learned as you pla
 <h3>🏛️ Join Our Gaming Community</h3>
 <p>Get notified about upcoming games, meet fellow strategy enthusiasts, and secure your spot at the table.</p>
 
-<form method="post" action="https://gaggle.email/join/torontomegaempires@gaggle.email" style="max-width: 400px;">
-<div style="margin-bottom: 10px;">
-<label for="name">Name:</label><br>
-<input name="name" type="text" placeholder="Your Name" style="width: 100%; padding: 8px; margin-top: 5px;">
-</div>
-<div style="margin-bottom: 15px;">
-<label for="email">Email:</label><br>
-<input name="email" type="email" placeholder="Your Email Address" style="width: 100%; padding: 8px; margin-top: 5px;">
-</div>
-<div>
-<button type="submit" style="background: var(--brand-color, #f2cb05); padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Join Toronto Mega Empires</button>
-</div>
-</form>
-
 <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
-<p style="margin: 5px 0 15px 0; font-size: 0.9em;"><strong>Having trouble with the form?</strong></p>
-<p style="margin: 5px 0; font-size: 0.9em;">📧 Direct signup: <a href="https://gaggle.torontomegaempires.com">gaggle.torontomegaempires.com</a></p>
-
 <div class="social-links-compact">
+<a href="https://google.torontomegaempires.com" class="social-link-compact discord-compact" target="_blank">
+<span class="social-icon">💬</span>
+<span>Join Mailing List</span>
+</a>
 <a href="https://discord.torontomegaempires.com" class="social-link-compact discord-compact" target="_blank">
 <span class="social-icon">💬</span>
 <span>Join Discord</span>
