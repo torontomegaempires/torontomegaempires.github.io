@@ -1,22 +1,6 @@
 # Game schedule data
 games:
     
-  - date: "2025-09-20"
-    title: "Mega Empires: The West"
-    type: "home"
-    variant: "the west"
-    location: "Beaches, Toronto"
-    max_players: 9
-    status: "upcoming"
-    
-  - date: "2025-11-29"
-    title: "Mega Empires: The East"
-    type: "home"
-    variant: "the east"
-    location: "Beaches, Toronto"
-    max_players: 9
-    status: "upcoming"
-    
   - date: "2026-01-10"
     title: "The Guild House - Mega Empires"
     type: "megacon"
