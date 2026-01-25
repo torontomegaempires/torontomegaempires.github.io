@@ -1,27 +1,10 @@
 # Game schedule data
 games:
     
-  - date: "2026-01-10"
-    title: "The Guild House - Mega Empires"
-    type: "megacon"
-    variant: "full game"
-    location: "The Guild House, Toronto"
-    max_players: 18
-    status: "upcoming"
-    cost: "$10 per player"
-    
-  - date: "2026-01-15"
-    title: "Niagara Boardgame Weekend - Mega Empires: The West"
-    type: "convention"
-    variant: "the west"
-    location: "Niagara Falls, ON"
-    max_players: 9
-    status: "upcoming"
-    
   - date: "2026-02-28"
-    title: "Mega Empires: The East"
+    title: "Mega Empires: The West"
     type: "home"
-    variant: "the east"
+    variant: "the west"
     location: "Beaches, Toronto"
     max_players: 9
     status: "upcoming"
