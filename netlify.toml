@@ -37,13 +37,13 @@
 # Redirect to latest game sign-up
 [[redirects]]
   from = "https://signup.torontomegaempires.com"
-  to = "https://discord.com/channels/1199457108257669231/1219112401287516161/1431825357253644368"
+  to = "https://discord.com/channels/1199457108257669231/1219112401287516161/1465107265509003480"
   status = 302
   force = true
 
 # Redirect to latest megacon sign-up
-[[redirects]]
-  from = "https://megacon-signup.torontomegaempires.com"
-  to = "https://discord.com/channels/1199457108257669231/1219112401287516161/1446701216452313200"
-  status = 302
-  force = true
+#[[redirects]]
+#  from = "https://megacon-signup.torontomegaempires.com"
+#  to = "https://discord.com/channels/1199457108257669231/1219112401287516161/1446701216452313200"
+#  status = 302
+#  force = true
