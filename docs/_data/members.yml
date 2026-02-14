@@ -1,9 +1,3 @@
-- name: Eric Mill
-  github: konklone
-
-- name: Parker Moore
-  github: parkr
-
-- name: Liu Fengyun
-  github: liufengyun
-  
+# Community members data
+# Currently unused - player data is managed via SQLite database (_db/megaempires.db)
+# and accessed through the jekyll-sqlite plugin (see _config.yml)
