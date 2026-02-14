@@ -29,11 +29,11 @@ title: Home
 <p class="social-subtitle">Connect with fellow strategists, get game updates, and secure your spot at the table</p>
 
 <div class="social-buttons">
-<a href="https://google.torontomegaempires.com" class="social-button discord" target="_blank">
+<a href="https://google.torontomegaempires.com" class="social-button discord" target="_blank" rel="noopener noreferrer">
 <span class="social-icon">💬</span>
 <span class="social-text">Join Mailing List</span>
 </a>
-<a href="https://discord.torontomegaempires.com" class="social-button discord" target="_blank">
+<a href="https://discord.torontomegaempires.com" class="social-button discord" target="_blank" rel="noopener noreferrer">
 <span class="social-icon">💬</span>
 <span class="social-text">Join Discord Server</span>
 </a>
@@ -46,7 +46,7 @@ title: Home
 <div class="callout-content">
 <strong>No experience required!</strong> We host the ultimate board gaming experience: <strong>Mega Empires</strong> - a massive strategy game supporting up to 18 players in sessions that span 10-12 hours of pure strategic gameplay. Think you have what it takes to guide a civilization from the ancient world to greatness?
 <br><br>
-Learn more about this legendary game at <a href="https://mega-empires.com" target="_blank">mega-empires.com</a>
+Learn more about this legendary game at <a href="https://mega-empires.com" target="_blank" rel="noopener noreferrer">mega-empires.com</a>
 </div>
 </div>
 
@@ -56,8 +56,9 @@ Learn more about this legendary game at <a href="https://mega-empires.com" targe
 {% assign upcoming_games = site.data.games-list.games | where_exp: "game", "game.date >= today" | sort: "date" %}
 {% if upcoming_games.size > 0 %}
 {% assign next_game = upcoming_games.first %}
-<div class="next-game-highlight" onclick="window.open('https://signup.torontomegaempires.com', '_blank')" style="cursor: pointer;">
-<h2 style="margin-top: 0;">🎲 Next Game</h2>
+<div class="next-game-highlight">
+<a href="https://signup.torontomegaempires.com" target="_blank" rel="noopener noreferrer" class="next-game-stretched-link" aria-label="Sign up for next game"></a>
+<h2>🎲 Next Game</h2>
 <h3>{{ next_game.title }}</h3>
 <p><strong>Date:</strong> {{ next_game.date | date: "%B %d, %Y" }}</p>
 <p><strong>Location:</strong> {{ next_game.location | default: "TBD" }}</p>
@@ -66,8 +67,9 @@ Learn more about this legendary game at <a href="https://mega-empires.com" targe
 </div>
 {% endif %}
 {% else %}
-<div class="next-game-highlight" onclick="window.open('https://signup.torontomegaempires.com', '_blank')" style="cursor: pointer;">
-<h2 style="margin-top: 0;">🎲 Next Game</h2>
+<div class="next-game-highlight">
+<a href="https://signup.torontomegaempires.com" target="_blank" rel="noopener noreferrer" class="next-game-stretched-link" aria-label="Sign up for next game"></a>
+<h2>🎲 Next Game</h2>
 <h3>Rob's Home - West</h3>
 <p><strong>Date:</strong> May 24, 2025</p>
 <p><strong>Players:</strong> Up to 9</p>
@@ -88,21 +90,21 @@ Don't worry about experience - Mega Empires is designed to be learned as you pla
 </div>
 </div>
 
-<div class="signup-section" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+<div class="signup-section">
 <h3>🏛️ Join Our Gaming Community</h3>
 <p>Get notified about upcoming games, meet fellow strategy enthusiasts, and secure your spot at the table.</p>
 
-<div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+<div class="signup-section-links">
 <div class="social-links-compact">
-<a href="https://google.torontomegaempires.com" class="social-link-compact discord-compact" target="_blank">
+<a href="https://google.torontomegaempires.com" class="social-link-compact discord-compact" target="_blank" rel="noopener noreferrer">
 <span class="social-icon">💬</span>
 <span>Join Mailing List</span>
 </a>
-<a href="https://discord.torontomegaempires.com" class="social-link-compact discord-compact" target="_blank">
+<a href="https://discord.torontomegaempires.com" class="social-link-compact discord-compact" target="_blank" rel="noopener noreferrer">
 <span class="social-icon">💬</span>
 <span>Join Discord</span>
 </a>
-<a href="https://fb.torontomegaempires.com" class="social-link-compact facebook-compact" target="_blank">
+<a href="https://fb.torontomegaempires.com" class="social-link-compact facebook-compact" target="_blank" rel="noopener noreferrer">
 <span class="social-icon">👥</span>
 <span>Follow Facebook</span>
 </a>
@@ -206,7 +208,7 @@ Mega Empires evolved from the classic Civilization by Francis Tresham, expanded 
 <div class="callout-title">Learn More About the Game
 </div>
 <div class="callout-content">
-Read the full development story at <a href="https://mega-empires.com/history" target="_blank">mega-empires.com/history</a>
+Read the full development story at <a href="https://mega-empires.com/history" target="_blank" rel="noopener noreferrer">mega-empires.com/history</a>
 </div>
 </div>
 
@@ -219,7 +221,7 @@ Read the full development story at <a href="https://mega-empires.com/history" ta
 <div class="games-list">
 {% for game in upcoming_games limit: 6 %}
 <div class="game-card">
-<h4 style="margin-top: 0;">{{ game.title }}</h4>
+<h4>{{ game.title }}</h4>
 <p><strong>{{ game.date | date: "%B %d, %Y" }}</strong></p>
 <p>{{ game.max_players }} players • {{ game.location }}</p>
 {% if game.cost %}<p><em>{{ game.cost }}</em></p>{% endif %}
@@ -230,12 +232,12 @@ Read the full development story at <a href="https://mega-empires.com/history" ta
 {% else %}
 <div class="games-list">
 <div class="game-card">
-<h4 style="margin-top: 0;">Rob's Home - West</h4>
+<h4>Rob's Home - West</h4>
 <p><strong>May 24, 2025</strong></p>
 <p>9 players • West</p>
 </div>
 <div class="game-card">
-<h4 style="margin-top: 0;">The Guild House MiniCon</h4>
+<h4>The Guild House MiniCon</h4>
 <p><strong>June 14, 2025</strong></p>
 <p>18 players • Full Experience</p>
 <p><em>$10 per player</em></p>
