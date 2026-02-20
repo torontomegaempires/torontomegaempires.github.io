@@ -1,9 +1,11 @@
 {% assign today = site.time | date: "%Y-%m-%d" %}
-{% assign upcoming_games = site.data.games.games | where_exp: "game", "game.date >= today" | sort: "date" %}
+{% if site.data.games-list and site.data.games-list.games %}
+{% assign upcoming_games = site.data.games-list.games | where_exp: "game", "game.date >= today" | sort: "date" %}
 {% if upcoming_games.size > 0 %}
 {% assign next_game = upcoming_games.first %}
 <div class="next-game-banner">
   <h2>Next Game: {{ next_game.title }}</h2>
   <p>{{ next_game.date | date: "%B %d, %Y" }} • {{ next_game.max_players }} players</p>
 </div>
+{% endif %}
 {% endif %}

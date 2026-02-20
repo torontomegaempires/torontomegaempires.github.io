@@ -8,9 +8,8 @@ source "https://rubygems.org"
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
 gem "jekyll", "~> 4.3.3"
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-# gem "minima", "~> 2.5"
-gem "jekyll-theme-yat"
+# Clean minimal theme
+gem "minima", "~> 2.5"
 
 gem "logger"
 gem "csv"
@@ -23,6 +22,10 @@ gem "base64"
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
+  gem "jekyll-seo-tag"
+  gem "jekyll-sitemap"
+  gem "jekyll-paginate"
+  gem "jekyll-spaceship"
   gem "jekyll-sqlite", "~> 0.1.5"
   gem "jekyll-datapage-generator", "~> 1.4"
   gem "jekyll-remote-theme"

@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="cta-buttons">
 <a href="/" class="cta-button primary">View Upcoming Games</a>
-<a href="https://discord.torontomegaempires.com" class="cta-button secondary" target="_blank">Join Our Community</a>
+<a href="https://discord.torontomegaempires.com" class="cta-button secondary" target="_blank" rel="noopener noreferrer">Join Our Community</a>
 </div>
 </div>
 

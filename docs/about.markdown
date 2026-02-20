@@ -1,15 +1,11 @@
 ---
-layout: about
+layout: page
 title: About
 ---
 
 <div class="hero-section">
 <h1 class="hero-title">Meet the Toronto Mega Empires Community</h1>
 <p class="hero-subtitle">Bringing ancient civilizations to life in the heart of Toronto</p>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">🏛️</span>
 </div>
 
 ## Your Host: Rob of the North
@@ -20,19 +16,15 @@ title: About
 <p>With over <strong>40 years of board gaming experience</strong>, Rob McArthur has been a cornerstone of Toronto's gaming community for decades. You'll find him at Toronto Area Gaming Society (TABS) events and as a regular attendee at the annual BreakoutCon, where he's willing to play any game with anyone!</p>
 
 <div class="contact-info-callout">
-<h4>🎲 Connect with Rob</h4>
+<h4>Connect with Rob</h4>
 <ul>
-<li><strong>BoardGameGeek:</strong> <a href="https://boardgamegeek.com/user/robmcarthur2001" target="_blank">@robmcarthur2001</a></li>
+<li><strong>BoardGameGeek:</strong> <a href="https://boardgamegeek.com/user/robmcarthur2001" target="_blank" rel="noopener noreferrer">@robmcarthur2001</a></li>
 <li><strong>Email:</strong> <a href="mailto:info@torontomegaempires.com">info@torontomegaempires.com</a></li>
-<li><strong>Discord:</strong> <a href="https://discord.torontomegaempires.com" target="_blank">Toronto Mega Empires Server</a></li>
+<li><strong>Discord:</strong> <a href="https://discord.torontomegaempires.com" target="_blank" rel="noopener noreferrer">Toronto Mega Empires Server</a></li>
 </ul>
 </div>
 </div>
 </div>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">🌟</span>
 </div>
 
 ## Our Community Story
@@ -62,10 +54,6 @@ title: About
 <p>Great food, engaging conversation, and lasting friendships formed over shared conquests and defeats.</p>
 </div>
 </div>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">🎯</span>
 </div>
 
 ## What to Expect at Our Events
@@ -105,7 +93,7 @@ title: About
 </div>
 <div class="timeline-content">
 <h4>Bronze to the Iron Age</h4>
-<p>Empires clash, trade routes flourishes, calamities strike, and civilizations advance through history.</p>
+<p>Empires clash, trade routes flourish, calamities strike, and civilizations advance through history.</p>
 </div>
 </div>
 
@@ -127,10 +115,6 @@ title: About
 </div>
 </div>
 </div>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">📊</span>
 </div>
 
 ## Community by the Numbers
@@ -165,10 +149,6 @@ title: About
 </div>
 </div>
 
-<div class="section-divider">
-<span class="divider-icon">❓</span>
-</div>
-
 ## Frequently Asked Questions
 
 <div class="faq-section">
@@ -194,18 +174,14 @@ title: About
 
 <div class="faq-item">
 <h4>Where are games held?</h4>
-<p>Most games are hosted at Rob's place in the Beaches area of Toronto, with easy TTC access. We also participate in conventions the Niagara Boardgame Weekend.</p>
+<p>Most games are hosted at Rob's place in the Beaches area of Toronto, with easy TTC access. We also participate in conventions like the Niagara Boardgame Weekend.</p>
 </div>
 
 <div class="faq-item">
 <h4>I have allergies to pets, is Rob's house hypo-allergenic?</h4>
-<p>Rob has a large (100 lbs) Bernadoodle name Finley who loves to hang out with us as we play. He is considered hypoallergenic as he does not have dander due to being a poodle cross-breed.</p>
+<p>Rob has a large (100 lbs) Bernadoodle named Finley who loves to hang out with us as we play. He is considered hypoallergenic as he does not have dander due to being a poodle cross-breed.</p>
 </div>
 
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">🚀</span>
 </div>
 
 ## Ready to Build Your Empire?
@@ -215,7 +191,7 @@ title: About
 <p>Whether you're a seasoned strategist or curious newcomer, there's a place for you at our table. Experience the thrill of building civilizations, the satisfaction of strategic planning, and the joy of epic gaming with fellow enthusiasts.</p>
 
 <div class="cta-buttons">
-<a href="https://discord.torontomegaempires.com" class="cta-button primary" target="_blank">Join Our Discord</a>
+<a href="https://discord.torontomegaempires.com" class="cta-button primary" target="_blank" rel="noopener noreferrer">Join Our Discord</a>
 <a href="/" class="cta-button secondary">View Upcoming Games</a>
 </div>
 </div>
@@ -223,6 +199,6 @@ title: About
 ---
 
 <div class="info-callout">
-<h4>🎲 About Mega Empires</h4>
-<p>Want to learn more about this incredible board game? Visit the official <a href="https://www.mega-empires.com" target="_blank">Mega Empires website</a> for rules, strategy guides, and the fascinating history behind this epic civilization game.</p>
+<h4>About Mega Empires</h4>
+<p>Want to learn more about this incredible board game? Visit the official <a href="https://www.mega-empires.com" target="_blank" rel="noopener noreferrer">Mega Empires website</a> for rules, strategy guides, and the fascinating history behind this epic civilization game.</p>
 </div>
