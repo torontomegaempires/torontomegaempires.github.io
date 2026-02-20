@@ -1,15 +1,11 @@
 ---
-layout: about
+layout: page
 title: About
 ---
 
 <div class="hero-section">
 <h1 class="hero-title">Meet the Toronto Mega Empires Community</h1>
 <p class="hero-subtitle">Bringing ancient civilizations to life in the heart of Toronto</p>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">🏛️</span>
 </div>
 
 ## Your Host: Rob of the North
@@ -20,7 +16,7 @@ title: About
 <p>With over <strong>40 years of board gaming experience</strong>, Rob McArthur has been a cornerstone of Toronto's gaming community for decades. You'll find him at Toronto Area Gaming Society (TABS) events and as a regular attendee at the annual BreakoutCon, where he's willing to play any game with anyone!</p>
 
 <div class="contact-info-callout">
-<h4>🎲 Connect with Rob</h4>
+<h4>Connect with Rob</h4>
 <ul>
 <li><strong>BoardGameGeek:</strong> <a href="https://boardgamegeek.com/user/robmcarthur2001" target="_blank" rel="noopener noreferrer">@robmcarthur2001</a></li>
 <li><strong>Email:</strong> <a href="mailto:info@torontomegaempires.com">info@torontomegaempires.com</a></li>
@@ -29,10 +25,6 @@ title: About
 </div>
 </div>
 </div>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">🌟</span>
 </div>
 
 ## Our Community Story
@@ -62,10 +54,6 @@ title: About
 <p>Great food, engaging conversation, and lasting friendships formed over shared conquests and defeats.</p>
 </div>
 </div>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">🎯</span>
 </div>
 
 ## What to Expect at Our Events
@@ -129,10 +117,6 @@ title: About
 </div>
 </div>
 
-<div class="section-divider">
-<span class="divider-icon">📊</span>
-</div>
-
 ## Community by the Numbers
 
 <div class="community-stats-grid">
@@ -163,10 +147,6 @@ title: About
 <div class="stat-label">Hours of Epic Gaming
 </div>
 </div>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">❓</span>
 </div>
 
 ## Frequently Asked Questions
@@ -204,10 +184,6 @@ title: About
 
 </div>
 
-<div class="section-divider">
-<span class="divider-icon">🚀</span>
-</div>
-
 ## Ready to Build Your Empire?
 
 <div class="action-callout">
@@ -223,6 +199,6 @@ title: About
 ---
 
 <div class="info-callout">
-<h4>🎲 About Mega Empires</h4>
+<h4>About Mega Empires</h4>
 <p>Want to learn more about this incredible board game? Visit the official <a href="https://www.mega-empires.com" target="_blank" rel="noopener noreferrer">Mega Empires website</a> for rules, strategy guides, and the fascinating history behind this epic civilization game.</p>
 </div>

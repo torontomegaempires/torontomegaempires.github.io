@@ -25,7 +25,7 @@ title: Home
 </div>
 
 <div class="social-media-section">
-<h2 class="social-title">🏛️ Join Our Empire Building Community</h2>
+<h2 class="social-title">Join Our Empire Building Community</h2>
 <p class="social-subtitle">Connect with fellow strategists, get game updates, and secure your spot at the table</p>
 
 <div class="social-buttons">
@@ -76,10 +76,6 @@ Learn more about this legendary game at <a href="https://mega-empires.com" targe
 </div>
 {% endif %}
 
-<div class="section-divider">
-<span class="divider-icon">⚔️</span>
-</div>
-
 # Ready to Make Your Empire Stand the Test of Time?
 
 <div class="action-callout">
@@ -91,7 +87,7 @@ Don't worry about experience - Mega Empires is designed to be learned as you pla
 </div>
 
 <div class="signup-section">
-<h3>🏛️ Join Our Gaming Community</h3>
+<h3>Join Our Gaming Community</h3>
 <p>Get notified about upcoming games, meet fellow strategy enthusiasts, and secure your spot at the table.</p>
 
 <div class="signup-section-links">
@@ -162,10 +158,6 @@ Don't worry about experience - Mega Empires is designed to be learned as you pla
 <li><strong>Community:</strong> Fellow Enthusiasts</li>
 </ul>
 </div>
-</div>
-
-<div class="section-divider">
-<span class="divider-icon">⭐</span>
 </div>
 
 # What Makes Mega Empires Special?
@@ -244,10 +236,6 @@ Read the full development story at <a href="https://mega-empires.com/history" ta
 </div>
 </div>
 {% endif %}
-
-<div class="section-divider">
-<span class="divider-icon">🏠</span>
-</div>
 
 # Host Your Own Mega Empires
 
