@@ -120,19 +120,19 @@ img.g-img + div {
     <style>
 
 	    .primary{
-	background: #f2cb05;
+	background: #2563eb;
 }
 .bg_white{
 	background: #ffffff;
 }
 .bg_light{
-	background: #f8f9fa;
+	background: #eff6ff;
 }
 .bg_black{
-	background: #2c3e50;
+	background: #1e293b;
 }
 .bg_dark{
-	background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+	background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
 }
 .email-section{
 	padding:2.5em;
@@ -142,32 +142,32 @@ img.g-img + div {
 .btn{
 	padding: 12px 24px;
 	display: inline-block;
-	border-radius: 25px;
+	border-radius: 6px;
 	font-weight: 700;
 	text-decoration: none;
 	transition: all 0.3s ease;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 .btn.btn-primary{
-	background: linear-gradient(135deg, #f2cb05 0%, #ffdd44 100%);
-	color: #2c3e50;
+	background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+	color: #ffffff;
 	border: none;
 }
 .btn.btn-primary:hover{
-	background: linear-gradient(135deg, #ffdd44 0%, #f2cb05 100%);
+	background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
 	transform: translateY(-2px);
-	box-shadow: 0 6px 20px rgba(242, 203, 5, 0.3);
+	box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
 }
 .btn.btn-white{
 	background: #ffffff;
-	color: #2c3e50;
-	border: 2px solid #f2cb05;
+	color: #2563eb;
+	border: 2px solid #2563eb;
 }
 .btn.btn-white-outline{
 	background: transparent;
 	border: 2px solid #fff;
 	color: #fff;
-	border-radius: 25px;
+	border-radius: 6px;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -186,7 +186,7 @@ body{
 }
 
 a{
-	color: #f2cb05;
+	color: #2563eb;
 	text-decoration: none;
 	font-weight: 600;
 }
@@ -199,16 +199,12 @@ table{
 	margin: 0;
 }
 .logo h1 a{
-	color: #2c3e50;
+	color: #2563eb;
 	font-size: 24px;
 	font-weight: 800;
 	text-transform: uppercase;
 	font-family: 'Nunito Sans', sans-serif;
 	text-decoration: none;
-	background: linear-gradient(135deg, #f2cb05 0%, #ffdd44 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
 }
 
 .navigation{
@@ -230,9 +226,8 @@ table{
 .hero{
 	position: relative;
 	z-index: 0;
-	border-radius: 16px;
 	overflow: hidden;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 .hero .overlay{
 	position: absolute;
@@ -242,7 +237,7 @@ table{
 	bottom: 0;
 	content: '';
 	width: 100%;
-	background: linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(52, 73, 94, 0.75) 50%, rgba(44, 62, 80, 0.85) 100%);
+	background: linear-gradient(135deg, rgba(30, 64, 175, 0.85) 0%, rgba(37, 99, 235, 0.70) 50%, rgba(30, 64, 175, 0.85) 100%);
 	z-index: -1;
 }
 .hero .icon{
@@ -264,10 +259,10 @@ table{
 	margin-bottom: 15px;
 	line-height: 1.1;
 	font-weight: 900;
-	text-shadow: 
+	text-shadow:
 		0 2px 4px rgba(0, 0, 0, 0.5),
-		0 0 20px rgba(242, 203, 5, 0.3),
-		0 0 40px rgba(242, 203, 5, 0.2);
+		0 0 20px rgba(255, 255, 255, 0.2),
+		0 0 40px rgba(37, 99, 235, 0.3);
 }
 
 
@@ -292,7 +287,7 @@ table{
 	transform: translateX(-50%);
 	width: 60px;
 	height: 3px;
-	background: linear-gradient(90deg, #f2cb05 0%, #ffdd44 100%);
+	background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
 	border-radius: 2px;
 }
 .heading-section .subheading{
@@ -312,7 +307,7 @@ table{
 	content: '';
 	width: 100%;
 	height: 2px;
-	background: #f2cb05;
+	background: #2563eb;
 	margin: 0 auto;
 }
 
@@ -330,7 +325,7 @@ table{
 	color: #ffffff;
 }
 .heading-section-white h2::after{
-	background: linear-gradient(90deg, #f2cb05 0%, #ffdd44 100%);
+	background: linear-gradient(90deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%);
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -349,7 +344,7 @@ table{
 	font-weight: 500;
 }
 .heading-section-white a{
-	color: #f2cb05;
+	color: #bfdbfe;
 	font-weight: 700;
 	text-decoration: none;
 }
@@ -382,24 +377,12 @@ table{
 	margin: 0 0 20px 0;
 	width: 100%;
 	float: left;
-	background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-	border-radius: 12px;
-	border-left: 4px solid #f2cb05;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-	transition: all 0.3s ease;
+	background: #ffffff;
+	border-radius: 6px;
+	border-left: 4px solid #2563eb;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 	position: relative;
 	overflow: hidden;
-}
-
-.services-list::before{
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 80px;
-	height: 80px;
-	background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f2cb05' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
-	pointer-events: none;
 }
 
 .services-list .text{
@@ -423,7 +406,7 @@ table{
 	left: 0;
 	width: 30px;
 	height: 2px;
-	background: #f2cb05;
+	background: #2563eb;
 	border-radius: 1px;
 }
 .services-list p{
@@ -446,12 +429,12 @@ table{
 	color: #2c3e50;
 }
 .text-tour h3 a{
-	color: #2c3e50;
+	color: #2563eb;
 	text-decoration: none;
 	transition: color 0.3s ease;
 }
 .text-tour h3 a:hover{
-	color: #f2cb05;
+	color: #1d4ed8;
 }
 
 /*BLOG*/
@@ -515,7 +498,7 @@ ul.social li{
 
 .footer{
 	color: rgba(255,255,255,.7);
-	background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+	background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 .footer .heading{
 	color: #ffffff;
@@ -531,7 +514,7 @@ ul.social li{
 	left: 0;
 	width: 40px;
 	height: 2px;
-	background: #f2cb05;
+	background: #3b82f6;
 	border-radius: 1px;
 }
 .footer ul{
@@ -544,13 +527,13 @@ ul.social li{
 	padding-left: 0;
 }
 .footer ul li a{
-	color: #f2cb05;
+	color: #93c5fd;
 	text-decoration: none;
 	font-weight: 600;
 	transition: color 0.3s ease;
 }
 .footer ul li a:hover{
-	color: #ffdd44;
+	color: #bfdbfe;
 }
 .footer p{
 	color: rgba(255,255,255,.8);
@@ -560,23 +543,23 @@ ul.social li{
 
 /* Email Client Compatibility */
 .email-container{
-	border-radius: 16px;
 	overflow: hidden;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Ensure golden text works in email clients */
+/* Ensure blue logo text works in email clients */
 .logo h1 a{
-	color: #f2cb05 !important;
+	color: #2563eb !important;
 }
 
 /* Fallback for email clients that don't support gradients */
 .bg_dark{
-	background: #2c3e50 !important;
+	background: #1e40af !important;
 }
 
 .btn.btn-primary{
-	background: #f2cb05 !important;
+	background: #2563eb !important;
+	color: #ffffff !important;
 }
 
 /* Mobile Responsive */
