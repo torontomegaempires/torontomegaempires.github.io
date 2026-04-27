@@ -33,13 +33,13 @@ class GameRecord {
         const {
             game_id, player_id, nation_id, score, cities, ast_pos,
             num_civ_adv_1VP, num_civ_adv_3VP, num_civ_adv_6VP,
-            special_building, special_building_own, bonus_vp
+            special_building, special_building_own, special_building_control, bonus_vp
         } = recordData;
 
         // Check for duplicate player-nation combination in the same game
         const checkSql = 'SELECT COUNT(*) as count FROM game_player_nation WHERE game_id = ? AND player_id = ? AND nation_id = ?';
         const existing = await dbAsync.get(checkSql, [game_id, player_id, nation_id]);
-        
+
         if (existing.count > 0) {
             throw new Error('This player-nation combination already exists for this game');
         }
@@ -48,14 +48,14 @@ class GameRecord {
             INSERT INTO game_player_nation (
                 game_id, player_id, nation_id, score, cities, ast_pos,
                 num_civ_adv_1VP, num_civ_adv_3VP, num_civ_adv_6VP,
-                special_building, special_building_own, bonus_vp
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                special_building, special_building_own, special_building_control, bonus_vp
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
-        
+
         return await dbAsync.run(sql, [
             game_id, player_id, nation_id, score, cities, ast_pos,
             num_civ_adv_1VP, num_civ_adv_3VP, num_civ_adv_6VP,
-            special_building, special_building_own, bonus_vp
+            special_building, special_building_own, special_building_control, bonus_vp
         ]);
     }
 
@@ -63,21 +63,21 @@ class GameRecord {
         const {
             score, cities, ast_pos,
             num_civ_adv_1VP, num_civ_adv_3VP, num_civ_adv_6VP,
-            special_building, special_building_own, bonus_vp
+            special_building, special_building_own, special_building_control, bonus_vp
         } = recordData;
 
         const sql = `
             UPDATE game_player_nation SET
                 score = ?, cities = ?, ast_pos = ?,
                 num_civ_adv_1VP = ?, num_civ_adv_3VP = ?, num_civ_adv_6VP = ?,
-                special_building = ?, special_building_own = ?, bonus_vp = ?
+                special_building = ?, special_building_own = ?, special_building_control = ?, bonus_vp = ?
             WHERE game_id = ? AND player_id = ? AND nation_id = ?
         `;
-        
+
         return await dbAsync.run(sql, [
             score, cities, ast_pos,
             num_civ_adv_1VP, num_civ_adv_3VP, num_civ_adv_6VP,
-            special_building, special_building_own, bonus_vp,
+            special_building, special_building_own, special_building_control, bonus_vp,
             gameId, playerId, nationId
         ]);
     }
