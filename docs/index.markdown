@@ -29,7 +29,7 @@ title: Home
 <p class="social-subtitle">Connect with fellow strategists, get game updates, and secure your spot at the table</p>
 
 <div class="social-buttons">
-<a href="https://google.torontomegaempires.com" class="social-button discord" target="_blank" rel="noopener noreferrer">
+<a href="https://newsletter.torontomegaempires.com" class="social-button discord" target="_blank" rel="noopener noreferrer">
 <span class="social-icon">💬</span>
 <span class="social-text">Join Mailing List</span>
 </a>
@@ -92,7 +92,7 @@ Don't worry about experience - Mega Empires is designed to be learned as you pla
 
 <div class="signup-section-links">
 <div class="social-links-compact">
-<a href="https://google.torontomegaempires.com" class="social-link-compact discord-compact" target="_blank" rel="noopener noreferrer">
+<a href="https://newsletter.torontomegaempires.com" class="social-link-compact discord-compact" target="_blank" rel="noopener noreferrer">
 <span class="social-icon">💬</span>
 <span>Join Mailing List</span>
 </a>
