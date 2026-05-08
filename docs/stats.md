@@ -220,3 +220,37 @@ title: Stats
 </tbody>
 </table>
 </div>
+
+<div class="section-divider">
+<span class="divider-icon">📈</span>
+</div>
+
+## Nation Score History
+
+<p class="text-muted">Score for each game played. Error bars show ±1 standard deviation of all player scores in that game.</p>
+
+{% assign nation_groups = site.data.nation_game_scores | group_by: "nation" | sort: "name" %}
+
+<div class="nation-charts-grid">
+{% for group in nation_groups %}
+<div class="chart-card">
+<div class="chart-card-title">
+<span class="nation-{{ group.name | downcase }}">{{ group.name }}</span>
+<span class="chart-game-count">{{ group.items | size }} games</span>
+</div>
+<div class="chart-container">
+<canvas id="chart-{{ group.name | downcase | replace: ' ', '-' }}"></canvas>
+</div>
+</div>
+{% endfor %}
+</div>
+
+<script>
+window.nationChartData = [
+{% for group in nation_groups %}{"nation":{{ group.name | jsonify }},"games":[{% for g in group.items %}{"name":{{ g.game_name | jsonify }},"date":{{ g.game_date | jsonify }},"score":{{ g.score }},"avg":{{ g.avg_score }},"sd":{{ g.stddev }}},{% endfor %}]},
+{% endfor %}
+];
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-error-bars@4.4.0/build/index.umd.min.js"></script>
+<script src="/assets/js/nation-charts.js"></script>

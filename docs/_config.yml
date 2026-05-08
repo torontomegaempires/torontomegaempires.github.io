@@ -142,6 +142,26 @@ order by game_player_nation.game_id, score desc"
     JOIN game_player_nation gpn ON n.id = gpn.nation_id
     GROUP BY n.id
     ORDER BY wins DESC, avg_score DESC"
+  - data: nation_game_scores
+    file: *db
+    query: "SELECT
+      n.name as nation,
+      g.name as game_name,
+      g.date as game_date,
+      gpn.score,
+      gs.avg_score,
+      gs.stddev
+    FROM nation n
+    JOIN game_player_nation gpn ON n.id = gpn.nation_id
+    JOIN game g ON gpn.game_id = g.id
+    JOIN (
+      SELECT game_id,
+        ROUND(AVG(score), 1) as avg_score,
+        ROUND(SQRT(AVG(score * score) - AVG(score) * AVG(score)), 1) as stddev
+      FROM game_player_nation
+      GROUP BY game_id
+    ) gs ON gs.game_id = g.id
+    ORDER BY n.name, date(g.date)"
   - data: game_winners
     file: *db
     query: "SELECT
