@@ -4,6 +4,8 @@ const Player = require('../models/player');
 
 const router = express.Router();
 
+const parseMessages = q => { try { return q ? JSON.parse(q) : null; } catch { return null; } };
+
 // Validation rules
 const playerValidation = [
     body('name').trim().notEmpty().withMessage('Name is required'),
@@ -18,7 +20,7 @@ router.get('/', async (req, res) => {
         res.render('players/index', {
             title: 'Players',
             players,
-            messages: req.query.messages ? JSON.parse(req.query.messages) : null
+            messages: parseMessages(req.query.messages)
         });
     } catch (error) {
         console.error('Error fetching players:', error);

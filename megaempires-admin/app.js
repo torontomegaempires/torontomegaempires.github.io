@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const { body, validationResult } = require('express-validator');
 
 const app = express();
 const PORT = process.env.PORT || 3000;

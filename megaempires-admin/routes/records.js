@@ -7,6 +7,8 @@ const Nation = require('../models/nation');
 
 const router = express.Router();
 
+const parseMessages = q => { try { return q ? JSON.parse(q) : null; } catch { return null; } };
+
 // Validation rules
 const recordValidation = [
     body('game_id').isInt({ min: 1 }).withMessage('Game is required'),
@@ -31,7 +33,7 @@ router.get('/', async (req, res) => {
         res.render('records/index', {
             title: 'Game Records',
             records,
-            messages: req.query.messages ? JSON.parse(req.query.messages) : null
+            messages: parseMessages(req.query.messages)
         });
     } catch (error) {
         console.error('Error fetching records:', error);

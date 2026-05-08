@@ -4,6 +4,8 @@ const Game = require('../models/game');
 
 const router = express.Router();
 
+const parseMessages = q => { try { return q ? JSON.parse(q) : null; } catch { return null; } };
+
 // Validation rules
 const gameValidation = [
     body('name').trim().notEmpty().withMessage('Game name is required'),
@@ -19,7 +21,7 @@ router.get('/', async (req, res) => {
         res.render('games/index', {
             title: 'Games',
             games,
-            messages: req.query.messages ? JSON.parse(req.query.messages) : null
+            messages: parseMessages(req.query.messages)
         });
     } catch (error) {
         console.error('Error fetching games:', error);

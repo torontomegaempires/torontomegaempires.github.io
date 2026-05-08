@@ -4,6 +4,8 @@ const Nation = require('../models/nation');
 
 const router = express.Router();
 
+const parseMessages = q => { try { return q ? JSON.parse(q) : null; } catch { return null; } };
+
 // Validation rules
 const nationValidation = [
     body('name').trim().notEmpty().withMessage('Nation name is required')
@@ -16,7 +18,7 @@ router.get('/', async (req, res) => {
         res.render('nations/index', {
             title: 'Nations',
             nations,
-            messages: req.query.messages ? JSON.parse(req.query.messages) : null
+            messages: parseMessages(req.query.messages)
         });
     } catch (error) {
         console.error('Error fetching nations:', error);
