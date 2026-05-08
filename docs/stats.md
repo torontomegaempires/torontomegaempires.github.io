@@ -156,7 +156,7 @@ title: Stats
 <span class="divider-icon">📈</span>
 </div>
 
-## Player Skill Rating
+## Performance Rating
 
 <p class="text-muted">Includes players with 3+ games. For each game, your score is compared to the average score of everyone who played that game, adjusted for how spread out the scores were — so a strong result in a high-scoring game counts the same as a strong result in a low-scoring game. These per-game ratings are then averaged across all your games. A rating of +1.0 means you score roughly one standard deviation above your opponents on average; 0.0 means you match the field; negative means below the field average.</p>
 
@@ -168,7 +168,7 @@ title: Stats
 <th>Player</th>
 <th>Games</th>
 <th>Wins</th>
-<th>Skill Rating</th>
+<th>Performance Rating</th>
 </tr>
 </thead>
 <tbody>
