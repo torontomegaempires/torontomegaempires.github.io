@@ -30,7 +30,9 @@ title: Stats
 </div>
 <div class="achievement-number">{{ site.data.player_stats | size }}
 </div>
-<div class="achievement-label">Unique Players
+<div class="achievement-label">Regular Players
+</div>
+<div class="achievement-description">{{ site.data.players | size }} total unique players
 </div>
 </div>
 
@@ -67,6 +69,7 @@ title: Stats
 ## Champion Roll
 
 {% assign sorted_winners = site.data.game_winners | sort: "game_date" | reverse %}
+{% assign current_year = "" %}
 <div class="results-table-wrapper">
 <table class="results-table">
 <thead>
@@ -75,17 +78,26 @@ title: Stats
 <th>Date</th>
 <th>Winner</th>
 <th>Nation</th>
-<th>Score</th>
+<th>Winner Score</th>
+<th>Avg Score</th>
+<th>Median Score</th>
 </tr>
 </thead>
 <tbody>
 {% for w in sorted_winners %}
+{% assign this_year = w.game_date | date: "%Y" %}
+{% if this_year != current_year %}
+{% assign current_year = this_year %}
+<tr class="year-header-row"><td colspan="7">{{ this_year }}</td></tr>
+{% endif %}
 <tr class="winner-row">
-<td>{{ w.game_name }}</td>
-<td>{{ w.game_date | date: "%b %d, %Y" }}</td>
+<td><a href="/games/#gr-{{ w.game_id }}">{{ w.game_name }}</a></td>
+<td>{{ w.game_date | date: "%b %d" }}</td>
 <td><strong>{{ w.winner }}</strong></td>
 <td><span class="nation-{{ w.nation | downcase }}">{{ w.nation }}</span></td>
 <td><span class="final-score">{{ w.score }}</span></td>
+<td class="stat-number">{{ w.avg_score }}</td>
+<td class="stat-number">{{ w.median_score }}</td>
 </tr>
 {% endfor %}
 </tbody>
@@ -97,6 +109,11 @@ title: Stats
 </div>
 
 ## Player Leaderboard
+
+{% assign total_players = site.data.players | size %}
+{% assign leaderboard_players = site.data.player_stats | size %}
+{% assign excluded_count = total_players | minus: leaderboard_players %}
+<p class="text-muted">Includes players with 2+ games, or who won their only game. {{ excluded_count }} player{% if excluded_count != 1 %}s{% endif %} not shown.</p>
 
 <div class="results-table-wrapper">
 <table class="results-table">

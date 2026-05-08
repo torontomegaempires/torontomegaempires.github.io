@@ -15,7 +15,84 @@
   --surface:     #f8f9fa;
   --radius:      6px;
   --shadow:      0 1px 3px rgba(0,0,0,0.08);
+
+  // Semantic color tokens (used throughout; overridden in dark mode)
+  --winner-bg:          #fffbeb;
+  --winner-bg-hover:    #fff5d6;
+  --winner-text:        #92680c;
+  --winner-text-muted:  #7d6030;
+
+  --podium-bg:          #f0f8ff;
+  --podium-bg-hover:    #e6f3ff;
+  --podium-border:      #87ceeb;
+
+  --success-bg:           #edf7ed;
+  --success-text:         #2e7d32;
+  --success-border:       #4caf50;
+  --success-border-light: #c3e6c3;
+
+  --warn-bg:     #fff8e6;
+  --warn-text:   #b5800d;
+  --warn-border: #e6a817;
+
+  --thead-bg: #1e3a6e;
+
+  --cta-secondary-bg: #2c3e50;
+
+  --rank-gold-bg:    #ffd700;
+  --rank-gold-text:  #7a5c00;
+  --rank-silver-bg:  #c8c8c8;
+  --rank-silver-text:#505050;
+  --rank-bronze-bg:  #cd7f32;
 }
+
+// ---- Dark Mode Variables ----
+
+@mixin dark-vars {
+  --brand:       #3b82f6;
+  --brand-dark:  #2563eb;
+  --brand-light: #172554;
+  --text:        #e2e8f0;
+  --text-muted:  #94a3b8;
+  --border:      #334155;
+  --bg:          #0f172a;
+  --surface:     #1e293b;
+  --shadow:      0 1px 3px rgba(0,0,0,0.4);
+
+  --winner-bg:          #2d2010;
+  --winner-bg-hover:    #3d2e14;
+  --winner-text:        #f5c842;
+  --winner-text-muted:  #d4a843;
+
+  --podium-bg:          #0f1f35;
+  --podium-bg-hover:    #152840;
+  --podium-border:      #3b82f6;
+
+  --success-bg:           #0f2210;
+  --success-text:         #6fcf7f;
+  --success-border:       #4caf50;
+  --success-border-light: #2d5a2e;
+
+  --warn-bg:     #2d2010;
+  --warn-text:   #f5c842;
+  --warn-border: #c8890a;
+
+  --rank-gold-bg:    #7a5c00;
+  --rank-gold-text:  #ffd700;
+  --rank-silver-bg:  #3a3a3a;
+  --rank-silver-text:#d0d0d0;
+  --rank-bronze-bg:  #5c3a1a;
+
+  --cta-secondary-bg: #475569;
+}
+
+// System preference — applies unless user explicitly chose light
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { @include dark-vars; }
+}
+
+// Explicit user toggle
+[data-theme="dark"] { @include dark-vars; }
 
 // ---- Hero Section ----
 
@@ -121,17 +198,17 @@
 }
 
 .warning-callout {
-  background: #fff8e6;
-  border-left-color: #e6a817;
+  background: var(--warn-bg);
+  border-left-color: var(--warn-border);
 
-  .callout-title { color: #b5800d; }
+  .callout-title { color: var(--warn-text); }
 }
 
 .action-callout {
-  background: #edf7ed;
-  border-left-color: #4caf50;
+  background: var(--success-bg);
+  border-left-color: var(--success-border);
 
-  .callout-title { color: #2e7d32; }
+  .callout-title { color: var(--success-text); }
 }
 
 // ---- Game Type Cards ----
@@ -257,14 +334,14 @@
 
   em {
     display: inline-block;
-    background: #edf7ed;
-    color: #2e7d32;
+    background: var(--success-bg);
+    color: var(--success-text);
     padding: 2px 8px;
     border-radius: 4px;
     font-style: normal;
     font-size: 0.85rem;
     font-weight: 600;
-    border: 1px solid #c3e6c3;
+    border: 1px solid var(--success-border-light);
   }
 }
 
@@ -717,7 +794,7 @@
   }
 
   &.secondary {
-    background: var(--text);
+    background: var(--cta-secondary-bg);
     color: #ffffff;
     &:hover { color: #ffffff; }
   }
@@ -890,7 +967,7 @@
 // ---- Winner Spotlight ----
 
 .winner-spotlight {
-  background: #fffbeb;
+  background: var(--winner-bg);
   border-radius: var(--radius);
   padding: 20px;
   margin: 20px 0;
@@ -904,18 +981,18 @@
   }
 
   h4 {
-    color: #92680c;
+    color: var(--winner-text);
     font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 8px;
   }
 
   p {
-    color: #7d6030;
+    color: var(--winner-text-muted);
     font-weight: 600;
     margin: 0;
 
-    strong { color: #92680c; }
+    strong { color: var(--winner-text); }
   }
 }
 
@@ -944,9 +1021,8 @@
   background: var(--bg);
 
   thead {
-    background: var(--brand);
-
     th {
+      background: var(--thead-bg);
       color: #ffffff;
       font-weight: 700;
       padding: 12px;
@@ -954,6 +1030,7 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.4px;
+      border: none;
     }
   }
 
@@ -965,16 +1042,29 @@
 
       &:hover { background: var(--brand-light); }
 
+      &.year-header-row {
+        background: var(--surface);
+        td {
+          padding: 6px 12px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+          color: var(--text-muted);
+          border-bottom: 1px solid var(--border);
+        }
+      }
+
       &.winner-row {
-        background: #fffbeb;
+        background: var(--winner-bg);
         border-left: 3px solid var(--gold);
-        &:hover { background: #fff5d6; }
+        &:hover { background: var(--winner-bg-hover); }
       }
 
       &.podium-row {
-        background: #f0f8ff;
-        border-left: 3px solid #87ceeb;
-        &:hover { background: #e6f3ff; }
+        background: var(--podium-bg);
+        border-left: 3px solid var(--podium-border);
+        &:hover { background: var(--podium-bg-hover); }
       }
 
       td {
@@ -999,9 +1089,9 @@
   font-size: 0.85rem;
   font-weight: 700;
 
-  &.gold   { background: #ffd700; color: #7a5c00; }
-  &.silver { background: #c8c8c8; color: #505050; }
-  &.bronze { background: #cd7f32; color: #ffffff; }
+  &.gold   { background: var(--rank-gold-bg);   color: var(--rank-gold-text); }
+  &.silver { background: var(--rank-silver-bg); color: var(--rank-silver-text); }
+  &.bronze { background: var(--rank-bronze-bg); color: #ffffff; }
 }
 
 .player-cell strong { color: var(--text); }
@@ -1038,9 +1128,9 @@
 
 .nation-name {
   @extend .nation-base;
-  background: #e8f5e8;
-  color: #2e7d32;
-  border: 1px solid #c3e6c3;
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border-light);
 }
 
 .nation-badge-small { padding: 2px 8px; font-size: 0.78rem; }
@@ -1218,5 +1308,90 @@
   .timeline-item {
     padding-left: 24px;
     &::before { left: -5px; width: 12px; height: 12px; }
+  }
+}
+
+// ---- Base Overrides (always use CSS vars; override minima's static values) ----
+// Minima compiles Sass variables to hard-coded hex at build time.
+// These rules load after minima (same specificity, later in cascade) so they win,
+// and they automatically respond when the CSS variables change on toggle.
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+a { color: var(--brand); }
+a:visited { color: var(--brand); }
+
+h1, h2, h3, h4, h5, h6 { color: var(--text); }
+
+.site-header {
+  background: var(--bg);
+  border-top-color: var(--brand-dark);
+  border-bottom-color: var(--border);
+}
+
+.site-title,
+.site-title:visited { color: var(--text); }
+
+.site-nav {
+  .page-link { color: var(--text); }
+
+  @media (max-width: 600px) {
+    background: var(--surface);
+    border-color: var(--border);
+    .menu-icon > svg { fill: var(--text-muted); }
+  }
+}
+
+.site-footer {
+  background: var(--surface);
+  border-top-color: var(--border);
+  color: var(--text-muted);
+}
+
+.footer-heading { color: var(--text); }
+
+.contact-list,
+.social-media-list { color: var(--text-muted); }
+
+blockquote {
+  color: var(--text-muted);
+  border-left-color: var(--border);
+}
+
+pre, code {
+  background-color: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+table { color: var(--text); }
+table tr:nth-child(even) { background-color: var(--surface); }
+table th {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+table td { border-color: var(--border); }
+
+// ---- Theme Toggle Button ----
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 4px 10px;
+  margin-left: 12px;
+  color: var(--text);
+  vertical-align: middle;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    border-color: var(--brand);
+    background: var(--surface);
   }
 }
