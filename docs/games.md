@@ -20,7 +20,7 @@ title: Games
 </div>
 
 {% for game in site.data.games %}
-<div class="game-card-with-photos">
+<div class="game-card-with-photos" id="gr-{{ game.id }}">
 <div class="game-header">
 <h3>{{ game.name }}</h3>
 <div class="game-date">

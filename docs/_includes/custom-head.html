@@ -5,6 +5,15 @@
   2. Customize default _includes/custom-head.html in your source directory and insert the given code snippet.
 {% endcomment %}
 <!-- custom-head.html begin -->
+<script>
+// Apply saved theme before first paint to avoid flash
+(function () {
+  var saved = localStorage.getItem('theme');
+  if (saved === 'dark' || saved === 'light') {
+    document.documentElement.setAttribute('data-theme', saved);
+  }
+}());
+</script>
 <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
 <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
@@ -23,6 +32,33 @@ document.addEventListener("DOMContentLoaded", function() {
       origInit();
     };
   }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+
+  function isDark() {
+    var attr = document.documentElement.getAttribute('data-theme');
+    if (attr === 'dark') return true;
+    if (attr === 'light') return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  function syncButton() {
+    btn.textContent = isDark() ? '☀️' : '🌙';
+    btn.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+
+  btn.addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    syncButton();
+  });
+
+  syncButton();
 });
 </script>
 <!-- custom-head.html end -->
