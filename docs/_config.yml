@@ -91,11 +91,17 @@ from player
 order by game_player_nation.game_id, score desc"
   - data: player_stats
     file: *db
-    query: "SELECT
+    query: "WITH game_top_third AS (
+      SELECT game_id, player_id,
+        ROW_NUMBER() OVER (PARTITION BY game_id ORDER BY score DESC, (CASE WHEN special_building = 1 AND special_building_own = 1 THEN 1 ELSE 0 END) DESC, special_building DESC, ast_pos DESC, num_civ_adv_6VP DESC, num_civ_adv_3VP DESC) as rnk,
+        COUNT(*) OVER (PARTITION BY game_id) as player_count
+      FROM game_player_nation
+    )
+    SELECT
       p.display as player,
       COUNT(*) as games_played,
       SUM(CASE WHEN gpn.player_id = (SELECT gpn2.player_id FROM game_player_nation gpn2 WHERE gpn2.game_id = gpn.game_id ORDER BY gpn2.score DESC, (CASE WHEN gpn2.special_building = 1 AND gpn2.special_building_own = 1 THEN 1 ELSE 0 END) DESC, gpn2.special_building DESC, gpn2.ast_pos DESC, gpn2.num_civ_adv_6VP DESC, gpn2.num_civ_adv_3VP DESC LIMIT 1) THEN 1 ELSE 0 END) as wins,
-      SUM(CASE WHEN gpn.player_id IN (SELECT gpn3.player_id FROM game_player_nation gpn3 WHERE gpn3.game_id = gpn.game_id ORDER BY gpn3.score DESC, (CASE WHEN gpn3.special_building = 1 AND gpn3.special_building_own = 1 THEN 1 ELSE 0 END) DESC, gpn3.special_building DESC, gpn3.ast_pos DESC, gpn3.num_civ_adv_6VP DESC, gpn3.num_civ_adv_3VP DESC LIMIT 3) THEN 1 ELSE 0 END) as top3,
+      SUM(CASE WHEN EXISTS (SELECT 1 FROM game_top_third gtt WHERE gtt.game_id = gpn.game_id AND gtt.player_id = gpn.player_id AND gtt.rnk <= gtt.player_count / 3) THEN 1 ELSE 0 END) as top3,
       CAST(ROUND(AVG(gpn.score)) AS INTEGER) as avg_score,
       MAX(gpn.score) as max_score
     FROM player p

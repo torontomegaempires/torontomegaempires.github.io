@@ -113,7 +113,7 @@ title: Stats
 {% assign total_players = site.data.players | size %}
 {% assign leaderboard_players = site.data.player_stats | size %}
 {% assign excluded_count = total_players | minus: leaderboard_players %}
-<p class="text-muted">Includes players with 2+ games. {{ excluded_count }} player{% if excluded_count != 1 %}s{% endif %} not shown. Ranked by wins, then top 3%, then average score.</p>
+<p class="text-muted">Includes players with 2+ games. {{ excluded_count }} player{% if excluded_count != 1 %}s{% endif %} not shown. Ranked by wins, then top ⅓%, then average score.</p>
 
 <div class="results-table-wrapper">
 <table class="results-table">
@@ -124,8 +124,8 @@ title: Stats
 <th>Games</th>
 <th>Wins</th>
 <th>Win %</th>
-<th>Top 3</th>
-<th>Top 3%</th>
+<th>Top ⅓</th>
+<th>Top ⅓%</th>
 <th>Avg Score</th>
 <th>Best Score</th>
 </tr>
