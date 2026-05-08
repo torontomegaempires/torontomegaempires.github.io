@@ -131,9 +131,8 @@ title: Stats
 </tr>
 </thead>
 <tbody>
-{% assign sorted_players = site.data.player_stats | sort: "wins" | reverse %}
 {% assign rank = 0 %}
-{% for p in sorted_players %}
+{% for p in site.data.player_stats %}
 {% assign rank = rank | plus: 1 %}
 {% assign win_pct = p.wins | times: 100.0 | divided_by: p.games_played | round %}
 {% assign top3_pct = p.top3 | times: 100.0 | divided_by: p.games_played | round %}
