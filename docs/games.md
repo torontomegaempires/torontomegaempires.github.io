@@ -149,16 +149,19 @@ title: Games
 {% endfor %}
 
 <script>
-(function () {
+function initPhotoLightbox() {
+  if (document.getElementById('photo-lightbox')) return;
+
   var overlay = document.createElement('div');
   overlay.id = 'photo-lightbox';
+  overlay.style.cssText = 'display:none;position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;align-items:center;justify-content:center;';
   overlay.innerHTML =
-    '<div class="lb-backdrop"></div>' +
-    '<div class="lb-frame">' +
-      '<img class="lb-img" src="" alt="">' +
-      '<button class="lb-close" aria-label="Close">&#x2715;</button>' +
-      '<button class="lb-prev" aria-label="Previous">&#x2039;</button>' +
-      '<button class="lb-next" aria-label="Next">&#x203a;</button>' +
+    '<div class="lb-backdrop" style="position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,0.92);cursor:pointer;"></div>' +
+    '<div class="lb-frame" style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;max-width:92vw;max-height:92vh;">' +
+      '<img class="lb-img" src="" alt="" style="display:block;max-width:92vw;max-height:92vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 40px rgba(0,0,0,0.6);">' +
+      '<button class="lb-close" aria-label="Close" style="position:absolute;top:-2.8rem;right:0;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:2.2rem;height:2.2rem;font-size:1.1rem;cursor:pointer;">&#x2715;</button>' +
+      '<button class="lb-prev" aria-label="Previous" style="position:absolute;left:-3rem;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:2.2rem;height:2.2rem;font-size:1.4rem;cursor:pointer;">&#x2039;</button>' +
+      '<button class="lb-next" aria-label="Next" style="position:absolute;right:-3rem;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:2.2rem;height:2.2rem;font-size:1.4rem;cursor:pointer;">&#x203a;</button>' +
     '</div>';
   document.body.appendChild(overlay);
 
@@ -170,11 +173,11 @@ title: Games
     current = (i + links.length) % links.length;
     lbImg.src = links[current].href;
     lbImg.alt = links[current].querySelector('img') ? links[current].querySelector('img').alt : '';
-    overlay.classList.add('active');
+    overlay.style.display = 'flex';
   }
 
   function hide() {
-    overlay.classList.remove('active');
+    overlay.style.display = 'none';
     lbImg.src = '';
   }
 
@@ -193,7 +196,13 @@ title: Games
     if (e.key === 'ArrowLeft') show(current - 1);
     if (e.key === 'ArrowRight') show(current + 1);
   });
-}());
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPhotoLightbox);
+} else {
+  initPhotoLightbox();
+}
 </script>
 
 <div class="section-divider">
