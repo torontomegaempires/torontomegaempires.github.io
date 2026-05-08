@@ -1,0 +1,29 @@
+{% assign game_photos = site.data.game_photos[include.game_date] %}
+{% if game_photos and game_photos.size > 0 %}
+<div class="photo-gallery-section">
+  <div class="photo-gallery-grid">
+    {% for photo in game_photos %}
+      {% unless photo.filename contains "suppress-" %}
+        {% if forloop.first %}
+          {% assign link_class = "gallery-photo-link featured-photo" %}
+        {% elsif photo.filename contains "ast" or photo.filename contains "position" %}
+          {% assign link_class = "gallery-photo-link winner-photo" %}
+        {% else %}
+          {% assign link_class = "gallery-photo-link" %}
+        {% endif %}
+        <div class="{{ link_class }}">
+          <a class="glightbox"
+             href="{{ photo.path }}"
+             data-glightbox="description: {{ include.game_name }}"
+             data-gallery="game-{{ include.game_date }}">
+            <img src="{{ photo.path }}"
+                 alt="{{ include.game_name }} - Epic gaming moments"
+                 class="gallery-photo"
+                 loading="lazy">
+          </a>
+        </div>
+      {% endunless %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

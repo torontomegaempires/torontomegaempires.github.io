@@ -32,39 +32,7 @@ title: Games
 {% assign game_date = game.date %}
 {% assign game_photos = site.data.game_photos[game_date] %}
 
-{% if game_photos and game_photos.size > 0 %}
-<div class="photo-gallery-section">
-<div class="photo-gallery-grid">
-{% for photo in game_photos %}
-{% assign photo_alt = game.name | append: " - Epic gaming moments" %}
-{% unless photo.filename contains "suppress-" %}
-<img src="{{ photo.path }}" alt="{{ photo_alt }}" 
-     class="gallery-photo {% if forloop.first %}featured-photo{% elsif photo.filename contains "ast" or photo.filename contains "position" %}winner-photo{% endif %}"
-     data-glightbox="description: {{ game.name }}"
-     data-gallery="game-{{ game_date }}"
-     loading="lazy">
-{% endunless %}
-{% endfor %}
-</div>
-</div>
-{% endif %}
-
-{% comment %} Lightbox Initialization Script {% endcomment %}
-{% if game_photos and game_photos.size > 0 and forloop.first %}
-<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const lightbox = GLightbox({
-    touchNavigation: true,
-    keyboardNavigation: true,
-    closeOnOutsideClick: true,
-    loop: true,
-    zoomable: true,
-    draggable: true
-  });
-});
-</script>
-{% endif %}
+{::nomarkdown}{% include photo-gallery.html game_date=game_date game_name=game.name %}{:/nomarkdown}
 
 <div class="photo-gallery-caption">
 {% if game.game_summary %}
@@ -179,6 +147,54 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 {% endfor %}
+
+<script>
+(function () {
+  var overlay = document.createElement('div');
+  overlay.id = 'photo-lightbox';
+  overlay.innerHTML =
+    '<div class="lb-backdrop"></div>' +
+    '<div class="lb-frame">' +
+      '<img class="lb-img" src="" alt="">' +
+      '<button class="lb-close" aria-label="Close">&#x2715;</button>' +
+      '<button class="lb-prev" aria-label="Previous">&#x2039;</button>' +
+      '<button class="lb-next" aria-label="Next">&#x203a;</button>' +
+    '</div>';
+  document.body.appendChild(overlay);
+
+  var links = Array.from(document.querySelectorAll('a.glightbox'));
+  var current = 0;
+  var lbImg = overlay.querySelector('.lb-img');
+
+  function show(i) {
+    current = (i + links.length) % links.length;
+    lbImg.src = links[current].href;
+    lbImg.alt = links[current].querySelector('img') ? links[current].querySelector('img').alt : '';
+    overlay.classList.add('active');
+  }
+
+  function hide() {
+    overlay.classList.remove('active');
+    lbImg.src = '';
+  }
+
+  links.forEach(function (a, i) {
+    a.addEventListener('click', function (e) { e.preventDefault(); show(i); });
+  });
+
+  overlay.querySelector('.lb-backdrop').addEventListener('click', hide);
+  overlay.querySelector('.lb-close').addEventListener('click', hide);
+  overlay.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
+  overlay.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
+
+  document.addEventListener('keydown', function (e) {
+    if (!overlay.classList.contains('active')) return;
+    if (e.key === 'Escape') hide();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+}());
+</script>
 
 <div class="section-divider">
 <span class="divider-icon">🌟</span>
