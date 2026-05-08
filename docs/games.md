@@ -191,7 +191,7 @@ function initPhotoLightbox() {
   overlay.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
 
   document.addEventListener('keydown', function (e) {
-    if (!overlay.classList.contains('active')) return;
+    if (overlay.style.display !== 'flex') return;
     if (e.key === 'Escape') hide();
     if (e.key === 'ArrowLeft') show(current - 1);
     if (e.key === 'ArrowRight') show(current + 1);
