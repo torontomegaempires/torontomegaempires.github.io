@@ -206,7 +206,8 @@ title: Stats
 </tr>
 </thead>
 <tbody>
-{% assign sorted_nations = site.data.nation_stats | sort: "wins" | reverse %}
+{% assign sorted_by_avg = site.data.nation_stats | sort: "avg_score" | reverse %}
+{% assign sorted_nations = sorted_by_avg | sort: "wins" | reverse %}
 {% for n in sorted_nations %}
 {% assign win_pct = n.wins | times: 100.0 | divided_by: n.times_played | round %}
 <tr>
