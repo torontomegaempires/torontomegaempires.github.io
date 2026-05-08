@@ -102,7 +102,7 @@ order by game_player_nation.game_id, score desc"
     JOIN game_player_nation gpn ON p.id = gpn.player_id
     GROUP BY p.id
     HAVING games_played >= 2
-    ORDER BY wins DESC, top3 DESC, avg_score DESC"
+    ORDER BY wins DESC, (top3 * 1.0 / games_played) DESC, avg_score DESC"
   - data: player_zscore
     file: *db
     query: "WITH game_stats AS (
