@@ -113,7 +113,7 @@ title: Stats
 {% assign total_players = site.data.players | size %}
 {% assign leaderboard_players = site.data.player_stats | size %}
 {% assign excluded_count = total_players | minus: leaderboard_players %}
-<p class="text-muted">Includes players with 2+ games, or who won their only game. {{ excluded_count }} player{% if excluded_count != 1 %}s{% endif %} not shown.</p>
+<p class="text-muted">Includes players with 2+ games. {{ excluded_count }} player{% if excluded_count != 1 %}s{% endif %} not shown.</p>
 
 <div class="results-table-wrapper">
 <table class="results-table">
@@ -124,6 +124,8 @@ title: Stats
 <th>Games</th>
 <th>Wins</th>
 <th>Win %</th>
+<th>Top 3</th>
+<th>Top 3%</th>
 <th>Avg Score</th>
 <th>Best Score</th>
 </tr>
@@ -134,12 +136,15 @@ title: Stats
 {% for p in sorted_players %}
 {% assign rank = rank | plus: 1 %}
 {% assign win_pct = p.wins | times: 100.0 | divided_by: p.games_played | round %}
+{% assign top3_pct = p.top3 | times: 100.0 | divided_by: p.games_played | round %}
 <tr {% if rank == 1 %}class="winner-row"{% elsif rank <= 3 %}class="podium-row"{% endif %}>
 <td class="ast-cell"><span class="ast-position">{{ rank }}</span></td>
 <td class="player-cell"><strong>{{ p.player }}</strong></td>
 <td class="stat-number">{{ p.games_played }}</td>
 <td class="stat-number">{{ p.wins }}</td>
 <td class="stat-number">{{ win_pct }}%</td>
+<td class="stat-number">{{ p.top3 }}</td>
+<td class="stat-number">{{ top3_pct }}%</td>
 <td class="stat-number">{{ p.avg_score }}</td>
 <td class="score-cell"><span class="final-score">{{ p.max_score }}</span></td>
 </tr>
