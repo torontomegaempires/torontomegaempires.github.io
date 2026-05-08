@@ -74,7 +74,7 @@ title: Games
 </thead>
 <tbody>
 {% for player in game_players %}
-<tr class="{% if player.ast_pos == 1 %}winner-row{% elsif player.ast_pos <= 3 %}podium-row{% endif %}">
+<tr class="{% assign ast_pos_int = player.ast_pos | plus: 0 %}{% if ast_pos_int == 1 %}winner-row{% elsif ast_pos_int <= 3 %}podium-row{% endif %}">
 <td class="player-cell">
 <strong>{{ player.player }}</strong>
 </td>
