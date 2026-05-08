@@ -102,6 +102,27 @@ order by game_player_nation.game_id, score desc"
     GROUP BY p.id
     HAVING games_played >= 2 OR wins >= 1
     ORDER BY wins DESC, avg_score DESC"
+  - data: player_zscore
+    file: *db
+    query: "WITH game_stats AS (
+      SELECT game_id,
+        AVG(score) as avg_score,
+        SQRT(AVG((score - (SELECT AVG(s.score) FROM game_player_nation s WHERE s.game_id = gpn.game_id)) *
+                 (score - (SELECT AVG(s.score) FROM game_player_nation s WHERE s.game_id = gpn.game_id)))) as stddev_score
+      FROM game_player_nation gpn
+      GROUP BY game_id
+    )
+    SELECT
+      p.display as player,
+      COUNT(*) as games_played,
+      SUM(CASE WHEN gpn.score = (SELECT MAX(gpn2.score) FROM game_player_nation gpn2 WHERE gpn2.game_id = gpn.game_id) THEN 1 ELSE 0 END) as wins,
+      ROUND(AVG((gpn.score - gs.avg_score) / gs.stddev_score), 2) as avg_z_score
+    FROM player p
+    JOIN game_player_nation gpn ON p.id = gpn.player_id
+    JOIN game_stats gs ON gs.game_id = gpn.game_id
+    GROUP BY p.id
+    HAVING games_played >= 3
+    ORDER BY avg_z_score DESC"
   - data: nation_stats
     file: *db
     query: "SELECT

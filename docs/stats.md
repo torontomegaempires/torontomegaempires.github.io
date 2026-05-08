@@ -149,6 +149,41 @@ title: Stats
 </div>
 
 <div class="section-divider">
+<span class="divider-icon">📈</span>
+</div>
+
+## Player Skill Rating
+
+<p class="text-muted">Includes players with 3+ games. For each game, your score is compared to the average score of everyone who played that game, adjusted for how spread out the scores were — so a strong result in a high-scoring game counts the same as a strong result in a low-scoring game. These per-game ratings are then averaged across all your games. A rating of +1.0 means you score roughly one standard deviation above your opponents on average; 0.0 means you match the field; negative means below the field average.</p>
+
+<div class="results-table-wrapper">
+<table class="results-table">
+<thead>
+<tr>
+<th>#</th>
+<th>Player</th>
+<th>Games</th>
+<th>Wins</th>
+<th>Skill Rating</th>
+</tr>
+</thead>
+<tbody>
+{% assign rank = 0 %}
+{% for p in site.data.player_zscore %}
+{% assign rank = rank | plus: 1 %}
+<tr {% if rank == 1 %}class="winner-row"{% elsif rank <= 3 %}class="podium-row"{% endif %}>
+<td class="ast-cell"><span class="ast-position">{{ rank }}</span></td>
+<td class="player-cell"><strong>{{ p.player }}</strong></td>
+<td class="stat-number">{{ p.games_played }}</td>
+<td class="stat-number">{{ p.wins }}</td>
+<td class="stat-number">{% if p.avg_z_score > 0 %}+{% endif %}{{ p.avg_z_score }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<div class="section-divider">
 <span class="divider-icon">🏛️</span>
 </div>
 
