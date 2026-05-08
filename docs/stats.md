@@ -1,0 +1,167 @@
+---
+layout: page
+title: Stats
+---
+
+<div class="hero-section">
+<h1 class="hero-title">Statistics</h1>
+<p class="hero-subtitle">Numbers from {{ site.data.games | size }} epic games of civilization building</p>
+</div>
+
+<div class="section-divider">
+<span class="divider-icon">📊</span>
+</div>
+
+## Overall Records
+
+<div class="achievement-stats-grid">
+
+<div class="achievement-card">
+<div class="achievement-icon">🎲
+</div>
+<div class="achievement-number">{{ site.data.games | size }}
+</div>
+<div class="achievement-label">Games Played
+</div>
+</div>
+
+<div class="achievement-card">
+<div class="achievement-icon">👥
+</div>
+<div class="achievement-number">{{ site.data.player_stats | size }}
+</div>
+<div class="achievement-label">Unique Players
+</div>
+</div>
+
+{% assign top_score = site.data.player_stats | sort: "max_score" | reverse | first %}
+<div class="achievement-card">
+<div class="achievement-icon">🏆
+</div>
+<div class="achievement-number">{{ top_score.max_score }}
+</div>
+<div class="achievement-label">Highest Score Ever
+</div>
+<div class="achievement-description">{{ top_score.player }}
+</div>
+</div>
+
+{% assign most_wins = site.data.player_stats | sort: "wins" | reverse | first %}
+<div class="achievement-card">
+<div class="achievement-icon">👑
+</div>
+<div class="achievement-number">{{ most_wins.wins }}
+</div>
+<div class="achievement-label">Most Wins
+</div>
+<div class="achievement-description">{{ most_wins.player }}
+</div>
+</div>
+
+</div>
+
+<div class="section-divider">
+<span class="divider-icon">👑</span>
+</div>
+
+## Champion Roll
+
+{% assign sorted_winners = site.data.game_winners | sort: "game_date" | reverse %}
+<div class="results-table-wrapper">
+<table class="results-table">
+<thead>
+<tr>
+<th>Game</th>
+<th>Date</th>
+<th>Winner</th>
+<th>Nation</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+{% for w in sorted_winners %}
+<tr class="winner-row">
+<td>{{ w.game_name }}</td>
+<td>{{ w.game_date | date: "%b %d, %Y" }}</td>
+<td><strong>{{ w.winner }}</strong></td>
+<td><span class="nation-{{ w.nation | downcase }}">{{ w.nation }}</span></td>
+<td><span class="final-score">{{ w.score }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<div class="section-divider">
+<span class="divider-icon">⚔️</span>
+</div>
+
+## Player Leaderboard
+
+<div class="results-table-wrapper">
+<table class="results-table">
+<thead>
+<tr>
+<th>#</th>
+<th>Player</th>
+<th>Games</th>
+<th>Wins</th>
+<th>Win %</th>
+<th>Avg Score</th>
+<th>Best Score</th>
+</tr>
+</thead>
+<tbody>
+{% assign sorted_players = site.data.player_stats | sort: "wins" | reverse %}
+{% assign rank = 0 %}
+{% for p in sorted_players %}
+{% assign rank = rank | plus: 1 %}
+{% assign win_pct = p.wins | times: 100.0 | divided_by: p.games_played | round %}
+<tr {% if rank == 1 %}class="winner-row"{% elsif rank <= 3 %}class="podium-row"{% endif %}>
+<td class="ast-cell"><span class="ast-position">{{ rank }}</span></td>
+<td class="player-cell"><strong>{{ p.player }}</strong></td>
+<td class="stat-number">{{ p.games_played }}</td>
+<td class="stat-number">{{ p.wins }}</td>
+<td class="stat-number">{{ win_pct }}%</td>
+<td class="stat-number">{{ p.avg_score }}</td>
+<td class="score-cell"><span class="final-score">{{ p.max_score }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<div class="section-divider">
+<span class="divider-icon">🏛️</span>
+</div>
+
+## Nation Performance
+
+<div class="results-table-wrapper">
+<table class="results-table">
+<thead>
+<tr>
+<th>Nation</th>
+<th>Played</th>
+<th>Wins</th>
+<th>Win %</th>
+<th>Avg Score</th>
+<th>Best Score</th>
+</tr>
+</thead>
+<tbody>
+{% assign sorted_nations = site.data.nation_stats | sort: "wins" | reverse %}
+{% for n in sorted_nations %}
+{% assign win_pct = n.wins | times: 100.0 | divided_by: n.times_played | round %}
+<tr>
+<td class="nation-cell"><span class="nation-{{ n.nation | downcase }}">{{ n.nation }}</span></td>
+<td class="stat-number">{{ n.times_played }}</td>
+<td class="stat-number">{{ n.wins }}</td>
+<td class="stat-number">{{ win_pct }}%</td>
+<td class="stat-number">{{ n.avg_score }}</td>
+<td class="score-cell"><span class="final-score">{{ n.max_score }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>

@@ -65,19 +65,9 @@ author: Rob of the North
 header_pages:
   - about.markdown
   - games.md
+  - stats.md
 
 sqlite:
-  - data: recent_results
-    file: &db "_db/megaempires.db"
-    query: "SELECT 
-    game.*, 
-    player.display as winner
-  FROM game 
-  LEFT JOIN game_player_nation ON game.id = game_player_nation.game_id 
-  LEFT JOIN player ON player.id = game_player_nation.player_id
-  WHERE game_player_nation.ast_pos = 1
-  ORDER BY date(game.date) DESC 
-  LIMIT 5"
   - data: players
     file: &db "_db/megaempires.db"
     query: SELECT * from player
@@ -99,6 +89,45 @@ from player
   join nation on
     nation.id=game_player_nation.nation_id
 order by game_player_nation.game_id, score desc"
+  - data: player_stats
+    file: *db
+    query: "SELECT
+      p.display as player,
+      COUNT(*) as games_played,
+      SUM(CASE WHEN gpn.score = (SELECT MAX(gpn2.score) FROM game_player_nation gpn2 WHERE gpn2.game_id = gpn.game_id) THEN 1 ELSE 0 END) as wins,
+      ROUND(AVG(gpn.score), 1) as avg_score,
+      MAX(gpn.score) as max_score
+    FROM player p
+    JOIN game_player_nation gpn ON p.id = gpn.player_id
+    GROUP BY p.id
+    ORDER BY wins DESC, avg_score DESC"
+  - data: nation_stats
+    file: *db
+    query: "SELECT
+      n.name as nation,
+      COUNT(*) as times_played,
+      SUM(CASE WHEN gpn.score = (SELECT MAX(gpn2.score) FROM game_player_nation gpn2 WHERE gpn2.game_id = gpn.game_id) THEN 1 ELSE 0 END) as wins,
+      ROUND(AVG(gpn.score), 1) as avg_score,
+      MAX(gpn.score) as max_score
+    FROM nation n
+    JOIN game_player_nation gpn ON n.id = gpn.nation_id
+    GROUP BY n.id
+    ORDER BY wins DESC, avg_score DESC"
+  - data: game_winners
+    file: *db
+    query: "SELECT
+      g.id as game_id,
+      g.name as game_name,
+      g.date as game_date,
+      p.display as winner,
+      n.name as nation,
+      gpn.score
+    FROM game g
+    JOIN game_player_nation gpn ON g.id = gpn.game_id
+    JOIN player p ON p.id = gpn.player_id
+    JOIN nation n ON n.id = gpn.nation_id
+    WHERE gpn.score = (SELECT MAX(gpn2.score) FROM game_player_nation gpn2 WHERE gpn2.game_id = g.id)
+    ORDER BY date(g.date) DESC"
 
 exclude:
   - _db

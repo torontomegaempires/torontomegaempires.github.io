@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bundler exec jekyll serve --livereload --drafts
+ruby -S bundle exec jekyll serve --livereload --drafts

@@ -10,12 +10,12 @@ All Jekyll commands must be run from the `docs/` directory:
 
 ```bash
 # Development server with live reload and drafts
-cd docs && bundler exec jekyll serve --livereload --drafts
+cd docs && ruby -S bundle exec jekyll serve --livereload --drafts
 # or use the helper script:
 ./docs/serve.sh
 
 # Production build
-cd docs && bundle exec jekyll build
+cd docs && ruby -S bundle exec jekyll build
 ```
 
 **Note:** Changes to `docs/_config.yml` require restarting the server — it is not hot-reloaded.
@@ -56,7 +56,7 @@ docs/emails/              # Email campaign archives and templates
 
 - **`docs/_config.yml`** — Central config. Defines the theme (`jekyll-theme-yat`), SQLite queries that populate `site.data.*`, and the `game_reports` collection.
 - **`docs/_data/`** — YAML files: `games-list.yml` (upcoming schedule), `members.yml` (community directory)
-- **`docs/_db/megaempires.db`** — SQLite database queried at build time by `jekyll-sqlite`. Results are exposed as `site.data.recent_results`, `site.data.players`, `site.data.games`, `site.data.game_players`.
+- **`docs/_db/megaempires.db`** — SQLite database queried at build time by `jekyll-sqlite`. Results are exposed as `site.data.players`, `site.data.games`, `site.data.game_players`, `site.data.player_stats`, `site.data.nation_stats`, `site.data.game_winners`.
 - **`docs/_sass/custom.scss`** — All custom styling (~2,300 lines). Uses CSS custom properties for theming (`--brand-color`, `--text-dark`, etc.).
 - **`docs/_plugins/photo_gallery.rb`** — Custom generator that scans `assets/images/games/YYYY-MM-DD/` directories and exposes photo data as `site.data.game_photos`.
 - **`docs/_includes/`** — Reusable Liquid components injected into layouts
