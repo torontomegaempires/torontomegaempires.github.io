@@ -34,6 +34,13 @@
   status = 302
   force = true
 
+# Redirect to game score submission form
+[[redirects]]
+  from = "https://score.torontomegaempires.com"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLScHMz5mknot2vrnQSHPmsvjIMFerKv_XQcgNqlYX3rJ5U5ctg/viewform?usp=header"
+  status = 302
+  force = true
+
 # Redirect to latest game sign-up
 [[redirects]]
   from = "https://signup.torontomegaempires.com"
