@@ -18,7 +18,7 @@ title: Home
 <span class="stat-label">Hour Sessions</span>
 </div>
 <div class="stat-item">
-<span class="stat-number">14+</span>
+<span class="stat-number">{{ site.data.games | size }}</span>
 <span class="stat-label">Games Played</span>
 </div>
 </div>
