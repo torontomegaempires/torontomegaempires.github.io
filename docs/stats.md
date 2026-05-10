@@ -128,6 +128,7 @@ title: Stats
 <th>Top ⅓%</th>
 <th>Avg Score</th>
 <th>Best Score</th>
+<th>Most Played Nation</th>
 </tr>
 </thead>
 <tbody>
@@ -146,6 +147,7 @@ title: Stats
 <td class="stat-number">{{ top3_pct }}%</td>
 <td class="stat-number">{{ p.avg_score }}</td>
 <td class="score-cell"><span class="final-score">{{ p.max_score }}</span></td>
+<td class="nation-cell" style="white-space:nowrap">{% if p.fav_nation_count > 1 %}<span class="nation-{{ p.fav_nation | downcase }}">{{ p.fav_nation }}</span> <span class="text-muted">({{ p.fav_nation_count }})</span>{% endif %}</td>
 </tr>
 {% endfor %}
 </tbody>
@@ -247,7 +249,7 @@ title: Stats
 
 <script>
 window.nationChartData = [
-{% for group in nation_groups %}{"nation":{{ group.name | jsonify }},"games":[{% for g in group.items %}{"name":{{ g.game_name | jsonify }},"date":{{ g.game_date | jsonify }},"score":{{ g.score }},"avg":{{ g.avg_score }},"sd":{{ g.stddev }}},{% endfor %}]},
+{% for group in nation_groups %}{"nation":{{ group.name | jsonify }},"games":[{% for g in group.items %}{"name":{{ g.game_name | jsonify }},"date":{{ g.game_date | jsonify }},"score":{{ g.score }},"avg":{{ g.avg_score }},"sd":{{ g.stddev }},"won":{{ g.won }},"player":{{ g.player | jsonify }}},{% endfor %}]},
 {% endfor %}
 ];
 </script>

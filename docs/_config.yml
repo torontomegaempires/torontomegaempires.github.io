@@ -96,6 +96,16 @@ order by game_player_nation.game_id, score desc"
         ROW_NUMBER() OVER (PARTITION BY game_id ORDER BY score DESC, (CASE WHEN special_building = 1 AND special_building_own = 1 THEN 1 ELSE 0 END) DESC, special_building DESC, ast_pos DESC, num_civ_adv_6VP DESC, num_civ_adv_3VP DESC) as rnk,
         COUNT(*) OVER (PARTITION BY game_id) as player_count
       FROM game_player_nation
+    ),
+    player_fav AS (
+      SELECT player_id, name as fav_nation, play_count as fav_nation_count
+      FROM (
+        SELECT gpn.player_id, n.name, COUNT(*) as play_count,
+          ROW_NUMBER() OVER (PARTITION BY gpn.player_id ORDER BY COUNT(*) DESC) as rn
+        FROM game_player_nation gpn
+        JOIN nation n ON n.id = gpn.nation_id
+        GROUP BY gpn.player_id, gpn.nation_id
+      ) WHERE rn = 1
     )
     SELECT
       p.display as player,
@@ -103,9 +113,12 @@ order by game_player_nation.game_id, score desc"
       SUM(CASE WHEN gpn.player_id = (SELECT gpn2.player_id FROM game_player_nation gpn2 WHERE gpn2.game_id = gpn.game_id ORDER BY gpn2.score DESC, (CASE WHEN gpn2.special_building = 1 AND gpn2.special_building_own = 1 THEN 1 ELSE 0 END) DESC, gpn2.special_building DESC, gpn2.ast_pos DESC, gpn2.num_civ_adv_6VP DESC, gpn2.num_civ_adv_3VP DESC LIMIT 1) THEN 1 ELSE 0 END) as wins,
       SUM(CASE WHEN EXISTS (SELECT 1 FROM game_top_third gtt WHERE gtt.game_id = gpn.game_id AND gtt.player_id = gpn.player_id AND gtt.rnk <= gtt.player_count / 3) THEN 1 ELSE 0 END) as top3,
       CAST(ROUND(AVG(gpn.score)) AS INTEGER) as avg_score,
-      MAX(gpn.score) as max_score
+      MAX(gpn.score) as max_score,
+      pf.fav_nation,
+      pf.fav_nation_count
     FROM player p
     JOIN game_player_nation gpn ON p.id = gpn.player_id
+    LEFT JOIN player_fav pf ON pf.player_id = p.id
     GROUP BY p.id
     HAVING games_played >= 2
     ORDER BY wins DESC, (top3 * 1.0 / games_played) DESC, avg_score DESC"
@@ -150,9 +163,20 @@ order by game_player_nation.game_id, score desc"
       g.date as game_date,
       gpn.score,
       gs.avg_score,
-      gs.stddev
+      gs.stddev,
+      p.display as player,
+      CASE WHEN gpn.player_id = (
+        SELECT gpn2.player_id FROM game_player_nation gpn2
+        WHERE gpn2.game_id = g.id
+        ORDER BY gpn2.score DESC,
+          (CASE WHEN gpn2.special_building = 1 AND gpn2.special_building_own = 1 THEN 1 ELSE 0 END) DESC,
+          gpn2.special_building DESC, gpn2.ast_pos DESC,
+          gpn2.num_civ_adv_6VP DESC, gpn2.num_civ_adv_3VP DESC
+        LIMIT 1
+      ) THEN 1 ELSE 0 END as won
     FROM nation n
     JOIN game_player_nation gpn ON n.id = gpn.nation_id
+    JOIN player p ON p.id = gpn.player_id
     JOIN game g ON gpn.game_id = g.id
     JOIN (
       SELECT game_id,

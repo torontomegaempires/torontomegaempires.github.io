@@ -31,6 +31,14 @@
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
+  function playerLabel(name) {
+    var parts = (name || '').trim().split(/\s+/);
+    if (parts.length < 2) return parts[0] || '';
+    var last = parts[parts.length - 1];
+    if (last.replace(/\.$/, '').length <= 2) return parts[0] + ' ' + last.replace(/\.?$/, '.');
+    return parts[0];
+  }
+
   function abbrevGame(name, date) {
     if (/^Game \d+$/.test(name)) return 'G' + name.slice(5);
     if (name === 'Niagara Boardgame Weekend') return "NBW '" + date.slice(2, 4);
@@ -38,6 +46,8 @@
     if (name.startsWith('Breakout ')) return "BK '" + name.slice(-2);
     return name.slice(0, 6);
   }
+
+  var WIN_COLOR = '#FFD700';
 
   var dark = isDark();
   var errorColor = dark ? 'rgba(255,255,255,0.90)' : 'rgba(55,65,81,0.65)';
@@ -76,6 +86,44 @@
       },
     };
 
+    var winCrownPlugin = {
+      id: 'winCrown',
+      afterDatasetsDraw: function (chart) {
+        var c = chart.ctx;
+        var meta = chart.getDatasetMeta(0);
+        meta.data.forEach(function (bar, i) {
+          if (!games[i] || !games[i].won) return;
+          c.save();
+          c.font = 'bold 11px sans-serif';
+          c.textAlign = 'center';
+          c.textBaseline = 'bottom';
+          c.fillStyle = WIN_COLOR;
+          c.fillText('★', bar.x, bar.y - 2);
+          c.restore();
+        });
+      },
+    };
+
+    var playerNamePlugin = {
+      id: 'playerName',
+      afterDraw: function (chart) {
+        var c = chart.ctx;
+        var meta = chart.getDatasetMeta(0);
+        var topY = chart.chartArea.top - 4;
+        meta.data.forEach(function (bar, i) {
+          if (!games[i]) return;
+          var firstName = playerLabel(games[i].player);
+          c.save();
+          c.font = games[i].won ? 'bold 9px sans-serif' : '9px sans-serif';
+          c.textAlign = 'center';
+          c.textBaseline = 'bottom';
+          c.fillStyle = games[i].won ? WIN_COLOR : tickColor;
+          c.fillText(firstName, bar.x, topY);
+          c.restore();
+        });
+      },
+    };
+
     new Chart(ctx, {
       type: 'barWithErrorBars',
       data: {
@@ -84,9 +132,9 @@
           data: games.map(function (g) {
             return { y: g.score, yMin: g.avg - g.sd, yMax: g.avg + g.sd };
           }),
-          backgroundColor: color + 'cc',
-          borderColor: color,
-          borderWidth: 1,
+          backgroundColor: games.map(function (g) { return g.won ? color + 'ff' : color + 'cc'; }),
+          borderColor: games.map(function (g) { return g.won ? WIN_COLOR : color; }),
+          borderWidth: games.map(function (g) { return g.won ? 2.5 : 1; }),
           errorBarColor: errorColor,
           errorBarWhiskerColor: errorColor,
           errorBarLineWidth: 2.5,
@@ -97,6 +145,7 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: { padding: { top: 55 } },
         plugins: {
           legend: { display: false },
           tooltip: {
@@ -122,7 +171,7 @@
           },
         },
       },
-      plugins: [avgMarkerPlugin],
+      plugins: [avgMarkerPlugin, winCrownPlugin, playerNamePlugin],
     });
   });
 })();
