@@ -146,7 +146,7 @@
                                                class="form-control <%= errors && errors.find(e => e.param === 'date') ? 'is-invalid' : '' %>" 
                                                id="date" 
                                                name="date" 
-                                               value="<%= game.date ? new Date(game.date).toISOString().split('T')[0] : '' %>" 
+                                               value="<%= game.date || '' %>" 
                                                required>
                                         <div class="form-text">
                                             Select the date when the game was played

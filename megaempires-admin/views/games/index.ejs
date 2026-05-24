@@ -147,7 +147,7 @@
                                                 <td>
                                                     <% if (game.date) { %>
                                                         <span class="badge bg-light text-dark">
-                                                            <%= new Date(game.date).toLocaleDateString() %>
+                                                            <%= new Date(game.date + 'T00:00:00').toLocaleDateString() %>
                                                         </span>
                                                     <% } else { %>
                                                         <span class="text-muted">No date</span>

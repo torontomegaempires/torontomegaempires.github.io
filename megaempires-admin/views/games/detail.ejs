@@ -135,7 +135,7 @@
                                 <p class="text-muted">
                                     <% if (game.date) { %>
                                         <span class="badge bg-light text-dark">
-                                            <%= new Date(game.date).toLocaleDateString() %>
+                                            <%= new Date(game.date + 'T00:00:00').toLocaleDateString() %>
                                         </span>
                                     <% } else { %>
                                         <span class="text-muted">No date recorded</span>
@@ -362,7 +362,7 @@
             $('#recordsTable').DataTable({
                 responsive: true,
                 pageLength: 25,
-                order: [[3, 'desc']], // Sort by score descending
+                order: [[0, 'asc']], // Sort by rank (server-side tie-breaking order)
                 columnDefs: [
                     { orderable: false, targets: [6] } // Disable sorting on Actions column
                 ]

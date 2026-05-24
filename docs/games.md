@@ -45,7 +45,7 @@ title: Games
 </div>
 {% comment %} Winner Spotlight {% endcomment %}
 {% if site.data.game_players %}
-{% assign winner = site.data.game_players | where: "game_id", game.id | sort: "score" | reverse | first %}
+{% assign winner = site.data.game_players | where: "game_id", game.id | sort: "rank" | first %}
 {% if winner %}
 <div class="winner-spotlight">
 <div class="winner-crown">👑
@@ -57,7 +57,7 @@ title: Games
 {% endif %}
 
 {% comment %} Game Results Table {% endcomment %}
-{% assign game_players = site.data.game_players | where: "game_id", game.id | sort: "score" | reverse %}
+{% assign game_players = site.data.game_players | where: "game_id", game.id | sort: "rank" %}
 {% if game_players and game_players.size > 0 %}
 <div class="game-results-section">
 <h4>📊 Final Standings</h4>

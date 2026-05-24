@@ -44,7 +44,12 @@ class Game {
             JOIN player p ON gpn.player_id = p.id
             JOIN nation n ON gpn.nation_id = n.id
             WHERE gpn.game_id = ?
-            ORDER BY gpn.score DESC
+            ORDER BY gpn.score DESC,
+              (CASE WHEN gpn.special_building = 1 AND gpn.special_building_own = 1 AND gpn.special_building_control >= 1 THEN 1 ELSE 0 END) DESC,
+              gpn.special_building DESC,
+              gpn.ast_pos DESC,
+              gpn.num_civ_adv_6VP DESC,
+              gpn.num_civ_adv_3VP DESC
         `;
         return await dbAsync.all(sql, [gameId]);
     }
