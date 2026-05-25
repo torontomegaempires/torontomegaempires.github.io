@@ -84,7 +84,7 @@ title: Games
 <th>Player</th>
 <th>Nation</th>
 <th>Score</th>
-<th>AST Position</th>
+<th>AST</th>
 <th>Cities</th>
 </tr>
 </thead>
