@@ -8,19 +8,41 @@ title: Games
 <p class="hero-subtitle">Witness the rise and fall of civilizations across our gaming history</p>
 </div>
 
-<div class="section-divider">
-<span class="divider-icon">🏛️</span>
-</div>
+{% comment %} Collect unique years from games, most recent first {% endcomment %}
+{% assign game_years = "" | split: "" %}
+{% for game in site.data.games %}
+{% assign yr = game.date | date: "%Y" %}
+{% unless game_years contains yr %}
+{% assign game_years = game_years | push: yr %}
+{% endunless %}
+{% endfor %}
+{% assign game_years = game_years | sort | reverse %}
 
-## Our Gaming Legacy
-
-<div class="info-callout">
-<h4>📊 Game Statistics</h4>
-<p>Each game represents 12 hours of epic strategic gameplay, with civilizations battling across millennia. From intimate 9-player home games to massive 18-player convention spectacles, every session tells a unique story of conquest, trade, and civilization building.</p>
+<div class="year-filter-bar" id="year-filter">
+<button class="year-btn active" data-year="all">All Years</button>
+{% for yr in game_years %}
+<button class="year-btn" data-year="{{ yr }}">{{ yr }}</button>
+{% endfor %}
 </div>
 
 {% for game in site.data.games %}
-<div class="game-card-with-photos" id="gr-{{ game.id }}">
+{% assign game_year = game.date | date: "%Y" %}
+{% assign game_players = site.data.game_players | where: "game_id", game.id | sort: "rank" %}
+{% assign winner = game_players | first %}
+{% assign player_count = game_players | size %}
+<div class="game-card-with-photos" id="gr-{{ game.id }}" data-year="{{ game_year }}">
+<div class="game-summary-row" role="button" tabindex="0" aria-expanded="false">
+<div class="game-summary-left">
+<span class="game-date-badge">{{ game.date | date: "%b %d, %Y" }}</span>
+<span class="game-summary-name">{{ game.name }}</span>
+</div>
+<div class="game-summary-right">
+{% if winner %}<span class="game-summary-winner">👑 {{ winner.player }} · {{ winner.nation }}</span>{% endif %}
+{% if player_count > 0 %}<span class="game-summary-players">{{ player_count }} players</span>{% endif %}
+<span class="game-expand-btn" aria-hidden="true">▼</span>
+</div>
+</div>
+<div class="game-detail">
 <div class="game-header">
 <h3>{{ game.name }}</h3>
 <div class="game-date">
@@ -28,7 +50,6 @@ title: Games
 </div>
 </div>
 
-{% comment %} Dynamic Photo Gallery Section {% endcomment %}
 {% assign game_date = game.date %}
 {% assign game_photos = site.data.game_photos[game_date] %}
 
@@ -43,9 +64,7 @@ title: Games
 <p>📸 Captured moments from this epic {{ game_photos.size }}-photo gaming session, showcasing the strategic intensity and community spirit of Mega Empires.</p>
 {% endif %}
 </div>
-{% comment %} Winner Spotlight {% endcomment %}
-{% if site.data.game_players %}
-{% assign winner = site.data.game_players | where: "game_id", game.id | sort: "rank" | first %}
+
 {% if winner %}
 <div class="winner-spotlight">
 <div class="winner-crown">👑
@@ -54,10 +73,7 @@ title: Games
 <p><strong>{{ winner.player }}</strong> led <strong>{{ winner.nation }}</strong> to glory with <strong>{{ winner.score }} points</strong>{% if winner.cities %} and <strong>{{ winner.cities }} cities</strong>{% endif %}!</p>
 </div>
 {% endif %}
-{% endif %}
 
-{% comment %} Game Results Table {% endcomment %}
-{% assign game_players = site.data.game_players | where: "game_id", game.id | sort: "rank" %}
 {% if game_players and game_players.size > 0 %}
 <div class="game-results-section">
 <h4>📊 Final Standings</h4>
@@ -97,7 +113,6 @@ title: Games
 </div>
 </div>
 
-{% comment %} Game Statistics {% endcomment %}
 <div class="game-stats-section">
 <div class="stats-grid">
 <div class="stat-item">
@@ -119,7 +134,7 @@ title: Games
 <div class="stat-item">
 <div class="stat-icon">👑
 </div>
-<div class="stat-value">{% assign winner = game_players | first %}{% if winner %}<span class="nation-{{ winner.nation | downcase }}">{{ winner.nation }}</span>{% else %}TBD{% endif %}
+<div class="stat-value">{% if winner %}<span class="nation-{{ winner.nation | downcase }}">{{ winner.nation }}</span>{% else %}TBD{% endif %}
 </div>
 <div class="stat-label">Winning Nation
 </div>
@@ -127,7 +142,7 @@ title: Games
 <div class="stat-item">
 <div class="stat-icon">🎯
 </div>
-<div class="stat-value">{% assign winner = game_players | first %}{% if winner %}{{ winner.score }}{% else %}Epic{% endif %}
+<div class="stat-value">{% if winner %}{{ winner.score }}{% else %}Epic{% endif %}
 </div>
 <div class="stat-label">Winning Score
 </div>
@@ -140,70 +155,12 @@ title: Games
 <p>This epic 12-hour session brought together players for strategic civilization building. Results will be updated soon!</p>
 </div>
 {% endif %}
-</div>
 
-<div class="section-divider">
-<span class="divider-icon">⚔️</span>
 </div>
-
+</div>
 {% endfor %}
 
-<script>
-function initPhotoLightbox() {
-  if (document.getElementById('photo-lightbox')) return;
-
-  var overlay = document.createElement('div');
-  overlay.id = 'photo-lightbox';
-  overlay.style.cssText = 'display:none;position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;align-items:center;justify-content:center;';
-  overlay.innerHTML =
-    '<div class="lb-backdrop" style="position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,0.92);cursor:pointer;"></div>' +
-    '<div class="lb-frame" style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;max-width:92vw;max-height:92vh;">' +
-      '<img class="lb-img" src="" alt="" style="display:block;max-width:92vw;max-height:92vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 40px rgba(0,0,0,0.6);">' +
-      '<button class="lb-close" aria-label="Close" style="position:absolute;top:-2.8rem;right:0;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:2.2rem;height:2.2rem;font-size:1.1rem;cursor:pointer;">&#x2715;</button>' +
-      '<button class="lb-prev" aria-label="Previous" style="position:absolute;left:-3rem;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:2.2rem;height:2.2rem;font-size:1.4rem;cursor:pointer;">&#x2039;</button>' +
-      '<button class="lb-next" aria-label="Next" style="position:absolute;right:-3rem;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:50%;width:2.2rem;height:2.2rem;font-size:1.4rem;cursor:pointer;">&#x203a;</button>' +
-    '</div>';
-  document.body.appendChild(overlay);
-
-  var links = Array.from(document.querySelectorAll('a.glightbox'));
-  var current = 0;
-  var lbImg = overlay.querySelector('.lb-img');
-
-  function show(i) {
-    current = (i + links.length) % links.length;
-    lbImg.src = links[current].href;
-    lbImg.alt = links[current].querySelector('img') ? links[current].querySelector('img').alt : '';
-    overlay.style.display = 'flex';
-  }
-
-  function hide() {
-    overlay.style.display = 'none';
-    lbImg.src = '';
-  }
-
-  links.forEach(function (a, i) {
-    a.addEventListener('click', function (e) { e.preventDefault(); show(i); });
-  });
-
-  overlay.querySelector('.lb-backdrop').addEventListener('click', hide);
-  overlay.querySelector('.lb-close').addEventListener('click', hide);
-  overlay.querySelector('.lb-prev').addEventListener('click', function () { show(current - 1); });
-  overlay.querySelector('.lb-next').addEventListener('click', function () { show(current + 1); });
-
-  document.addEventListener('keydown', function (e) {
-    if (overlay.style.display !== 'flex') return;
-    if (e.key === 'Escape') hide();
-    if (e.key === 'ArrowLeft') show(current - 1);
-    if (e.key === 'ArrowRight') show(current + 1);
-  });
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initPhotoLightbox);
-} else {
-  initPhotoLightbox();
-}
-</script>
+<script src="/assets/js/games-interact.js"></script>
 
 <div class="section-divider">
 <span class="divider-icon">🌟</span>

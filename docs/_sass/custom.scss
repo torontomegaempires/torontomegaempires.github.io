@@ -802,17 +802,62 @@
 
 // ---- Games Page ----
 
+// Year filter bar
+.year-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 24px 0 8px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.year-btn {
+  background: var(--bg);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+  &:hover {
+    background: var(--brand-light);
+    color: var(--brand-dark);
+    border-color: var(--brand);
+  }
+
+  &.active {
+    background: var(--brand);
+    color: #fff;
+    border-color: var(--brand-dark);
+  }
+}
+
+// Game card — collapsed by default, expands on .is-open
 .game-card-with-photos {
   background: var(--bg);
   border: 1px solid var(--border);
   border-left: 5px solid var(--brand);
   border-radius: var(--radius);
-  padding: 28px;
-  margin: 32px 0;
+  padding: 0;
+  margin: 10px 0;
   box-shadow: var(--shadow);
+  transition: box-shadow 0.15s;
+
+  &:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+  &.is-open { box-shadow: 0 3px 12px rgba(0,0,0,0.14); }
 
   .game-header {
     margin-bottom: 20px;
+    padding-top: 4px;
 
     h3 {
       color: var(--text);
@@ -833,6 +878,95 @@
       font-weight: 700;
     }
   }
+}
+
+// Summary row — always visible, acts as the click target
+.game-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  cursor: pointer;
+  user-select: none;
+
+  &:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; border-radius: var(--radius); }
+
+  .game-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .game-summary-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+}
+
+.game-date-badge {
+  display: inline-block;
+  background: var(--brand-light);
+  color: var(--brand-dark);
+  border: 1px solid var(--brand);
+  padding: 3px 10px;
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.game-summary-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-summary-winner {
+  font-size: 0.85rem;
+  color: var(--winner-text);
+  background: var(--winner-bg);
+  border: 1px solid var(--gold);
+  padding: 2px 10px;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+.game-summary-players {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+.game-expand-btn {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: inline-block;
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+
+.game-card-with-photos.is-open .game-expand-btn {
+  transform: rotate(180deg);
+}
+
+// Detail section — hidden until expanded
+.game-detail {
+  display: none;
+  padding: 0 28px 28px;
+  border-top: 1px solid var(--border);
 }
 
 // ---- Photo Gallery ----
