@@ -1415,8 +1415,52 @@
   }
 
   .game-card-with-photos {
-    padding: 20px;
-    margin: 24px 0;
+    padding: 0;
+    margin: 8px 0;
+    position: relative;
+  }
+
+  .game-summary-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 10px 40px 10px 14px; // right gap keeps chevron clear
+  }
+
+  .game-summary-left {
+    flex: none;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .game-summary-right {
+    flex: none;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .game-summary-name {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    font-size: 0.95rem;
+  }
+
+  .game-expand-btn {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+  }
+
+  .game-card-with-photos.is-open .game-expand-btn {
+    transform: rotate(180deg);
+  }
+
+  .game-detail {
+    padding: 0 14px 20px;
   }
 
   .photo-gallery-grid {
