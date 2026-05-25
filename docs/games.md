@@ -83,9 +83,9 @@ title: Games
 <tr>
 <th>Player</th>
 <th>Nation</th>
-<th>Cities</th>
-<th>AST Position</th>
 <th>Score</th>
+<th>AST Position</th>
+<th>Cities</th>
 </tr>
 </thead>
 <tbody>
@@ -97,14 +97,14 @@ title: Games
 <td class="nation-cell">
 <span class="nation-{{ player.nation | downcase }}">{{ player.nation }}</span>
 </td>
-<td class="cities-cell">
-<span class="stat-number">{% if player.cities %}{{ player.cities }}{% endif %}</span>
+<td class="score-cell">
+<span class="final-score">{{ player.score }}</span>
 </td>
 <td class="ast-cell">
 <span class="ast-position">{{ player.ast_pos }}</span>
 </td>
-<td class="score-cell">
-<span class="final-score">{{ player.score }}</span>
+<td class="cities-cell">
+<span class="stat-number">{% if player.cities %}{{ player.cities }}{% endif %}</span>
 </td>
 </tr>
 {% endfor %}
