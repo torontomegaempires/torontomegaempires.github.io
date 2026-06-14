@@ -41,6 +41,12 @@
   status = 302
   force = true
 
+[[redirects]]
+  from = "https://results.torontomegaempires.com"
+  to = "https://docs.google.com/spreadsheets/d/1T3PVSl5CfSv9NQGGLDrWCTh9xFEitkoRaEMW8_0rYU8/edit?usp=sharing"
+  status = 302
+  force = true
+
 # Redirect to latest game sign-up
 [[redirects]]
   from = "https://signup.torontomegaempires.com"
