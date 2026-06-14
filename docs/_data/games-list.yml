@@ -25,6 +25,15 @@ games:
     max_players: 9
     status: "upcoming"
 
+  - date: "2026-06-14"
+    title: "UoT Game"
+    form_title: "UoT Game - June 14, 2026"
+    type: "home"
+    variant: "the west"
+    location: "University of Toronto"
+    max_players: 9
+    status: "upcoming"
+
   - date: "2026-09-19"
     title: "Mega Empires: The East"
     type: "home"

@@ -1,0 +1,496 @@
+---
+layout: page
+title: Submit Score
+permalink: /submit-score/
+---
+
+<div class="hero-section">
+<h1 class="hero-title">Submit Your Score</h1>
+<p class="hero-subtitle">Enter your end-of-game stats. Standings update as each player submits.</p>
+</div>
+
+<div class="section-divider"><span class="divider-icon">🎲</span></div>
+
+<div id="score-app">
+
+<div class="ss-game-row">
+  <label for="game-select"><strong>Game</strong></label>
+  <select id="game-select"><option value="">Loading games…</option></select>
+</div>
+
+<script>
+// Games from _data/games-list.yml, injected at build time (last 60 days + all future)
+const YAML_GAMES = [{% assign today_ts = 'now' | date: '%s' | plus: 0 %}{% assign cutoff_ts = today_ts | minus: 5184000 %}{% for g in site.data.games-list.games %}{% assign g_ts = g.date | date: '%s' | plus: 0 %}{% if g_ts >= cutoff_ts %}{% if g.form_title %}"{{ g.form_title }}",{% else %}"{{ g.title }} ({{ g.date | date: '%-d %b %Y' }})",{% endif %}{% endif %}{% endfor %}];
+</script>
+
+<div class="ss-card">
+  <h2 class="ss-card-title">Your Stats</h2>
+  <form id="score-form" novalidate>
+
+    <div class="ss-field">
+      <label for="f-name">Your Name <span class="ss-req">*</span></label>
+      <input type="text" id="f-name" autocomplete="name" placeholder="e.g. Rob M." required>
+    </div>
+
+    <div class="ss-field">
+      <label for="f-empire">Empire <span class="ss-req">*</span></label>
+      <select id="f-empire" required>
+        <option value="">Select…</option>
+        <option>Assyria</option><option>Babylon</option><option>Carthage</option>
+        <option>Celt</option><option>Dravidia</option><option>Egypt</option>
+        <option>Hatti</option><option>Hellas</option><option>Iberia</option>
+        <option>Indus</option><option>Kushan</option><option>Maurya</option>
+        <option>Minoa</option><option>Nubia</option><option>Parthia</option>
+        <option>Persia</option><option>Rome</option><option>Saba</option>
+      </select>
+    </div>
+
+    <div class="ss-row">
+      <div class="ss-field">
+        <label for="f-ast">AST Position <span class="ss-req">*</span></label>
+        <input type="number" id="f-ast" min="1" max="16" required>
+      </div>
+      <div class="ss-field">
+        <label>Solo AST Winner?</label>
+        <div class="ss-radios">
+          <label><input type="radio" name="solo-ast" value="No" checked> No</label>
+          <label><input type="radio" name="solo-ast" value="Yes"> Yes (+5 VP)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="ss-field ss-field-narrow">
+      <label for="f-cities">Cities <span class="ss-req">*</span></label>
+      <input type="number" id="f-cities" min="0" required>
+    </div>
+
+    <div class="ss-row ss-row-3">
+      <div class="ss-field">
+        <label for="f-adv1">1 VP Advances</label>
+        <input type="number" id="f-adv1" min="0" value="0">
+      </div>
+      <div class="ss-field">
+        <label for="f-adv3">3 VP Advances</label>
+        <input type="number" id="f-adv3" min="0" value="0">
+      </div>
+      <div class="ss-field">
+        <label for="f-adv6">6 VP Advances</label>
+        <input type="number" id="f-adv6" min="0" value="0">
+      </div>
+    </div>
+
+    <div class="ss-field">
+      <label>Special Building in Start Region?</label>
+      <p class="ss-help">You do not have to control the building</p>
+      <div class="ss-radios">
+        <label><input type="radio" name="special-bldg" value="No" checked> No</label>
+        <label><input type="radio" name="special-bldg" value="Yes"> Yes (+2 VP)</label>
+      </div>
+    </div>
+
+    <div class="ss-field">
+      <label>Control Empire Historical Special Building?</label>
+      <p class="ss-help">The building associated with your Empire</p>
+      <div class="ss-radios">
+        <label><input type="radio" name="control-hist" value="No" checked> No</label>
+        <label><input type="radio" name="control-hist" value="Yes"> Yes (+2 VP)</label>
+      </div>
+    </div>
+
+    <div class="ss-field ss-field-narrow">
+      <label for="f-bldgs">Total Buildings Controlled</label>
+      <input type="number" id="f-bldgs" min="0" value="0">
+    </div>
+
+    <div class="ss-preview">
+      Your score: <strong id="score-preview-val">—</strong>
+    </div>
+
+    <button type="submit" class="ss-submit-btn" id="submit-btn">Submit Score</button>
+    <div class="ss-status" id="form-status"></div>
+
+  </form>
+</div>
+
+<div class="section-divider"><span class="divider-icon">🏆</span></div>
+
+<div class="ss-results">
+  <div class="ss-results-header">
+    <h2>Current Standings</h2>
+    <button class="ss-refresh-btn" id="refresh-btn" onclick="fetchResults()">↻ Refresh</button>
+  </div>
+  <div class="ss-updated" id="last-updated"></div>
+  <div class="results-table-wrapper">
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>Empire</th>
+          <th>Score</th>
+          <th>AST</th>
+          <th>Cities</th>
+          <th>Advances (1/3/6)</th>
+          <th>Bldgs</th>
+        </tr>
+      </thead>
+      <tbody id="results-body">
+        <tr><td colspan="8" class="ss-loading">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<style>
+#score-app { max-width: 680px; }
+
+.ss-game-row { margin-bottom: 1.75rem; }
+.ss-game-row label { display: block; margin-bottom: 0.35rem; }
+#game-select {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.ss-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.ss-card-title { margin: 0 0 1.5rem; font-size: 1.2rem; }
+
+.ss-field { margin-bottom: 1.25rem; }
+.ss-field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.93rem;
+  margin-bottom: 0.3rem;
+}
+.ss-field input[type="text"],
+.ss-field input[type="number"],
+.ss-field select {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  padding: 0.42rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  background: var(--bg);
+  color: var(--text);
+}
+.ss-field-narrow input[type="number"] { max-width: 110px; }
+
+.ss-row {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.ss-row-3 .ss-field input[type="number"] { max-width: 100px; }
+
+.ss-radios {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.4rem;
+}
+.ss-radios label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: normal;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.ss-help {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0.1rem 0 0.4rem;
+}
+.ss-req { color: #e55; }
+
+.ss-preview {
+  background: var(--brand-light);
+  border-left: 4px solid var(--brand);
+  padding: 0.75rem 1.1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 1rem;
+  margin: 1.5rem 0 1.25rem;
+  color: var(--text);
+}
+.ss-preview strong {
+  font-size: 1.6rem;
+  color: var(--brand);
+  margin-left: 0.25rem;
+}
+
+.ss-submit-btn {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.6rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ss-submit-btn:hover:not(:disabled) { background: var(--brand-dark); }
+.ss-submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.ss-status { margin-top: 0.75rem; font-size: 0.95rem; min-height: 1.4em; }
+.ss-status.success { color: var(--success-text); }
+.ss-status.error   { color: #c0392b; }
+
+.ss-results { margin-bottom: 3rem; }
+.ss-results-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+.ss-results-header h2 { margin: 0; }
+.ss-refresh-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.25rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.ss-updated { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem; }
+.ss-loading { text-align: center; color: var(--text-muted); padding: 1.5rem; }
+</style>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVPmMcnZgqCcsUkLDNUVLN5LEpcrk2KmlvpZePK6N6VWwmhUgb6BpRHgrXt8MPqVZJ/exec';
+
+let refreshTimer;
+
+// ── Score formula ────────────────────────────────────────────────────
+function calcScore(d) {
+  return Math.max(0, ((+d.ast || 0) - 1) * 5)
+    + (d.soloAst === 'Yes' ? 5 : 0)
+    + (+d.cities || 0)
+    + (+d.adv1 || 0)
+    + (+d.adv3 || 0) * 3
+    + (+d.adv6 || 0) * 6
+    + (d.specialBldg === 'Yes' ? 2 : 0)
+    + (d.controlHist === 'Yes' ? 2 : 0)
+    + (+d.totalBldgs || 0);
+}
+
+// Composite tie-breaking key (higher = better rank)
+function tieKey(p) {
+  const ownCtrl = (p.specialBldg === 'Yes' && p.controlHist === 'Yes' && (+p.totalBldgs || 0) >= 1) ? 1 : 0;
+  const hasBldg = p.specialBldg === 'Yes' ? 1 : 0;
+  return p.score     * 1e9
+    + ownCtrl        * 1e8
+    + hasBldg        * 1e7
+    + (+p.ast || 0)  * 1e5
+    + (+p.adv6 || 0) * 1e3
+    + (+p.adv3 || 0);
+}
+
+function mapRow(r) {
+  return {
+    name:        String(r['Your Name']       || ''),
+    game:        String(r['Game Played']     || ''),
+    empire:      String(r['Empire']          || ''),
+    ast:         +r['AST Position']   || 0,
+    soloAst:     String(r['Solo AST Winner?'] || 'No'),
+    cities:      +r['Cities']         || 0,
+    adv1:        +r['1 VP Advances']  || 0,
+    adv3:        +r['3 VP Advances']  || 0,
+    adv6:        +r['6 VP Advances']  || 0,
+    specialBldg: String(r['Special Building in Start Region?']              || 'No'),
+    controlHist: String(r['Control Empire Historical Special Building?']    || 'No'),
+    totalBldgs:  +r['Total Buildings Controlled'] || 0,
+  };
+}
+
+function rankSubmissions(rows) {
+  return rows
+    .map(r => { const p = mapRow(r); p.score = calcScore(p); return p; })
+    .sort((a, b) => tieKey(b) - tieKey(a))
+    .map((p, i) => ({ ...p, rank: i + 1 }));
+}
+
+// ── Live score preview ───────────────────────────────────────────────
+function formData() {
+  return {
+    ast:        document.getElementById('f-ast').value,
+    soloAst:    document.querySelector('input[name="solo-ast"]:checked')?.value || 'No',
+    cities:     document.getElementById('f-cities').value,
+    adv1:       document.getElementById('f-adv1').value,
+    adv3:       document.getElementById('f-adv3').value,
+    adv6:       document.getElementById('f-adv6').value,
+    specialBldg:document.querySelector('input[name="special-bldg"]:checked')?.value || 'No',
+    controlHist:document.querySelector('input[name="control-hist"]:checked')?.value || 'No',
+    totalBldgs: document.getElementById('f-bldgs').value,
+  };
+}
+
+document.getElementById('score-form').addEventListener('input', () => {
+  const d = formData();
+  const el = document.getElementById('score-preview-val');
+  el.textContent = (d.ast && d.cities !== '') ? calcScore(d) : '—';
+});
+
+// ── Game dropdown ────────────────────────────────────────────────────
+async function loadGames() {
+  const sel = document.getElementById('game-select');
+  let sheetGames = [];
+  try {
+    const res = await fetch(`${SCRIPT_URL}?action=games`);
+    sheetGames = await res.json();
+  } catch { /* sheet unavailable — fall back to YAML only */ }
+
+  // Merge: sheet games first (most recent activity), then YAML games not already listed
+  const seen = new Set(sheetGames);
+  const merged = [...sheetGames, ...YAML_GAMES.filter(g => !seen.has(g))];
+
+  if (merged.length) {
+    sel.innerHTML = merged.map(g => `<option value="${esc(g)}">${esc(g)}</option>`).join('');
+    fetchResults();
+  } else {
+    sel.innerHTML = '<option value="">No games found — add one to games-list.yml</option>';
+  }
+}
+
+document.getElementById('game-select').addEventListener('change', fetchResults);
+
+// ── Results ──────────────────────────────────────────────────────────
+async function fetchResults() {
+  const game = document.getElementById('game-select').value;
+  if (!game) return;
+
+  const btn = document.getElementById('refresh-btn');
+  btn.textContent = '↻ Loading…';
+  btn.disabled = true;
+
+  try {
+    const res  = await fetch(`${SCRIPT_URL}?game=${encodeURIComponent(game)}`);
+    const rows = await res.json();
+    renderResults(rankSubmissions(rows));
+    document.getElementById('last-updated').textContent =
+      'Updated ' + new Date().toLocaleTimeString();
+  } catch {
+    document.getElementById('results-body').innerHTML =
+      '<tr><td colspan="8" class="ss-loading" style="color:#c0392b">Failed to load — try refreshing.</td></tr>';
+  }
+
+  btn.textContent = '↻ Refresh';
+  btn.disabled = false;
+
+  clearTimeout(refreshTimer);
+  refreshTimer = setTimeout(fetchResults, 30000);
+}
+
+function renderResults(players) {
+  const tbody = document.getElementById('results-body');
+  if (!players.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="ss-loading">No submissions yet.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = players.map(p => {
+    const rowClass   = p.rank === 1 ? 'winner-row' : p.rank <= 3 ? 'podium-row' : '';
+    const nationCls  = `nation-${p.empire.toLowerCase().replace(/\s+/g, '-')}`;
+    const bldgSuffix = p.specialBldg === 'Yes'
+      ? (p.controlHist === 'Yes' ? ' ★★' : ' ★') : '';
+    return `<tr class="${rowClass}">
+      <td style="text-align:center"><span class="ast-position">${p.rank}</span></td>
+      <td class="player-cell"><strong>${esc(p.name)}</strong></td>
+      <td><span class="${nationCls}">${esc(p.empire)}</span></td>
+      <td><span class="final-score">${p.score}</span></td>
+      <td class="stat-number">${p.ast}</td>
+      <td class="stat-number">${p.cities}</td>
+      <td class="stat-number">${p.adv1} / ${p.adv3} / ${p.adv6}</td>
+      <td class="stat-number">${p.totalBldgs}${bldgSuffix}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ── Submit ───────────────────────────────────────────────────────────
+document.getElementById('score-form').addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const game   = document.getElementById('game-select').value;
+  const name   = document.getElementById('f-name').value.trim();
+  const empire = document.getElementById('f-empire').value;
+  const d      = formData();
+
+  if (!game)   return setStatus('Please select a game first.', 'error');
+  if (!name)   return setStatus('Please enter your name.', 'error');
+  if (!empire) return setStatus('Please select your empire.', 'error');
+  if (!d.ast)  return setStatus('Please enter your AST position.', 'error');
+  if (d.cities === '') return setStatus('Please enter your city count.', 'error');
+
+  const payload = {
+    'Your Name':    name,
+    'Game Played':  game,
+    'Empire':       empire,
+    'AST Position': +d.ast,
+    'Solo AST Winner?': d.soloAst,
+    'Cities':       +d.cities,
+    '1 VP Advances':  +d.adv1,
+    '3 VP Advances':  +d.adv3,
+    '6 VP Advances':  +d.adv6,
+    'Special Building in Start Region?':           d.specialBldg,
+    'Control Empire Historical Special Building?': d.controlHist,
+    'Total Buildings Controlled': +d.totalBldgs,
+  };
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+  setStatus('', '');
+
+  try {
+    // no-cors avoids preflight issues with Apps Script redirects;
+    // the row still gets appended even though we can't read the response.
+    await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+    try { localStorage.setItem('mega-player-name', name); } catch {}
+    setStatus('Score submitted! ✓', 'success');
+    setTimeout(fetchResults, 1500);
+  } catch {
+    setStatus('Submission failed — check your connection and try again.', 'error');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Submit Score';
+});
+
+function setStatus(msg, type) {
+  const el = document.getElementById('form-status');
+  el.textContent = msg;
+  el.className   = 'ss-status ' + type;
+}
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Init ─────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    const saved = localStorage.getItem('mega-player-name');
+    if (saved) document.getElementById('f-name').value = saved;
+  } catch {}
+  loadGames();
+});
+</script>
