@@ -28,6 +28,11 @@ const YAML_GAMES = [{% assign today_ts = 'now' | date: '%s' | plus: 0 %}{% assig
   <form id="score-form" novalidate>
 
     <div class="ss-field">
+      <label for="f-key">Game Key <span class="ss-req">*</span></label>
+      <input type="password" id="f-key" autocomplete="off" placeholder="Shared in Discord" required>
+    </div>
+
+    <div class="ss-field">
       <label for="f-name">Your Name <span class="ss-req">*</span></label>
       <input type="text" id="f-name" autocomplete="name" placeholder="e.g. Rob M." required>
     </div>
@@ -427,11 +432,13 @@ function renderResults(players) {
 document.getElementById('score-form').addEventListener('submit', async e => {
   e.preventDefault();
 
+  const key    = document.getElementById('f-key').value.trim();
   const game   = document.getElementById('game-select').value;
   const name   = document.getElementById('f-name').value.trim();
   const empire = document.getElementById('f-empire').value;
   const d      = formData();
 
+  if (!key)    return setStatus('Please enter the game key.', 'error');
   if (!game)   return setStatus('Please select a game first.', 'error');
   if (!name)   return setStatus('Please enter your name.', 'error');
   if (!empire) return setStatus('Please select your empire.', 'error');
@@ -439,6 +446,7 @@ document.getElementById('score-form').addEventListener('submit', async e => {
   if (d.cities === '') return setStatus('Please enter your city count.', 'error');
 
   const payload = {
+    key,
     'Your Name':    name,
     'Game Played':  game,
     'Empire':       empire,
@@ -459,6 +467,15 @@ document.getElementById('score-form').addEventListener('submit', async e => {
   setStatus('', '');
 
   try {
+    const check = await fetch(`${SCRIPT_URL}?action=validate&key=${encodeURIComponent(key)}`);
+    const { ok: valid } = await check.json();
+    if (!valid) {
+      setStatus('Incorrect game key — check Discord and try again.', 'error');
+      btn.disabled = false;
+      btn.textContent = 'Submit Score';
+      return;
+    }
+
     // no-cors avoids preflight issues with Apps Script redirects;
     // the row still gets appended even though we can't read the response.
     await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
