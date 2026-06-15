@@ -75,6 +75,20 @@ title: Games
 {% endif %}
 
 {% if game_players and game_players.size > 0 %}
+{% assign has_ast_data = false %}
+{% assign has_cities_data = false %}
+{% assign has_adv_data = false %}
+{% assign has_bldg_data = false %}
+{% for p in game_players %}
+{% assign adv_sum = p.num_civ_adv_1VP | plus: 0 | plus: p.num_civ_adv_3VP | plus: p.num_civ_adv_6VP %}
+{% assign bldg_sum = p.special_building | plus: 0 | plus: p.special_building_own | plus: p.special_building_control %}
+{% assign ast_val = p.ast_pos | plus: 0 %}
+{% assign cities_val = p.cities | plus: 0 %}
+{% if ast_val > 0 %}{% assign has_ast_data = true %}{% endif %}
+{% if cities_val > 0 %}{% assign has_cities_data = true %}{% endif %}
+{% if adv_sum > 0 %}{% assign has_adv_data = true %}{% endif %}
+{% if bldg_sum > 0 %}{% assign has_bldg_data = true %}{% endif %}
+{% endfor %}
 <div class="game-results-section">
 <h4>📊 Final Standings</h4>
 <div class="results-table-wrapper">
@@ -82,10 +96,12 @@ title: Games
 <thead>
 <tr>
 <th>Player</th>
-<th>Nation</th>
+<th>Empire</th>
 <th>Score</th>
-<th>AST</th>
-<th>Cities</th>
+{% if has_ast_data %}<th>AST</th>{% endif %}
+{% if has_cities_data %}<th>Cities</th>{% endif %}
+{% if has_adv_data %}<th>Advances (1/3/6)</th>{% endif %}
+{% if has_bldg_data %}<th>Bldgs</th>{% endif %}
 </tr>
 </thead>
 <tbody>
@@ -100,12 +116,18 @@ title: Games
 <td class="score-cell">
 <span class="final-score">{{ player.score }}</span>
 </td>
-<td class="ast-cell">
-<span class="ast-position">{{ player.ast_pos }}</span>
-</td>
-<td class="cities-cell">
-<span class="stat-number">{% if player.cities %}{{ player.cities }}{% endif %}</span>
-</td>
+{% if has_ast_data %}
+<td class="ast-cell"><span class="ast-position">{{ player.ast_pos }}</span></td>
+{% endif %}
+{% if has_cities_data %}
+<td class="cities-cell"><span class="stat-number">{% if player.cities %}{{ player.cities }}{% endif %}</span></td>
+{% endif %}
+{% if has_adv_data %}
+<td class="stat-number">{{ player.num_civ_adv_1VP | default: 0 }} / {{ player.num_civ_adv_3VP | default: 0 }} / {{ player.num_civ_adv_6VP | default: 0 }}</td>
+{% endif %}
+{% if has_bldg_data %}
+<td class="stat-number">{{ player.special_building_control | default: 0 }}{% if player.special_building == 1 %}{% if player.special_building_own == 1 %} ★★{% else %} ★{% endif %}{% endif %}</td>
+{% endif %}
 </tr>
 {% endfor %}
 </tbody>
@@ -136,7 +158,7 @@ title: Games
 </div>
 <div class="stat-value">{% if winner %}<span class="nation-{{ winner.nation | downcase }}">{{ winner.nation }}</span>{% else %}TBD{% endif %}
 </div>
-<div class="stat-label">Winning Nation
+<div class="stat-label">Winning Empire
 </div>
 </div>
 <div class="stat-item">

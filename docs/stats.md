@@ -77,7 +77,7 @@ title: Stats
 <th>Game</th>
 <th>Date</th>
 <th>Winner</th>
-<th>Nation</th>
+<th>Empire</th>
 <th>Winner Score</th>
 <th>Avg Score</th>
 <th>Median Score</th>
@@ -128,7 +128,7 @@ title: Stats
 <th>Top ⅓%</th>
 <th>Avg Score</th>
 <th>Best Score</th>
-<th>Most Played Nation</th>
+<th>Most Played Empire</th>
 </tr>
 </thead>
 <tbody>
@@ -193,13 +193,13 @@ title: Stats
 <span class="divider-icon">🏛️</span>
 </div>
 
-## Nation Performance
+## Empire Performance
 
 <div class="results-table-wrapper">
 <table class="results-table">
 <thead>
 <tr>
-<th>Nation</th>
+<th>Empire</th>
 <th>Played</th>
 <th>Wins</th>
 <th>Win %</th>
@@ -227,7 +227,7 @@ title: Stats
 <span class="divider-icon">📈</span>
 </div>
 
-## Nation Score History
+## Empire Score History
 
 <p class="text-muted">Score for each game played. Error bars show ±1 standard deviation of all player scores in that game.</p>
 

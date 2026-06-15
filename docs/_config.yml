@@ -83,6 +83,12 @@ sqlite:
 	game_player_nation.cities,
 	game_player_nation.ast_pos,
 	game_player_nation.score,
+	game_player_nation.num_civ_adv_1VP,
+	game_player_nation.num_civ_adv_3VP,
+	game_player_nation.num_civ_adv_6VP,
+	game_player_nation.special_building,
+	game_player_nation.special_building_own,
+	game_player_nation.special_building_control,
 	ROW_NUMBER() OVER (PARTITION BY game_player_nation.game_id ORDER BY game_player_nation.score DESC, (CASE WHEN game_player_nation.special_building = 1 AND game_player_nation.special_building_own = 1 AND game_player_nation.special_building_control >= 1 THEN 1 ELSE 0 END) DESC, game_player_nation.special_building DESC, game_player_nation.ast_pos DESC, game_player_nation.num_civ_adv_6VP DESC, game_player_nation.num_civ_adv_3VP DESC) as rank
 from player
   join game_player_nation on
