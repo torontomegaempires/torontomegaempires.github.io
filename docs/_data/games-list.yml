@@ -2,6 +2,7 @@
 games:
     
   - date: "2026-02-28"
+    game_number: 17
     title: "Mega Empires: The West"
     type: "home"
     variant: "the west"
@@ -18,6 +19,7 @@ games:
     status: "upcoming"
 
   - date: "2026-05-23"
+    game_number: 18
     title: "Mega Empires: The East"
     type: "home"
     variant: "the east"
@@ -35,6 +37,7 @@ games:
     status: "upcoming"
 
   - date: "2026-09-19"
+    game_number: 19
     title: "Mega Empires: The East"
     type: "home"
     variant: "the east"
@@ -43,6 +46,7 @@ games:
     status: "upcoming"
 
   - date: "2026-11-28"
+    game_number: 20
     title: "Mega Empires: The West"
     type: "home"
     variant: "the west"

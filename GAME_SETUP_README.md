@@ -1,5 +1,33 @@
 # Toronto Mega Empires - Automated Game Setup
 
+## Quick start (2026+): generate the announcement email
+
+The fastest path is the data-driven generator. It reads the schedule
+(`docs/_data/games-list.yml`), fills the current email template, and prints the
+send command plus the Discord/Apollo field values:
+
+```bash
+ruby generate-game-email.rb              # next upcoming HOME game
+ruby generate-game-email.rb 2026-11-28   # a specific game date
+```
+
+It writes `docs/emails/<today>-email.html` and requires the game to have a
+`game_number` in `games-list.yml` (home games are numbered sequentially; the UoT
+series and conventions are NOT part of that sequence — give them no number).
+
+The **Discord event** can't be scripted: Apollo replaced its old pasteable
+`/event create ...` command with an interactive guided flow. Run `/event` in
+#event-announcements, pick "Create a new Apollo event", and answer the DM prompts
+with the values the generator printed (single "Accepted" option, capacity 9,
+start 10:00 AM Eastern, end "12 hours", repeat Never). After it's created, point
+the active `signup.torontomegaempires.com` redirect in `netlify.toml` at the new
+event URL, then commit & push.
+
+The interactive `setup-new-game.sh` below still works but predates the generator.
+
+---
+
+
 This repository contains an automated bash script for setting up new Mega Empires games, including Discord event creation, email announcements, and website redirects.
 
 ## Overview
