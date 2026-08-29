@@ -30,7 +30,7 @@ games:
   - date: "2026-06-14"
     title: "UoT Game"
     form_title: "UoT Game - June 14, 2026"
-    type: "home"
+    type: "uoft"
     variant: "the west"
     location: "University of Toronto"
     max_players: 9
