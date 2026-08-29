@@ -122,29 +122,41 @@ main() {
     fi
     
     # Step 2: Generate Apollo Command
-    print_info "Step 2: Generating Apollo command for Discord..."
+    print_info "Step 2: Preparing Discord event details for Apollo..."
     
     # Convert date to proper format for Discord (YYYY-MM-DD HH:MM format)
     START_TIME="${GAME_DATE} 10:00"
     END_TIME="${GAME_DATE} 22:00"
 
-    # Generate the Apollo command
-    APOLLO_COMMAND="/event create title:\"${GAME_NAME}\" start:\"${START_TIME}\" end:\"${END_TIME}\" max_attendees:9 description:\"**Address**: 64 Leuty Ave, Toronto, ON M4E 2R4
-    Google Maps https://maps.app.goo.gl/zz68pg38L65L42wC7
+    # Event description to paste into Apollo's description field.
+    # NOTE: Apollo no longer accepts a pasted one-line "/event create ..." command.
+    # It uses Discord's native guided /event slash command, so we print the field
+    # values for you to enter and a clean description block to paste.
+    EVENT_DESCRIPTION="**Address**: 64 Leuty Ave, Toronto, ON M4E 2R4
+Google Maps https://maps.app.goo.gl/zz68pg38L65L42wC7
 
-    **TTC**: Take subway to Main St Station, then 64 Main Southbound to Queen. Do not try taking 501 Queen Streetcar across, it's too slow.
+**TTC**: Take subway to Main St Station, then 64 Main Southbound to Queen. Do not try taking 501 Queen Streetcar across, it's too slow.
 
-    **Parking**: There is on street parking and a Green P at the top of the street.
+**Parking**: There is on street parking and a Green P at the top of the street.
 
-    **My Mobile**: 416-829-7626
-    **WhatsApp**: https://chat.whatsapp.com/Ja3TvLbI6640ycHTObHoRX
+**My Mobile**: 416-829-7626
+**WhatsApp**: https://chat.whatsapp.com/Ja3TvLbI6640ycHTObHoRX
 
-    **Cost**: \$20 to help pay for lunch and dinner, which will be sandwiches and salad. Please let me know if you have dietary requirements; I'm happy to accommodate.\""
+**Cost**: \$20 to help pay for lunch and dinner, which will be sandwiches and salad. Please let me know if you have dietary requirements; I'm happy to accommodate."
 
-    # Display the command in a nice format
-    print_info "📋 Apollo Command (copy and execute in Discord):"
+    # Display the event details in a nice format
+    print_info "In your Discord events channel, type /event and pick Apollo's create command."
+    print_warning "Do NOT paste a command line - pasted text cannot trigger a slash command."
     echo
-    echo ${APOLLO_COMMAND}
+    echo "  Title:         ${GAME_NAME}"
+    echo "  Start:         ${START_TIME}  (America/Toronto)"
+    echo "  End:           ${END_TIME}  (America/Toronto)"
+    echo "  Max attendees: 9"
+    echo "  Description:   paste the block below"
+    echo
+    echo "----- DESCRIPTION (copy/paste) -----"
+    echo "${EVENT_DESCRIPTION}"
+    echo "------------------------------------"
     
     # Step 3: Wait for Discord Event URL
     print_info "Step 3: Waiting for Discord event creation..."
