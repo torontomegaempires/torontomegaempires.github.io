@@ -3,3 +3,4 @@ data.txt
 docs/_db/*.backup*
 node_modules
 .claude
+Claude outputs/
