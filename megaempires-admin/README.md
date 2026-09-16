@@ -67,7 +67,7 @@ A Node.js web application for managing Mega Empires board game data with full CR
   ```
 - **Database location**: `database/megaempires.db`
 - **Views**: EJS templates in `views/` directory
-- **Static files**: CSS, JS, and uploads in `public/` directory
+- **Static files**: CSS and JS in `public/` directory
 
 ## API Endpoints
 
@@ -146,8 +146,7 @@ megaempires-admin/
 │   └── [entity folders]/
 ├── public/
 │   ├── css/style.css
-│   ├── js/app.js
-│   └── uploads/
+│   └── js/app.js
 └── database/
     └── megaempires.db
 ```

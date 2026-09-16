@@ -1,0 +1,64 @@
+version: 2
+
+# Two manifests are tracked, with very different blast radius:
+#
+#   docs/Gemfile.lock            - Jekyll gems. These run in the Netlify build
+#                                  that publishes torontomegaempires.com, so
+#                                  treat breakage here as production-affecting.
+#   megaempires-admin/           - Express admin app. Local use only, never
+#                                  deployed and never network-exposed.
+#
+# Updates are grouped so routine bumps arrive as one PR per ecosystem instead
+# of a stream of single-package PRs. Major-version updates are deliberately
+# left ungrouped so each one shows up on its own and gets a proper look.
+
+updates:
+  # Jekyll site - gems used by the Netlify production build
+  - package-ecosystem: bundler
+    directory: "/docs"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Toronto
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps(docs)"
+    groups:
+      # One PR for all outstanding security fixes.
+      docs-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      # One PR per week for routine minor/patch bumps.
+      docs-minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+
+  # Admin app - local-only Express/SQLite tool
+  - package-ecosystem: npm
+    directory: "/megaempires-admin"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/Toronto
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps(admin)"
+    groups:
+      admin-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      admin-minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
