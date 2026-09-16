@@ -85,21 +85,19 @@ const YAML_GAMES = [{% assign today_ts = 'now' | date: '%s' | plus: 0 %}{% assig
     </div>
 
     <div class="ss-field">
-      <label>Special Building in Start Region?</label>
-      <p class="ss-help">You do not have to control the building</p>
-      <div class="ss-radios">
-        <label><input type="radio" name="special-bldg" value="No" checked> No</label>
-        <label><input type="radio" name="special-bldg" value="Yes"> Yes (+2 VP)</label>
-      </div>
+      <label class="ss-check">
+        <input type="checkbox" id="f-special-bldg">
+        <span>Is there a Special Building in your Start Region?</span>
+      </label>
+      <p class="ss-help">You do not have to control the building (+2 VP)</p>
     </div>
 
     <div class="ss-field">
-      <label>Control Empire Historical Special Building?</label>
-      <p class="ss-help">The building associated with your Empire</p>
-      <div class="ss-radios">
-        <label><input type="radio" name="control-hist" value="No" checked> No</label>
-        <label><input type="radio" name="control-hist" value="Yes"> Yes (+2 VP)</label>
-      </div>
+      <label class="ss-check">
+        <input type="checkbox" id="f-control-hist">
+        <span>Do you control your Empire Historical Building?</span>
+      </label>
+      <p class="ss-help">The building associated with your Empire (+2 VP) — checking this adds 1 to your Total Buildings Controlled below</p>
     </div>
 
     <div class="ss-field ss-field-narrow">
@@ -216,6 +214,21 @@ const YAML_GAMES = [{% assign today_ts = 'now' | date: '%s' | plus: 0 %}{% assig
   gap: 0.35rem;
   font-weight: normal;
   font-size: 0.95rem;
+  cursor: pointer;
+}
+.ss-field label.ss-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+.ss-check input[type="checkbox"] {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+  margin: 0;
+  accent-color: var(--brand);
   cursor: pointer;
 }
 .ss-help {
@@ -342,16 +355,26 @@ function formData() {
     adv1:       document.getElementById('f-adv1').value,
     adv3:       document.getElementById('f-adv3').value,
     adv6:       document.getElementById('f-adv6').value,
-    specialBldg:document.querySelector('input[name="special-bldg"]:checked')?.value || 'No',
-    controlHist:document.querySelector('input[name="control-hist"]:checked')?.value || 'No',
+    specialBldg:document.getElementById('f-special-bldg').checked ? 'Yes' : 'No',
+    controlHist:document.getElementById('f-control-hist').checked ? 'Yes' : 'No',
     totalBldgs: document.getElementById('f-bldgs').value,
   };
 }
 
-document.getElementById('score-form').addEventListener('input', () => {
+function updatePreview() {
   const d = formData();
   const el = document.getElementById('score-preview-val');
   el.textContent = (d.ast && d.cities !== '') ? calcScore(d) : '—';
+}
+
+document.getElementById('score-form').addEventListener('input', updatePreview);
+
+// Controlling your historical building also counts toward total buildings
+document.getElementById('f-control-hist').addEventListener('change', e => {
+  const bldgs = document.getElementById('f-bldgs');
+  const n = +bldgs.value || 0;
+  bldgs.value = e.target.checked ? n + 1 : Math.max(0, n - 1);
+  updatePreview();
 });
 
 // ── Game dropdown ────────────────────────────────────────────────────
