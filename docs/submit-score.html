@@ -50,26 +50,25 @@ const YAML_GAMES = [{% assign today_ts = 'now' | date: '%s' | plus: 0 %}{% assig
       </select>
     </div>
 
-    <div class="ss-row">
-      <div class="ss-field">
-        <label for="f-ast">AST Position <span class="ss-req">*</span></label>
-        <input type="number" id="f-ast" min="1" max="16" required>
-      </div>
-      <div class="ss-field">
-        <label>Solo AST Winner?</label>
-        <div class="ss-radios">
-          <label><input type="radio" name="solo-ast" value="No" checked> No</label>
-          <label><input type="radio" name="solo-ast" value="Yes"> Yes (+5 VP)</label>
-        </div>
-      </div>
+    <div class="ss-field">
+      <label for="f-ast">AST Position <span class="ss-req">*</span></label>
+      <input type="number" id="f-ast" min="1" max="16" required>
     </div>
 
-    <div class="ss-field ss-field-narrow">
+    <div class="ss-field">
+      <label class="ss-check">
+        <input type="checkbox" id="f-solo-ast">
+        <span>Solo AST Winner?</span>
+      </label>
+      <p class="ss-help">+5 VP</p>
+    </div>
+
+    <div class="ss-field">
       <label for="f-cities">Cities <span class="ss-req">*</span></label>
       <input type="number" id="f-cities" min="0" required>
     </div>
 
-    <div class="ss-row ss-row-3">
+    <div class="ss-row-3">
       <div class="ss-field">
         <label for="f-adv1">1 VP Advances</label>
         <input type="number" id="f-adv1" min="0" value="0">
@@ -100,7 +99,7 @@ const YAML_GAMES = [{% assign today_ts = 'now' | date: '%s' | plus: 0 %}{% assig
       <p class="ss-help">The building associated with your Empire (+2 VP) — checking this adds 1 to your Total Buildings Controlled below</p>
     </div>
 
-    <div class="ss-field ss-field-narrow">
+    <div class="ss-field">
       <label for="f-bldgs">Total Buildings Controlled</label>
       <input type="number" id="f-bldgs" min="0" value="0">
     </div>
@@ -170,6 +169,7 @@ const YAML_GAMES = [{% assign today_ts = 'now' | date: '%s' | plus: 0 %}{% assig
   margin-bottom: 2rem;
   background: var(--surface);
   box-shadow: var(--shadow);
+  container-type: inline-size;
 }
 .ss-card-title { margin: 0 0 1.5rem; font-size: 1.2rem; }
 
@@ -193,29 +193,20 @@ const YAML_GAMES = [{% assign today_ts = 'now' | date: '%s' | plus: 0 %}{% assig
   background: var(--bg);
   color: var(--text);
 }
-.ss-field-narrow input[type="number"] { max-width: 110px; }
+/* Every number field holds at most 2 digits */
+.ss-field input[type="number"] { max-width: 3rem; }
 
-.ss-row {
-  display: flex;
-  gap: 2.5rem;
-  flex-wrap: wrap;
-  align-items: flex-start;
+/* All three advances side by side, or all three stacked — never 2 + 1 */
+.ss-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, max-content));
+  justify-content: start;
+  gap: 0 1.5rem;
 }
-.ss-row-3 .ss-field input[type="number"] { max-width: 100px; }
+@container (max-width: 440px) {
+  .ss-row-3 { grid-template-columns: minmax(0, max-content); }
+}
 
-.ss-radios {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 0.4rem;
-}
-.ss-radios label {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-weight: normal;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
 .ss-field label.ss-check {
   display: flex;
   align-items: center;
@@ -350,7 +341,7 @@ function rankSubmissions(rows) {
 function formData() {
   return {
     ast:        document.getElementById('f-ast').value,
-    soloAst:    document.querySelector('input[name="solo-ast"]:checked')?.value || 'No',
+    soloAst:    document.getElementById('f-solo-ast').checked ? 'Yes' : 'No',
     cities:     document.getElementById('f-cities').value,
     adv1:       document.getElementById('f-adv1').value,
     adv3:       document.getElementById('f-adv3').value,
