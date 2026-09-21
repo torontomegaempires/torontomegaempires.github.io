@@ -7,7 +7,7 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 4.3.3"
+gem "jekyll", "~> 4.4.1"
 # Clean minimal theme
 gem "minima", "~> 2.5"
 
@@ -26,7 +26,7 @@ group :jekyll_plugins do
   gem "jekyll-sitemap"
   gem "jekyll-paginate"
   gem "jekyll-spaceship"
-  gem "jekyll-sqlite", "~> 0.1.5"
+  gem "jekyll-sqlite", "~> 0.4.0"
   gem "jekyll-datapage-generator", "~> 1.4"
   gem "jekyll-remote-theme"
 end
