@@ -45,7 +45,7 @@ games:
     max_players: 9
     status: "upcoming"
 
-  - date: "2026-11-28"
+  - date: "2026-11-21"
     game_number: 20
     title: "Mega Empires: The West"
     type: "home"
