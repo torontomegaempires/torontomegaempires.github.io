@@ -19,7 +19,7 @@ require 'date'
 ROOT     = File.expand_path(__dir__)
 SCHEDULE = File.join(ROOT, 'docs/_data/games-list.yml')
 TEMPLATE = File.join(ROOT, 'docs/emails/templates/game-announcement.html')
-VARIANT_NAMES = { 'the east' => 'The East', 'the west' => 'The West' }.freeze
+VARIANT_NAMES = { 'the east' => 'The East', 'the west' => 'The West', 'the far east' => 'The Far East' }.freeze
 
 def die(msg)
   warn "ERROR: #{msg}"

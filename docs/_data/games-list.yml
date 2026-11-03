@@ -53,3 +53,46 @@ games:
     location: "Beaches, Toronto"
     max_players: 9
     status: "upcoming"
+
+  - date: "2027-01-09"
+    game_number: 21
+    title: "Mega Empires: The West"
+    type: "home"
+    variant: "the west"
+    location: "Beaches, Toronto"
+    max_players: 9
+    status: "upcoming"
+
+  - date: "2027-01-14"
+    title: "Niagara Boardgame Weekend 2027 - Mega Empires: The West"
+    type: "convention"
+    variant: "the west"
+    location: "Niagara Falls"
+    max_players: 9
+    status: "upcoming"
+
+  - date: "2027-02-27"
+    game_number: 22
+    title: "Mega Empires: The Far East"
+    type: "home"
+    variant: "the far east"
+    location: "Beaches, Toronto"
+    max_players: 9
+    status: "upcoming"
+
+  - date: "2027-03-18"
+    title: "BreakoutCon 2027 - Mega Empires"
+    type: "convention"
+    variant: "full game"
+    location: "Sheraton Hotel, Toronto"
+    max_players: 18
+    status: "upcoming"
+
+  - date: "2027-05-22"
+    game_number: 23
+    title: "Mega Empires: The Far East"
+    type: "home"
+    variant: "the far east"
+    location: "Beaches, Toronto"
+    max_players: 9
+    status: "upcoming"
